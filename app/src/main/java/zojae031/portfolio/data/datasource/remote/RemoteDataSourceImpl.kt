@@ -5,7 +5,6 @@ import io.reactivex.SingleOnSubscribe
 import io.reactivex.schedulers.Schedulers
 import org.jsoup.Connection
 import org.jsoup.Jsoup
-import java.lang.Exception
 
 object RemoteDataSourceImpl : RemoteDataSource {
     private val urlList = listOf(
@@ -16,11 +15,11 @@ object RemoteDataSourceImpl : RemoteDataSource {
     @Volatile
     override var isDirty: MutableList<Boolean> = mutableListOf(false, false, false)
 
-    override fun getBasicInformation(): Single<String> {
+    override fun getBasicData(): Single<String> {
         return parseUrl(0)
     }
 
-    override fun getCompetitionInformation(): Single<String> {
+    override fun getCompetitionData(): Single<String> {
         return parseUrl(1)
     }
 
@@ -34,7 +33,7 @@ object RemoteDataSourceImpl : RemoteDataSource {
                         isDirty[idx] = true
                         it.onSuccess(this.parse().select(".d-block").select("p").text())
                     }
-            }catch (e : Exception){
+            } catch (e: Exception) {
                 it.onError(e)
             }
 

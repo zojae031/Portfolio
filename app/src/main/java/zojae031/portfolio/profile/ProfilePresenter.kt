@@ -16,14 +16,14 @@ class ProfilePresenter(private val view: ProfileContract.View, private val repos
 
     override fun onResume() {
         repository
-            .getBasicInformation()
+            .getBasicData()
             .map { data ->
                 JsonParser().parse(data).asJsonObject.apply {
                     return@map Gson().fromJson(this, BasicEntity::class.java)
                 }
             }
             .doOnSuccess { entity ->
-                repository.insertBasicInformation(entity as BasicEntity)
+                repository.insertBasicData(entity as BasicEntity)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ entity ->

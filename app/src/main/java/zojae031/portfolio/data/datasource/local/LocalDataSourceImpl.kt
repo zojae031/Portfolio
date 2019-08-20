@@ -14,7 +14,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
     private val basicDao = db.basicDao()
     private val projectDao = db.projectDao()
 
-    override fun getBasicInformation(): Single<String> {
+    override fun getBasicData(): Single<String> {
         return Single.create(SingleOnSubscribe<String> { emitter ->
             val data = basicDao.select()
             JsonObject().apply {
@@ -28,11 +28,11 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
         }).subscribeOn(Schedulers.io())
     }
 
-    override fun insertBasicInformation(data: BasicEntity) {
+    override fun insertBasicData(data: BasicEntity) {
         basicDao.insert(data)
     }
 
-    override fun getProjectInformation(): Single<String> {
+    override fun getProjectData(): Single<String> {
         return Single.create(SingleOnSubscribe<String> { emitter ->
             val array = JsonArray()
             projectDao.select().map {
@@ -54,7 +54,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
         }).subscribeOn(Schedulers.io())
     }
 
-    override fun insertProjectInformation(data: CompetitionEntity) {
+    override fun insertProjectData(data: CompetitionEntity) {
         projectDao.insert(data)
     }
 

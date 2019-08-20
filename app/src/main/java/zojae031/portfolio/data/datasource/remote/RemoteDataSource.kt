@@ -5,6 +5,6 @@ import io.reactivex.Single
 interface RemoteDataSource {
 
     var isDirty: MutableList<Boolean>
-    fun getBasicInformation(): Single<String>
-    fun getCompetitionInformation(): Single<String>
+    fun getBasicData(): Single<String>
+    fun getCompetitionData(): Single<String>
 }

@@ -9,7 +9,7 @@ import zojae031.portfolio.data.dao.BasicEntity
 import zojae031.portfolio.data.dao.CompetitionEntity
 import zojae031.portfolio.data.dao.ProjectDao
 
-@Database(entities = [BasicEntity::class,CompetitionEntity::class], version = 1)
+@Database(entities = [BasicEntity::class, CompetitionEntity::class], version = 1)
 abstract class LocalDataBase : RoomDatabase() {
     abstract fun basicDao(): BasicDao
     abstract fun projectDao(): ProjectDao

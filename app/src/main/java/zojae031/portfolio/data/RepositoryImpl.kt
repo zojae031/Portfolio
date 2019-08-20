@@ -13,41 +13,41 @@ class RepositoryImpl private constructor(
     private val manager: ConnectivityManager
 ) : Repository {
 
-    override fun getBasicInformation(): Single<String> {
+    override fun getBasicData(): Single<String> {
         return if (manager.activeNetwork != null) {//네트워크 연결상태 on
             if (remoteDataSource.isDirty[0]) {//캐시가 지저분하면 로컬에서 땡겨옴
-                localDataSource.getBasicInformation()
+                localDataSource.getBasicData()
             } else {
-                remoteDataSource.getBasicInformation()
+                remoteDataSource.getBasicData()
             }
         } else {//네트워크 연결상태 off
-            localDataSource.getBasicInformation()
+            localDataSource.getBasicData()
         }
     }
 
-    override fun insertBasicInformation(data: BasicEntity) {
+    override fun insertBasicData(data: BasicEntity) {
         if (remoteDataSource.isDirty[0]) { //캐시가 더러울때만 저장
-            localDataSource.insertBasicInformation(data)
+            localDataSource.insertBasicData(data)
         }
     }
 
-    override fun insertCompetitionInformation(data: Array<CompetitionEntity>) {
+    override fun insertCompetitionData(data: Array<CompetitionEntity>) {
         if (remoteDataSource.isDirty[1]) {
             for (list in data) {
-                localDataSource.insertProjectInformation(list)
+                localDataSource.insertProjectData(list)
             }
         }
     }
 
-    override fun getCompetitionInformation(): Single<String> {
+    override fun getCompetitionData(): Single<String> {
         return if (manager.activeNetwork != null) {
             if (remoteDataSource.isDirty[1]) {
-                localDataSource.getProjectInformation()
+                localDataSource.getProjectData()
             } else {
-                remoteDataSource.getCompetitionInformation()
+                remoteDataSource.getCompetitionData()
             }
         } else {
-            localDataSource.getProjectInformation()
+            localDataSource.getProjectData()
         }
 
     }
