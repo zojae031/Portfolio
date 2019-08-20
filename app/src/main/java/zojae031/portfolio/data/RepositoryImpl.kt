@@ -2,8 +2,8 @@ package zojae031.portfolio.data
 
 import android.net.ConnectivityManager
 import io.reactivex.Single
-import zojae031.portfolio.data.dao.BasicEntity
-import zojae031.portfolio.data.dao.CompetitionEntity
+import zojae031.portfolio.data.dao.profile.BasicEntity
+import zojae031.portfolio.data.dao.project.CompetitionEntity
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 

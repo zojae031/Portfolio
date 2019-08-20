@@ -6,8 +6,8 @@ import com.google.gson.JsonObject
 import io.reactivex.Single
 import io.reactivex.SingleOnSubscribe
 import io.reactivex.schedulers.Schedulers
-import zojae031.portfolio.data.dao.BasicEntity
-import zojae031.portfolio.data.dao.CompetitionEntity
+import zojae031.portfolio.data.dao.profile.BasicEntity
+import zojae031.portfolio.data.dao.project.CompetitionEntity
 
 class LocalDataSourceImpl private constructor(context: Context) : LocalDataSource {
     private val db = LocalDataBase.getInstance(context)

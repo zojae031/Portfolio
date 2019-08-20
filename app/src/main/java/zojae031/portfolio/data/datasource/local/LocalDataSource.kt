@@ -1,8 +1,8 @@
 package zojae031.portfolio.data.datasource.local
 
 import io.reactivex.Single
-import zojae031.portfolio.data.dao.BasicEntity
-import zojae031.portfolio.data.dao.CompetitionEntity
+import zojae031.portfolio.data.dao.profile.BasicEntity
+import zojae031.portfolio.data.dao.project.CompetitionEntity
 
 interface LocalDataSource {
     fun getBasicData(): Single<String>

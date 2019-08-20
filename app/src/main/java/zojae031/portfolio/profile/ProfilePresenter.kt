@@ -5,7 +5,7 @@ import com.google.gson.JsonParser
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
-import zojae031.portfolio.data.dao.BasicEntity
+import zojae031.portfolio.data.dao.profile.BasicEntity
 
 class ProfilePresenter(private val view: ProfileContract.View, private val repository: Repository) :
     ProfileContract.Presenter {

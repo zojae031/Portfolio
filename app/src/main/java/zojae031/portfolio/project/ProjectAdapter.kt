@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.project_list.view.*
 import zojae031.portfolio.R
-import zojae031.portfolio.data.dao.CompetitionEntity
+import zojae031.portfolio.data.dao.project.CompetitionEntity
 
 class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAdapterContract.View,
     ProjectAdapterContract.Model {

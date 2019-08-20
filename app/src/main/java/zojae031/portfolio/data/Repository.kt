@@ -1,8 +1,10 @@
 package zojae031.portfolio.data
 
 import io.reactivex.Single
-import zojae031.portfolio.data.dao.BasicEntity
-import zojae031.portfolio.data.dao.CompetitionEntity
+import zojae031.portfolio.data.dao.profile.BasicEntity
+
+
+import zojae031.portfolio.data.dao.project.CompetitionEntity
 
 interface Repository {
     fun getBasicData(): Single<String>

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 import zojae031.portfolio.R
 import zojae031.portfolio.data.RepositoryImpl
-import zojae031.portfolio.data.dao.BasicEntity
+import zojae031.portfolio.data.dao.profile.BasicEntity
 import zojae031.portfolio.data.datasource.local.LocalDataSourceImpl
 import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
 

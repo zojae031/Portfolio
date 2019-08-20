@@ -1,4 +1,4 @@
-package zojae031.portfolio.data.dao
+package zojae031.portfolio.data.dao.profile
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
