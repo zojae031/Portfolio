@@ -6,10 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import zojae031.portfolio.data.dao.BasicDao
 import zojae031.portfolio.data.dao.BasicEntity
+import zojae031.portfolio.data.dao.CompetitionEntity
+import zojae031.portfolio.data.dao.ProjectDao
 
-@Database(entities = [BasicEntity::class], version = 1)
+@Database(entities = [BasicEntity::class,CompetitionEntity::class], version = 1)
 abstract class LocalDataBase : RoomDatabase() {
     abstract fun basicDao(): BasicDao
+    abstract fun projectDao(): ProjectDao
 
     companion object {
         private var INSTANCE: LocalDataBase? = null

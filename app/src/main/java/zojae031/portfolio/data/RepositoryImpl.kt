@@ -3,6 +3,7 @@ package zojae031.portfolio.data
 import android.net.ConnectivityManager
 import io.reactivex.Single
 import zojae031.portfolio.data.dao.BasicEntity
+import zojae031.portfolio.data.dao.CompetitionEntity
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 
@@ -30,8 +31,25 @@ class RepositoryImpl private constructor(
         }
     }
 
+    override fun insertCompetitionInformation(data: Array<CompetitionEntity>) {
+        if (remoteDataSource.isDirty[1]) {
+            for (list in data) {
+                localDataSource.insertProjectInformation(list)
+            }
+        }
+    }
+
     override fun getCompetitionInformation(): Single<String> {
-        return remoteDataSource.getCompetitionInformation()
+        return if (manager.activeNetwork != null) {
+            if (remoteDataSource.isDirty[1]) {
+                localDataSource.getProjectInformation()
+            } else {
+                remoteDataSource.getCompetitionInformation()
+            }
+        } else {
+            localDataSource.getProjectInformation()
+        }
+
     }
 
     companion object {

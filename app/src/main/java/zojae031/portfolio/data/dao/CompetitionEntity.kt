@@ -1,7 +1,11 @@
 package zojae031.portfolio.data.dao
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class CompetitionEntity(
-    val image: String,
+    @PrimaryKey val image: String,
     val name: String,
     val prize: String,
     val text: String,
