@@ -50,6 +50,6 @@ class ProfileFragment : Fragment(), ProfileContract.View {
 
     override fun showBasicInformation(data: BasicEntity) {
         information.text =
-            String.format("이름 : ${data.name}\n나이 : ${data.age}\n학력 : ${data.university}\n전공 : ${data.major}\n병역 : ${data.military}")
+            "이름 : ${data.name}\n나이 : ${data.age}\n학력 : ${data.university}\n전공 : ${data.major}\n병역 : ${data.military}"
     }
 }
