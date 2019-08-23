@@ -18,7 +18,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         presenter.onCreate()
-
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setHomeAsUpIndicator(R.drawable.menu)
+            setDisplayShowTitleEnabled(false)
+            setDisplayHomeAsUpEnabled(true)
+        }
         with(pager) {
             adapter = MainPagerAdapter(supportFragmentManager)
             addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
