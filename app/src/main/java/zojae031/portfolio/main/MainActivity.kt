@@ -3,6 +3,7 @@ package zojae031.portfolio.main
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -17,13 +18,20 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         presenter.onCreate()
+
         setSupportActionBar(toolbar)
+        toolbar.setNavigationOnClickListener {
+            drawer.openDrawer(GravityCompat.START)
+        }
+
         supportActionBar?.apply {
             setHomeAsUpIndicator(R.drawable.menu)
             setDisplayShowTitleEnabled(false)
             setDisplayHomeAsUpEnabled(true)
         }
+
         with(pager) {
             adapter = MainPagerAdapter(supportFragmentManager)
             addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
