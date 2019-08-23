@@ -26,15 +26,15 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
         repository
             .getCompetitionData()
             .map { data ->
-                JsonParser().parse(data).asJsonArray.apply {
-                    return@map Gson().fromJson(this, Array<CompetitionEntity>::class.java)
+                JsonParser().parse(data).asJsonArray.run {
+                    Gson().fromJson(this, Array<CompetitionEntity>::class.java)
                 }
             }
-            .doOnSuccess { repository.insertCompetitionData(it as Array<CompetitionEntity>) }
+            .doOnSuccess { repository.insertCompetitionData(it) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { entity ->
                 adapterView.clearList()
-                adapterView.updateList(entity as Array<CompetitionEntity>)
+                adapterView.updateList(entity)
                 adapterModel.notifyAdapter()
             }.also { compositeDisposable.add(it) }
     }

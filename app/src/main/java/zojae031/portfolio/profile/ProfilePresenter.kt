@@ -18,16 +18,16 @@ class ProfilePresenter(private val view: ProfileContract.View, private val repos
         repository
             .getBasicData()
             .map { data ->
-                JsonParser().parse(data).asJsonObject.apply {
-                    return@map Gson().fromJson(this, BasicEntity::class.java)
+                JsonParser().parse(data).asJsonObject.run {
+                    Gson().fromJson(this, BasicEntity::class.java)
                 }
             }
             .doOnSuccess { entity ->
-                repository.insertBasicData(entity as BasicEntity)
+                repository.insertBasicData(entity)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ entity ->
-                view.showBasicInformation(entity as BasicEntity)
+                view.showBasicInformation(entity)
 
             }, { t ->
                 view.showToast(t.message.toString())
