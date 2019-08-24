@@ -1,7 +1,5 @@
 package zojae031.portfolio.project
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,12 +37,11 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAda
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val image = itemView.image
+        private val project = itemView.project_list
+        private val image = itemView.project_image
         private val name = itemView.name
         private val prize = itemView.prize
-        private val text = itemView.text
         private val competition = itemView.competition
-        private val videoLink = itemView.project_list
         fun bind(position: Int) {
             Glide
                 .with(itemView.context)
@@ -54,10 +51,10 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAda
                 .into(image)
             name.text = lists[position].name
             prize.text = lists[position].prize
-            text.text = lists[position].text
             competition.text = lists[position].competition
-            videoLink.setOnClickListener {
-                it.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(lists[position].video)))
+            project.setOnClickListener {
+                ProjectDialog(it.context, lists[position])
+                    .show()
             }
         }
     }

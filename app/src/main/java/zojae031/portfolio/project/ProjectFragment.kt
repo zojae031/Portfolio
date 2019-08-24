@@ -33,6 +33,8 @@ class ProjectFragment : Fragment(), ProjectContract.View {
             recycler.adapter = adapter
         }
 
+
+
     override fun onPause() {
         presenter.onPause()
         super.onPause()
