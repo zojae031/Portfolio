@@ -1,5 +1,6 @@
 package zojae031.portfolio.data.datasource.remote
 
+import android.util.Log
 import io.reactivex.Single
 import io.reactivex.SingleOnSubscribe
 import io.reactivex.schedulers.Schedulers

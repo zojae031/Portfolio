@@ -1,6 +1,7 @@
 package zojae031.portfolio.data.datasource.local
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import io.reactivex.Single
@@ -43,6 +44,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
                     addProperty("prize", it.prize)
                     addProperty("text", it.text)
                     addProperty("video", it.video)
+                    addProperty("skills", it.skills)
                 }
             }.map {
                 array.add(it)
@@ -55,6 +57,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
     }
 
     override fun insertProjectData(data: CompetitionEntity) {
+        Log.e("data",data.skills)
         projectDao.insert(data)
     }
 
