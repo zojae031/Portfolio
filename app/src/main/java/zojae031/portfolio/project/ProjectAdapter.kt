@@ -14,7 +14,13 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAda
     private val lists: MutableList<CompetitionEntity> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder =
-        Holder(LayoutInflater.from(parent.context).inflate(R.layout.project_list, parent, false))
+        Holder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.project_list,
+                parent,
+                false
+            )
+        )
 
 
     override fun getItemCount(): Int = lists.size
@@ -36,8 +42,14 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAda
         this.notifyDataSetChanged()
     }
 
+
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val project = itemView.project_list
+        init {
+            itemView.setOnClickListener {
+                ProjectDialog(it.context, lists[adapterPosition]).show()
+            }
+        }
+
         private val image = itemView.project_image
         private val name = itemView.name
         private val prize = itemView.prize
@@ -52,10 +64,6 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAda
             name.text = lists[position].name
             prize.text = lists[position].prize
             competition.text = lists[position].competition
-            project.setOnClickListener {
-                ProjectDialog(it.context, lists[position])
-                    .show()
-            }
         }
     }
 }
