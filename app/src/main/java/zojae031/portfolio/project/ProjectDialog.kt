@@ -25,9 +25,7 @@ class ProjectDialog(context: Context, private val data: CompetitionEntity) : Dia
 
         title.text = data.name
         text.text = data.text
-        positive.setOnClickListener {
-            dismiss()
-        }
+
         skills.setOnClickListener {
             skill_text.visibility = View.VISIBLE
             skill_text.text = data.skills

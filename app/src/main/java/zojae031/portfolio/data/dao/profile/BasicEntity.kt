@@ -9,5 +9,7 @@ data class BasicEntity(
     val age: String,
     val university: String,
     val major: String,
-    val military: String
+    val military: String,
+    val hobby: String,
+    val additional: String
 )

@@ -1,7 +1,9 @@
 package zojae031.portfolio.profile
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +16,7 @@ import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.profile.BasicEntity
 import zojae031.portfolio.data.datasource.local.LocalDataSourceImpl
 import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
+
 
 class ProfileFragment : Fragment(), ProfileContract.View {
     private val presenter by lazy {
@@ -49,7 +52,25 @@ class ProfileFragment : Fragment(), ProfileContract.View {
     }
 
     override fun showBasicInformation(data: BasicEntity) {
-        information.text =
-            "이름 : ${data.name}\n나이 : ${data.age}\n학력 : ${data.university}\n전공 : ${data.major}\n병역 : ${data.military}"
+        name.append(data.name)
+        age.append(data.age)
+        university.append(data.university)
+        major.append(data.major)
+        military.append(data.military)
+        hobby.append(data.hobby)
+        additionalOption(data.additional)
+    }
+
+    private fun additionalOption(data: String) {
+        if (data != "") {
+            explain.visibility = View.VISIBLE
+            play.apply {
+                visibility = View.VISIBLE
+                setOnClickListener {
+                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data)))
+                }
+            }
+
+        }
     }
 }
