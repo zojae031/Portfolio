@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              app:layout_anchorGravity="center" android:background="@drawable/rounded">
+              android:layout_height="wrap_content"
+              app:layout_anchorGravity="center" android:background="@drawable/rounded"
+              android:padding="8dp">
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -84,14 +85,19 @@
                 android:fontFamily="@font/main_font" android:layout_margin="8dp" android:padding="4dp"
                 android:lineSpacingExtra="12sp" android:id="@+id/hobby"/>
     </LinearLayout>
-    <ImageView
+    <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_media_play"
-            android:id="@+id/play" android:visibility="invisible" android:layout_margin="4dp"/>
-    <TextView
-            android:text="마샬아츠란?"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/explain" android:fontFamily="@font/main_font"
-            android:textColor="@android:color/black" android:textSize="18sp" android:gravity="center"
-            android:padding="8dp" android:visibility="invisible"/>
+            android:layout_height="match_parent" android:gravity="center">
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_media_play"
+                android:id="@+id/play" android:visibility="invisible" android:layout_margin="4dp"/>
+        <TextView
+                android:text="마샬아츠란?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/explain" android:fontFamily="@font/main_font"
+                android:textColor="@android:color/black" android:textSize="18sp" android:gravity="center"
+                android:padding="8dp" android:visibility="invisible"/>
+    </LinearLayout>
 </LinearLayout>
