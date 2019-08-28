@@ -52,12 +52,12 @@ class ProfileFragment : Fragment(), ProfileContract.View {
     }
 
     override fun showBasicInformation(data: BasicEntity) {
-        name.append(data.name)
-        age.append(data.age)
-        university.append(data.university)
-        major.append(data.major)
-        military.append(data.military)
-        hobby.append(data.hobby)
+        name.text = "이름 : ${data.name}"
+        age.text = "나이 : ${data.age}"
+        university.text = "학력 : ${data.university}"
+        major.text = "전공 : ${data.major}"
+        military.text = "병역 : ${data.military}"
+        hobby.text = "취미 : ${data.hobby}"
         additionalOption(data.additional)
     }
 
