@@ -28,11 +28,14 @@ class ProjectFragment : Fragment(), ProjectContract.View {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
         inflater.inflate(R.layout.fragment_project, container, false).apply {
             recycler.adapter = adapter
         }
-
 
 
     override fun onPause() {

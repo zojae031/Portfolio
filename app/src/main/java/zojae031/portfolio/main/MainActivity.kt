@@ -39,7 +39,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
                 }
 
-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
 
                 }
 
@@ -49,7 +53,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
             })
         }
-        indicator.createDotPanel(pager.adapter!!.count, R.drawable.indicator_off, R.drawable.indicator_on, 0)
+        indicator.createDotPanel(
+            pager.adapter!!.count,
+            R.drawable.indicator_off,
+            R.drawable.indicator_on,
+            0
+        )
     }
 
     override fun showToast(text: String) {

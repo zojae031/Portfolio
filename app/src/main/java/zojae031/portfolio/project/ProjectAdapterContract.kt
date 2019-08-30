@@ -8,6 +8,5 @@ interface ProjectAdapterContract {
         fun updateList(lists: Array<CompetitionEntity>)
     }
 
-    interface Model : BaseAdapterContract.Model {
-    }
+    interface Model : BaseAdapterContract.Model
 }

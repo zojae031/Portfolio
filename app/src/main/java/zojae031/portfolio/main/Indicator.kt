@@ -7,7 +7,8 @@ import android.util.TypedValue
 import android.widget.ImageView
 import android.widget.LinearLayout
 
-class Indicator(private val mContext: Context, private val attrs: AttributeSet) : LinearLayout(mContext, attrs) {
+class Indicator(private val mContext: Context, private val attrs: AttributeSet) :
+    LinearLayout(mContext, attrs) {
 
 
     private var defaultCircle: Int = 0

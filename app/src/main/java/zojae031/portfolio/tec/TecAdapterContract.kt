@@ -7,7 +7,5 @@ interface TecAdapterContract {
         fun updateList()
     }
 
-    interface Model : BaseAdapterContract.Model {
-
-    }
+    interface Model : BaseAdapterContract.Model
 }

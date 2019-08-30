@@ -44,7 +44,11 @@ class ProfileFragment : Fragment(), ProfileContract.View {
         super.onPause()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
         inflater.inflate(R.layout.fragment_profile, container, false)
 
     override fun showToast(text: String) {

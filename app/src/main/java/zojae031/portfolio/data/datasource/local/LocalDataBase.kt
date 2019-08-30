@@ -18,7 +18,11 @@ abstract class LocalDataBase : RoomDatabase() {
         private var INSTANCE: LocalDataBase? = null
         fun getInstance(context: Context): LocalDataBase {
             if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(context.applicationContext, LocalDataBase::class.java, "db").build()
+                INSTANCE = Room.databaseBuilder(
+                    context.applicationContext,
+                    LocalDataBase::class.java,
+                    "db"
+                ).build()
             }
             return INSTANCE!!
         }

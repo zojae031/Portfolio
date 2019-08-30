@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<font-family xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:android="http://schemas.android.com/apk/res/android">
-    <font app:font="@font/dotum_bold" android:font="@font/dotum_bold" app:fontWeight="400" android:fontWeight="400"
-          app:fontStyle="normal" android:fontStyle="normal"/>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <font
+            android:font="@font/dotum_bold"
+            android:fontStyle="normal"
+            android:fontWeight="400"
+            app:font="@font/dotum_bold"
+            app:fontStyle="normal"
+            app:fontWeight="400" />
 
 </font-family>

@@ -6,7 +6,7 @@ class TecPresenter : TecContract.Presenter {
     private lateinit var adapterView: TecAdapterContract.View
     private lateinit var adapterModel: TecAdapterContract.Model
 
-    override fun setAdapater(view: TecAdapterContract.View, model: TecAdapterContract.Model) {
+    override fun setAdapter(view: TecAdapterContract.View, model: TecAdapterContract.Model) {
         adapterView = view
         adapterModel = model
     }
