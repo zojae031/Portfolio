@@ -4,6 +4,7 @@ import android.net.ConnectivityManager
 import io.reactivex.Single
 import zojae031.portfolio.data.dao.profile.BasicEntity
 import zojae031.portfolio.data.dao.project.CompetitionEntity
+import zojae031.portfolio.data.dao.tec.TecEntity
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 
@@ -36,7 +37,7 @@ class RepositoryImpl private constructor(
             if (remoteDataSource.isDirty[1]) {
                 localDataSource.getProjectData()
             } else {
-                remoteDataSource.getCompetitionData()
+                remoteDataSource.getProjectData()
             }
         } else {
             localDataSource.getProjectData()
@@ -53,7 +54,23 @@ class RepositoryImpl private constructor(
     }
 
     override fun getTecData(): Single<String> {
-        return remoteDataSource.getTecData()
+        return if (manager.activeNetwork != null) {
+            if (remoteDataSource.isDirty[2]) {
+                localDataSource.getTecData()
+            } else {
+                remoteDataSource.getTecData()
+            }
+        } else {
+            localDataSource.getTecData()
+        }
+    }
+
+    override fun insertTecData(data: Array<TecEntity>) {
+        if (remoteDataSource.isDirty[2]) {
+            for (list in data) {
+                localDataSource.insertTecData(list)
+            }
+        }
     }
 
     companion object {

@@ -1,6 +1,8 @@
 package zojae031.portfolio.data.datasource.local
 
 import android.content.Context
+import android.util.Log
+import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import io.reactivex.Single
@@ -8,11 +10,13 @@ import io.reactivex.SingleOnSubscribe
 import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.dao.profile.BasicEntity
 import zojae031.portfolio.data.dao.project.CompetitionEntity
+import zojae031.portfolio.data.dao.tec.TecEntity
 
 class LocalDataSourceImpl private constructor(context: Context) : LocalDataSource {
     private val db = LocalDataBase.getInstance(context)
     private val basicDao = db.basicDao()
     private val projectDao = db.projectDao()
+    private val tecDao = db.tecDao()
 
     override fun getBasicData(): Single<String> {
         return Single.create(SingleOnSubscribe<String> { emitter ->
@@ -61,6 +65,27 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
         projectDao.insert(data)
     }
 
+    override fun getTecData(): Single<String> {
+        return Single.create(SingleOnSubscribe<String> { emitter ->
+            val array = JsonArray()
+            tecDao.select().map {
+                JsonObject().apply {
+                    addProperty("name", it.name)
+                    addProperty("image", it.image)
+                    add("source", it.source)
+                }
+            }.map {
+                array.add(it)
+            }.also {
+                emitter.onSuccess(array.toString())
+            }
+
+        }).subscribeOn(Schedulers.io())
+    }
+
+    override fun insertTecData(data: TecEntity) {
+        tecDao.insert(data)
+    }
 
     companion object {
         private var INSTANCE: LocalDataSourceImpl? = null

@@ -20,7 +20,7 @@ object RemoteDataSourceImpl : RemoteDataSource {
         return parseUrl(0)
     }
 
-    override fun getCompetitionData(): Single<String> {
+    override fun getProjectData(): Single<String> {
         return parseUrl(1)
     }
 

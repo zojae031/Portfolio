@@ -9,6 +9,6 @@ import zojae031.portfolio.data.dao.tec.TecEntity
 class TecDialog(context: Context, private val data: TecEntity) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dialog_project)
+        setContentView(R.layout.dialog_tec)
     }
 }

@@ -8,11 +8,14 @@ import zojae031.portfolio.data.dao.profile.BasicDao
 import zojae031.portfolio.data.dao.profile.BasicEntity
 import zojae031.portfolio.data.dao.project.CompetitionEntity
 import zojae031.portfolio.data.dao.project.ProjectDao
+import zojae031.portfolio.data.dao.tec.TecDao
+import zojae031.portfolio.data.dao.tec.TecEntity
 
-@Database(entities = [BasicEntity::class, CompetitionEntity::class], version = 1)
+@Database(entities = [BasicEntity::class, CompetitionEntity::class, TecEntity::class], version = 1)
 abstract class LocalDataBase : RoomDatabase() {
     abstract fun basicDao(): BasicDao
     abstract fun projectDao(): ProjectDao
+    abstract fun tecDao(): TecDao
 
     companion object {
         private var INSTANCE: LocalDataBase? = null

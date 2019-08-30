@@ -1,5 +1,6 @@
 package zojae031.portfolio.tec
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,13 +27,16 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
 
     override fun onResume() {
         repository.getTecData()
-            .observeOn(AndroidSchedulers.mainThread())
             .map { data ->
+                Log.e("map data",data)
                 JsonParser().parse(data).asJsonArray.run {
                     Gson().fromJson(this, Array<TecEntity>::class.java)
                 }
             }
+            .doOnSuccess { repository.insertTecData(it) }
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe { data ->
+
                 adapterModel.clearList()
                 adapterModel.updateList(data)
                 adapterView.notifyAdapter()
