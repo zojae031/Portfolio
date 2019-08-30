@@ -43,6 +43,7 @@ class RepositoryImpl private constructor(
         }
 
     }
+
     override fun insertCompetitionData(data: Array<CompetitionEntity>) {
         if (remoteDataSource.isDirty[1]) {
             for (list in data) {

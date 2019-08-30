@@ -1,8 +1,6 @@
 package zojae031.portfolio.profile
 
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,21 +9,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_profile.*
+import zojae031.portfolio.Injection
 import zojae031.portfolio.R
-import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.profile.BasicEntity
-import zojae031.portfolio.data.datasource.local.LocalDataSourceImpl
-import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
 
 
 class ProfileFragment : Fragment(), ProfileContract.View {
     private val presenter by lazy {
         ProfilePresenter(
-            this@ProfileFragment, RepositoryImpl.getInstance(
-                LocalDataSourceImpl.getInstance(context!!),
-                RemoteDataSourceImpl,
-                context!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            )
+            this@ProfileFragment, Injection.getRepository(context!!)
         )
     }
 
