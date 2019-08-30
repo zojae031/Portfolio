@@ -2,10 +2,10 @@ package zojae031.portfolio
 
 interface BaseAdapterContract {
     interface View {
-        fun clearList()
+        fun notifyAdapter()
     }
 
     interface Model {
-        fun notifyAdapter()
+        fun clearList()
     }
 }

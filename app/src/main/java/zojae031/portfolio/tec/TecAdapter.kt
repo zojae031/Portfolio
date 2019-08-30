@@ -32,8 +32,8 @@ class TecAdapter : RecyclerView.Adapter<TecAdapter.Holder>(), TecAdapterContract
     override fun getItemCount(): Int = lists.size
 
 
-    override fun updateList() {
-
+    override fun updateList(lists: Array<TecEntity>) {
+        this.lists.addAll(lists)
     }
 
     override fun clearList() {

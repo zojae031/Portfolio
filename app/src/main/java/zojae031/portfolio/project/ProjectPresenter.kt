@@ -13,7 +13,10 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
     private lateinit var adapterView: ProjectAdapterContract.View
     private lateinit var adapterModel: ProjectAdapterContract.Model
     private val compositeDisposable = CompositeDisposable()
-    override fun setAdapter(view: ProjectAdapterContract.View, model: ProjectAdapterContract.Model) {
+    override fun setAdapter(
+        view: ProjectAdapterContract.View,
+        model: ProjectAdapterContract.Model
+    ) {
         adapterView = view
         adapterModel = model
     }
@@ -33,9 +36,9 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
             .doOnSuccess { repository.insertCompetitionData(it) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { entity ->
-                adapterView.clearList()
-                adapterView.updateList(entity)
-                adapterModel.notifyAdapter()
+                adapterModel.clearList()
+                adapterModel.updateList(entity)
+                adapterView.notifyAdapter()
             }.also { compositeDisposable.add(it) }
     }
 
