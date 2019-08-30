@@ -11,4 +11,5 @@ interface Repository {
     fun insertBasicData(data: BasicEntity)
     fun getCompetitionData(): Single<String>
     fun insertCompetitionData(data: Array<CompetitionEntity>)
+    fun getTecData(): Single<String>
 }

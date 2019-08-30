@@ -31,14 +31,6 @@ class RepositoryImpl private constructor(
         }
     }
 
-    override fun insertCompetitionData(data: Array<CompetitionEntity>) {
-        if (remoteDataSource.isDirty[1]) {
-            for (list in data) {
-                localDataSource.insertProjectData(list)
-            }
-        }
-    }
-
     override fun getCompetitionData(): Single<String> {
         return if (manager.activeNetwork != null) {
             if (remoteDataSource.isDirty[1]) {
@@ -50,6 +42,17 @@ class RepositoryImpl private constructor(
             localDataSource.getProjectData()
         }
 
+    }
+    override fun insertCompetitionData(data: Array<CompetitionEntity>) {
+        if (remoteDataSource.isDirty[1]) {
+            for (list in data) {
+                localDataSource.insertProjectData(list)
+            }
+        }
+    }
+
+    override fun getTecData(): Single<String> {
+        return remoteDataSource.getTecData()
     }
 
     companion object {

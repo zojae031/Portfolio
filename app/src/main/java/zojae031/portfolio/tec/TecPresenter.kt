@@ -1,6 +1,11 @@
 package zojae031.portfolio.tec
 
-class TecPresenter : TecContract.Presenter {
+import android.util.Log
+import io.reactivex.android.schedulers.AndroidSchedulers
+import zojae031.portfolio.data.Repository
+
+class TecPresenter(private val view: TecContract.View, private val repository: Repository) :
+    TecContract.Presenter {
 
 
     private lateinit var adapterView: TecAdapterContract.View
@@ -16,6 +21,11 @@ class TecPresenter : TecContract.Presenter {
     }
 
     override fun onResume() {
+        repository.getTecData()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { data ->
+                Log.e("result ", data)
+            }
 
     }
 

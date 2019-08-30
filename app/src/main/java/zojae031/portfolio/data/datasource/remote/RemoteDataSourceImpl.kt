@@ -9,7 +9,8 @@ import org.jsoup.Jsoup
 object RemoteDataSourceImpl : RemoteDataSource {
     private val urlList = listOf(
         "https://github.com/zojae031/Portfolio/issues/1",
-        "https://github.com/zojae031/Portfolio/issues/2"
+        "https://github.com/zojae031/Portfolio/issues/2",
+        "https://github.com/zojae031/Portfolio/issues/3"
     )
 
     @Volatile
@@ -21,6 +22,10 @@ object RemoteDataSourceImpl : RemoteDataSource {
 
     override fun getCompetitionData(): Single<String> {
         return parseUrl(1)
+    }
+
+    override fun getTecData(): Single<String> {
+        return parseUrl(2)
     }
 
     private fun parseUrl(idx: Int): Single<String> =

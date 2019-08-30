@@ -7,4 +7,5 @@ interface RemoteDataSource {
     var isDirty: MutableList<Boolean>
     fun getBasicData(): Single<String>
     fun getCompetitionData(): Single<String>
+    fun getTecData(): Single<String>
 }
