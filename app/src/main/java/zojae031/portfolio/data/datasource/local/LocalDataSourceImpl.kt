@@ -1,8 +1,6 @@
 package zojae031.portfolio.data.datasource.local
 
 import android.content.Context
-import android.util.Log
-import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import io.reactivex.Single
@@ -50,6 +48,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
                     addProperty("text", it.text)
                     addProperty("video", it.video)
                     addProperty("skills", it.skills)
+                    addProperty("git", it.git)
                 }
             }.map {
                 array.add(it)

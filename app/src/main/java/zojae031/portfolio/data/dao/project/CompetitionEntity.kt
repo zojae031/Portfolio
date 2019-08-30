@@ -11,5 +11,6 @@ data class CompetitionEntity(
     val text: String,
     val competition: String,
     val video: String,
-    val skills: String
+    val skills: String,
+    val git: String
 )

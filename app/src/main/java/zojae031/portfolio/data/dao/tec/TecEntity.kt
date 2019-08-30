@@ -9,4 +9,5 @@ import java.io.Serializable
 
 @Entity
 @TypeConverters(JsonArrayConverter::class)
-data class TecEntity(@PrimaryKey val name: String, val image: String, val source: JsonArray) : Serializable
+data class TecEntity(@PrimaryKey val name: String, val image: String, val source: JsonArray) :
+    Serializable

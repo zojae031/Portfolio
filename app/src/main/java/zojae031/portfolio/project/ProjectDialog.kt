@@ -25,7 +25,9 @@ class ProjectDialog(context: Context, private val data: CompetitionEntity) : Dia
         title.text = data.name
         text.text = data.text
         skill_text.text = data.skills
-
+        git.setOnClickListener {
+            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.git)))
+        }
         video.setOnClickListener {
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.video)))
         }

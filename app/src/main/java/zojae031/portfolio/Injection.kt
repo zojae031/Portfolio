@@ -22,9 +22,9 @@ class Injection private constructor(private val context: Context) {
             getInstance(context)
             if (repository == null) {
                 repository = RepositoryImpl.getInstance(
-                    LocalDataSourceImpl.getInstance(context!!),
+                    LocalDataSourceImpl.getInstance(context),
                     RemoteDataSourceImpl,
-                    context!!.getSystemService(
+                    context.getSystemService(
                         Context.CONNECTIVITY_SERVICE
                     ) as ConnectivityManager
                 )
