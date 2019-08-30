@@ -51,7 +51,7 @@ class TecAdapter : RecyclerView.Adapter<TecAdapter.Holder>(), TecAdapterContract
                 .with(itemView.context)
                 .load(lists[position].image)
                 .error(R.drawable.ic_launcher_foreground)
-                .override(150, 150)
+                .override(300, 300)
                 .into(image)
         }
     }
