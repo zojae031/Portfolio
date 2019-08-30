@@ -9,7 +9,10 @@ import kotlinx.android.synthetic.main.tec_list.view.*
 import zojae031.portfolio.R
 import zojae031.portfolio.data.dao.tec.TecEntity
 
-class TecAdapter : RecyclerView.Adapter<TecAdapter.Holder>() {
+class TecAdapter : RecyclerView.Adapter<TecAdapter.Holder>(), TecAdapterContract.View,
+    TecAdapterContract.Model {
+
+
     private val lists = mutableListOf<TecEntity>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder =
         Holder(
@@ -28,6 +31,18 @@ class TecAdapter : RecyclerView.Adapter<TecAdapter.Holder>() {
 
     override fun getItemCount(): Int = lists.size
 
+
+    override fun updateList() {
+
+    }
+
+    override fun clearList() {
+        lists.clear()
+    }
+
+    override fun notifyAdapter() {
+        notifyDataSetChanged()
+    }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val image = itemView.imageView
