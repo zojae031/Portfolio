@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             .error(R.drawable.picture)
             .centerCrop()
             .apply(RequestOptions.circleCropTransform())
-            .into(imageView)
+            .into(image)
     }
 
 }

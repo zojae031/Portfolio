@@ -1,6 +1,5 @@
 package zojae031.portfolio.tec
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,17 +47,17 @@ class TecAdapter : RecyclerView.Adapter<TecAdapter.Holder>(), TecAdapterContract
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener {
-                it.context.startActivity(TecActivity.getIntent(it.context,lists[adapterPosition]))
+                it.context.startActivity(TecActivity.getIntent(it.context, lists[adapterPosition]))
             }
         }
 
-        private val image = itemView.imageView
+        private val image = itemView.image
         fun bind(position: Int) {
             Glide
                 .with(itemView.context)
                 .load(lists[position].image)
                 .error(R.drawable.ic_launcher_foreground)
-                .override(300, 300)
+                .override(350, 350)
                 .into(image)
         }
     }

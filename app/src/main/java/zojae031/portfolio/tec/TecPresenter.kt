@@ -1,6 +1,6 @@
 package zojae031.portfolio.tec
 
-import com.google.gson.Gson
+import android.util.Log
 import com.google.gson.JsonParser
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -28,17 +28,28 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
         repository.getTecData()
             .map { data ->
                 JsonParser().parse(data).asJsonArray.run {
-                    Gson().fromJson(this, Array<TecEntity>::class.java)
+
+                    this.map {
+                        with(it.asJsonObject) {
+                            return@with TecEntity(
+                                get("name").toString(),
+                                get("image").toString(),
+                                get("source").toString()
+                            )
+                        }
+                    }.toTypedArray()
                 }
             }
-            .doOnSuccess { repository.insertTecData(it) }
+            .doOnSuccess {
+                repository.insertTecData(it)
+            }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->
                 adapterModel.clearList()
                 adapterModel.updateList(data)
                 adapterView.notifyAdapter()
             }, { t ->
-                view.showToast(t.localizedMessage)
+                view.showToast(t.message.toString())
             }).also { compositeDisposable.add(it) }
 
     }

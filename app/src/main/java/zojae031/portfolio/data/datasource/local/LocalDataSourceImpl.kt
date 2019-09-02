@@ -1,6 +1,7 @@
 package zojae031.portfolio.data.datasource.local
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import io.reactivex.Single
@@ -72,7 +73,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
                 JsonObject().apply {
                     addProperty("name", it.name)
                     addProperty("image", it.image)
-                    add("source", it.source)
+                    addProperty("source", it.source)
                 }
             }.map {
                 array.add(it)
