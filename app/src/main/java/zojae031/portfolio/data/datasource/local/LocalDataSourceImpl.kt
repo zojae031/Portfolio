@@ -49,6 +49,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
                     addProperty("video", it.video)
                     addProperty("skills", it.skills)
                     addProperty("git", it.git)
+                    addProperty("date", it.date)
                 }
             }.map {
                 array.add(it)

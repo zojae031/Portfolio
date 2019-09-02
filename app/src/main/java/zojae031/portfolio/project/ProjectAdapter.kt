@@ -33,7 +33,7 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAda
     override fun clearList() {
         lists.clear()
     }
-
+git 
     override fun updateList(lists: Array<CompetitionEntity>) {
         this.lists.addAll(lists)
     }
@@ -54,6 +54,7 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAda
         private val name = itemView.name
         private val prize = itemView.prize
         private val competition = itemView.competition
+        private val date = itemView.date
         fun bind(position: Int) {
             Glide
                 .with(itemView.context)
@@ -64,6 +65,7 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAda
             name.text = lists[position].name
             prize.text = lists[position].prize
             competition.text = lists[position].competition
+            date.text = lists[position].date
         }
     }
 }
