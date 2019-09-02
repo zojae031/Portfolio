@@ -35,11 +35,14 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
             }
             .doOnSuccess { repository.insertCompetitionData(it) }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { entity ->
+            .subscribe({ entity ->
                 adapterModel.clearList()
                 adapterModel.updateList(entity)
                 adapterView.notifyAdapter()
-            }.also { compositeDisposable.add(it) }
+
+            }, { t ->
+                view.showToast(t.message.toString())
+            }).also { compositeDisposable.add(it) }
     }
 
     override fun onPause() {

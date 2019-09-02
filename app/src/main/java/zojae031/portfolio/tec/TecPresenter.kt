@@ -33,11 +33,13 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
             }
             .doOnSuccess { repository.insertTecData(it) }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { data ->
+            .subscribe({ data ->
                 adapterModel.clearList()
                 adapterModel.updateList(data)
                 adapterView.notifyAdapter()
-            }.also { compositeDisposable.add(it) }
+            }, { t ->
+                view.showToast(t.localizedMessage)
+            }).also { compositeDisposable.add(it) }
 
     }
 

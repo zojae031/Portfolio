@@ -33,7 +33,7 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAda
     override fun clearList() {
         lists.clear()
     }
-git 
+
     override fun updateList(lists: Array<CompetitionEntity>) {
         this.lists.addAll(lists)
     }
