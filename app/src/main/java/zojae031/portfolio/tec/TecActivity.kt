@@ -32,7 +32,6 @@ class TecActivity : Activity() {
                 return false
             }
         }
-        Log.e("data",datas.source)
         val a = JsonParser().parse(datas.source).asJsonArray
 
         Log.e("parse",a.toString())
