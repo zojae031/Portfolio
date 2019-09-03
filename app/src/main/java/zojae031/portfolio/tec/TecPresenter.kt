@@ -30,7 +30,6 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
                 JsonParser().parse(data).asJsonArray.run {
                     this.map {
                         return@map with(it.asJsonObject) {
-                            Log.e("asd",get("source").toString())
                             return@with TecEntity(
                                 get("name").asString,
                                 get("image").asString,
@@ -51,6 +50,7 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
                 adapterView.notifyAdapter()
             }, { t ->
                 view.showToast(t.message.toString())
+                Log.e("TecPresenter", t.message)
             }).also { compositeDisposable.add(it) }
 
     }

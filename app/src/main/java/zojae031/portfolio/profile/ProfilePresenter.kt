@@ -1,5 +1,6 @@
 package zojae031.portfolio.profile
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,11 +27,12 @@ class ProfilePresenter(private val view: ProfileContract.View, private val repos
                 repository.insertBasicData(entity)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ entity->
+            .subscribe({ entity ->
                 view.showBasicInformation(entity)
 
             }, { t ->
                 view.showToast(t.message.toString())
+                Log.e("ProfilePresenter", t.message)
             }
             ).also { compositeDisposable.add(it) }
 

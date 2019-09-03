@@ -1,7 +1,6 @@
 package zojae031.portfolio.data.datasource.local
 
 import android.content.Context
-import android.util.Log
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import io.reactivex.Single
@@ -19,17 +18,17 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
 
     override fun getBasicData(): Single<String> {
         return Single.create(SingleOnSubscribe<String> { emitter ->
-            val data = basicDao.select()
-            JsonObject().apply {
-                addProperty("name", data[0].name)
-                addProperty("age", data[0].age)
-                addProperty("university", data[0].university)
-                addProperty("major", data[0].major)
-                addProperty("military", data[0].military)
-                addProperty("hobby", data[0].hobby)
-                addProperty("additional", data[0].additional)
-            }.also { emitter.onSuccess(it.toString()) }
-
+            basicDao.select().map {
+                JsonObject().apply {
+                    addProperty("name", it.name)
+                    addProperty("age", it.age)
+                    addProperty("university", it.university)
+                    addProperty("major", it.major)
+                    addProperty("military", it.military)
+                    addProperty("hobby", it.hobby)
+                    addProperty("additional", it.additional)
+                }.also { emitter.onSuccess(it.toString()) }
+            }
         }).subscribeOn(Schedulers.io())
     }
 
@@ -41,7 +40,6 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
         return Single.create(SingleOnSubscribe<String> { emitter ->
             val array = JsonArray()
             projectDao.select().map {
-                //                Gson().toJson(it,CompetitionEntity::class.java)
                 JsonObject().apply {
                     addProperty("image", it.image)
                     addProperty("name", it.name)
@@ -82,7 +80,6 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
     }
 
     override fun insertTecData(data: TecEntity) {
-        Log.e("LocalDataSource:Insert", data.name)
         tecDao.insert(data)
     }
 

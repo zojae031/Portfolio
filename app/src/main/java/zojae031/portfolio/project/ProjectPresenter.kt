@@ -1,5 +1,6 @@
 package zojae031.portfolio.project
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -42,6 +43,7 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
 
             }, { t ->
                 view.showToast(t.message.toString())
+                Log.e("ProjectPresenter", t.message)
             }).also { compositeDisposable.add(it) }
     }
 
