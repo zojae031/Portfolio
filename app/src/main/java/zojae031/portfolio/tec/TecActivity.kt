@@ -33,9 +33,7 @@ class TecActivity : Activity() {
             }
         }
         val a = JsonParser().parse(datas.source).asJsonArray
-
-        Log.e("parse",a.toString())
-
+        //TODO Button으로 옮겨다니기 visable invisable
         web_view.loadUrl(a[0].asJsonObject.get("data1").asString)
     }
 

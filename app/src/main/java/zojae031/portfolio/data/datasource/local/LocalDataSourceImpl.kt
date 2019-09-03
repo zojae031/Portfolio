@@ -41,6 +41,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
         return Single.create(SingleOnSubscribe<String> { emitter ->
             val array = JsonArray()
             projectDao.select().map {
+                //                Gson().toJson(it,CompetitionEntity::class.java)
                 JsonObject().apply {
                     addProperty("image", it.image)
                     addProperty("name", it.name)
@@ -68,23 +69,20 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
 
     override fun getTecData(): Single<String> {
         return Single.create(SingleOnSubscribe<String> { emitter ->
-            val array = JsonArray()
+            val arr = JsonArray()
             tecDao.select().map {
                 JsonObject().apply {
                     addProperty("name", it.name)
                     addProperty("image", it.image)
                     addProperty("source", it.source)
-                }
-            }.map {
-                array.add(it)
-            }.also {
-                emitter.onSuccess(array.toString())
+                }.also { arr.add(it) }
             }
-
+            emitter.onSuccess(arr.toString())
         }).subscribeOn(Schedulers.io())
     }
 
     override fun insertTecData(data: TecEntity) {
+        Log.e("LocalDataSource:Insert", data.name)
         tecDao.insert(data)
     }
 

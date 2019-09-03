@@ -28,14 +28,15 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
         repository.getTecData()
             .map { data ->
                 JsonParser().parse(data).asJsonArray.run {
-
                     this.map {
-                        with(it.asJsonObject) {
+                        return@map with(it.asJsonObject) {
+                            Log.e("asd",get("source").toString())
                             return@with TecEntity(
-                                get("name").toString(),
-                                get("image").toString(),
+                                get("name").asString,
+                                get("image").asString,
                                 get("source").toString()
                             )
+
                         }
                     }.toTypedArray()
                 }
