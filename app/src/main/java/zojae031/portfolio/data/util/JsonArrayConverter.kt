@@ -6,13 +6,13 @@ import com.google.gson.JsonArray
 
 class JsonArrayConverter {
     @TypeConverter
-    fun fromJsonArray(data: String): JsonArray? {
+    fun fromJsonArray(data: String?): JsonArray? {
         return if (data == null) null
         else Gson().fromJson(data, JsonArray::class.java)
     }
 
     @TypeConverter
-    fun toJsonArray(data: JsonArray): String? {
+    fun toJsonArray(data: JsonArray?): String? {
         return if (data == null) null
         else Gson().toJson(data)
     }

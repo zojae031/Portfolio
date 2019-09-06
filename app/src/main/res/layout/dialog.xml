@@ -7,7 +7,7 @@
         android:orientation="vertical">
 
     <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/outer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
                 android:padding="4dp"
                 app:srcCompat="@mipmap/ic_launcher" />
 
@@ -67,7 +68,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/outer" />
 
     <LinearLayout
             android:id="@+id/linearLayout2"
@@ -86,13 +87,13 @@
             app:layout_constraintTop_toBottomOf="@+id/skill_text">
 
         <Button
-                android:id="@+id/video"
+                android:id="@+id/left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="시연 영상" />
 
         <Button
-                android:id="@+id/git"
+                android:id="@+id/right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

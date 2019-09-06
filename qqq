@@ -1,0 +1,55 @@
+[33m8bd0df7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m Profile LocalDataSource 데이터 발행 방식 변경
+[33m7419f9f[m Tec LocalDataSource JsonArray String 문제해결
+[33m21dcbc2[m web View xml 변경
+[33mc2adae5[m Tec localDataSource JsonArray->String 변환(Parcelable 추가)
+[33mdcfa651[m Tec Dialog->Activity로 변경, Rxjava error처리
+[33m5eede80[m Project 날짜 추가
+[33m46ee4af[m Injection 변경
+[33m30836d0[m Project Github 연결 버튼 추가
+[33mf6feecf[m Tec localDataSource cache 구현 완료
+[33mcf9a29f[m Repository Injection 추가
+[33m5d70c8c[m Tec JsonArrayMapping, linear->grid 변경
+[33mfb46482[m Adapter 기능 수정, list 뿌리기
+[33m324d429[m Tec issue parsing
+[33m85e9448[m Tec RemoteDataSource 추가
+[33mb2b7e6d[m Tec MVP 적용 완료
+[33meb37c36[m 안드로이드 스튜디오 업데이트 & Tec MVP 적용
+[33m962ecd8[m tec Adapater 추가
+[33m3643a1e[m Project 기술항목 항상 보이게 변경
+[33m65b60f9[m Profile append 오류 해결
+[33mc4de05b[m 동영상 재생버튼 위치 변경
+[33med829c3[m 취미 추가, 동영상 추가
+[33m3dda417[m Adapter onClickListener 성능 향상
+[33m861ff2d[m 기술 항목 추가
+[33m5bbea3c[m Project Custom Dialog 제작
+[33m082c4e8[m Font size 조절
+[33ma8b8eb4[m apply -> run 변경 (리턴값 문제)
+[33m9b4cf63[m profile 글자 간격 변경
+[33maaf698d[m drawer 추가 완료
+[33m8e4c71e[m menu button add
+[33m0ce9526[m 아이콘 변경
+[33m1a8829a[m 앱 색상 변경
+[33m2ee9858[m package 정리
+[33mfcc7955[m 함수명 변경
+[33mc6c906c[m Competition Local Datasource 완료
+[33m0a57749[m Single 에러처리, Glide 에러 처리
+[33m9a92333[m list 클릭시 유튜브 연결
+[33m9d265c1[m Data 가공(map) 방식 변경
+[33mcab956f[m project remote datasource / project ui 수정
+[33m8329190[m 패키지 변경, adapter 추가
+[33ma3bd492[m local/remote 캐싱 완료
+[33mc7ce928[m room dataBase 추가
+[33m856719c[m package 변경
+[33m4316b55[m font family 추가
+[33m39f4157[m 기본정보 파싱(remoteDatasource)
+[33m8eafbd4[m xml code reformat
+[33m7d424b3[m Jsoup Parsing
+[33me87c8ac[m Model 기본 정의
+[33m67a21aa[m sub fragment 작업
+[33mfee3cea[m Indicator padding 수정
+[33m39c283d[m Indicator 제작
+[33m434861f[m View Pager 추가
+[33m9fb3af0[m UI(배경) 수정
+[33md46b009[m UserImage 편집
+[33m7106781[m main 화면 구성
+[33mb0fcdbc[m 프로젝트 생성
