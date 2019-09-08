@@ -1,6 +1,5 @@
 package zojae031.portfolio.tec
 
-import android.util.Log
 import com.google.gson.JsonParser
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -9,7 +8,6 @@ import zojae031.portfolio.data.dao.tec.TecEntity
 
 class TecPresenter(private val view: TecContract.View, private val repository: Repository) :
     TecContract.Presenter {
-
 
     private lateinit var adapterView: TecAdapterContract.View
     private lateinit var adapterModel: TecAdapterContract.Model
@@ -27,8 +25,6 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
     override fun onResume() {
         repository.getTecData()
             .map { data ->
-                Log.e("onResume : TecPresenter", data)
-                //TODO 변경 데이터 파싱 불가
                 JsonParser().parse(data).asJsonArray.run {
                     this.map {
                         return@map with(it.asJsonObject) {
@@ -37,7 +33,6 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
                                 get("image").asString,
                                 get("source").toString()
                             )
-
                         }
                     }.toTypedArray()
                 }
@@ -52,9 +47,7 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
                 adapterView.notifyAdapter()
             }, { t ->
                 view.showToast(t.message.toString())
-                Log.e("TecPresenter", t.message)
             }).also { compositeDisposable.add(it) }
-
     }
 
     override fun onPause() {

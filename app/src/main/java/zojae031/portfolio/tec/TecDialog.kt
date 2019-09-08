@@ -23,27 +23,36 @@ class TecDialog(context: Context, private val data: TecEntity) : Dialog(context)
 
         title.text = data.name
         outer.removeView(text)
-        left.text = "◁"
-        right.text = "▷"
+
         //TODO UI 생각해보기!
         //TODO TecActivity 는 WebView만 뿌려주기!!!
         //TODO LEFT, Right 데이터 파싱 만들기
-        JsonParser().parse(data.source).asJsonArray.apply {
-            left.setOnClickListener {
-                context.startActivity(
-                    TecActivity.getIntent(
-                        context,
-                        this[0].asJsonObject.get("data1").asString
+
+
+        JsonParser().parse(data.source).asJsonArray.let { arr ->
+            val source = arr[0].asJsonObject
+            left.apply {
+                text = source.get("left").asString
+                setOnClickListener {
+                    context.startActivity(
+                        TecActivity.getIntent(
+                            context,
+                            source.asJsonObject.get("data1").asString
+                        )
                     )
-                )
+                }
             }
-            right.setOnClickListener {
-                context.startActivity(
-                    TecActivity.getIntent(
-                        context,
-                        this[0].asJsonObject.get("data2").asString
+
+            right.apply {
+                text = source.get("right").asString
+                setOnClickListener {
+                    context.startActivity(
+                        TecActivity.getIntent(
+                            context,
+                            source.get("data2").asString
+                        )
                     )
-                )
+                }
             }
         }
 
