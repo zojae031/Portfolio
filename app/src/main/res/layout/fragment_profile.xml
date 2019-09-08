@@ -3,7 +3,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded"
         android:orientation="vertical"
         android:padding="8dp"
         app:layout_anchorGravity="center">
@@ -12,7 +11,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="@android:color/white"
             android:orientation="horizontal">
 
         <TextView
@@ -136,18 +134,20 @@
     </LinearLayout>
 
     <LinearLayout
+            android:id="@+id/additional"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="4dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
         <ImageView
                 android:id="@+id/play"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:srcCompat="@android:drawable/ic_media_play" />
 
         <TextView
@@ -160,6 +160,6 @@
                 android:text="저의 취미는요"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:visibility="invisible" />
+                android:visibility="visible" />
     </LinearLayout>
 </LinearLayout>

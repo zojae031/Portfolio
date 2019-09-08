@@ -1,5 +1,6 @@
 package zojae031.portfolio.data.datasource.remote
 
+import android.util.Log
 import io.reactivex.Single
 import io.reactivex.SingleOnSubscribe
 import io.reactivex.schedulers.Schedulers
@@ -39,7 +40,7 @@ object RemoteDataSourceImpl : RemoteDataSource {
                         it.onSuccess(this.parse().select(".d-block").select("p").text())
                     }
             } catch (e: Exception) {
-                it.onError(e)
+                it.tryOnError(e)
             }
 
 

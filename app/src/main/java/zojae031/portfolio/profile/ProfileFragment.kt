@@ -59,14 +59,12 @@ class ProfileFragment : Fragment(), ProfileContract.View {
 
     private fun additionalOption(data: String) {
         if (data != "") {
-            explain.visibility = View.VISIBLE
-            play.apply {
+            additional.apply {
                 visibility = View.VISIBLE
                 setOnClickListener {
                     context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data)))
                 }
             }
-
         }
     }
 }
