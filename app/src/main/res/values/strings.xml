@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Portfolio</string>
+    <string name="email">edgar3@naver.com</string>
+    <string name="git">https://github.com/zojae031/Portfolio</string>
 </resources>
