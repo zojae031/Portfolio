@@ -48,7 +48,6 @@ class TecAdapter : RecyclerView.Adapter<TecAdapter.Holder>(), TecAdapterContract
         init {
             itemView.setOnClickListener {
                 TecDialog(it.context, lists[adapterPosition]).show()
-//                it.context.startActivity(TecActivity.getIntent(it.context, lists[adapterPosition]))
             }
         }
 

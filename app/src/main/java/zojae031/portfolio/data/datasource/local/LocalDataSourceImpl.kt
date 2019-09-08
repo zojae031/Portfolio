@@ -3,6 +3,7 @@ package zojae031.portfolio.data.datasource.local
 import android.content.Context
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import io.reactivex.Single
 import io.reactivex.SingleOnSubscribe
 import io.reactivex.schedulers.Schedulers
@@ -72,10 +73,12 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
                 JsonObject().apply {
                     addProperty("name", it.name)
                     addProperty("image", it.image)
-                    addProperty("source", it.source)
-                }.also { arr.add(it) }
+                    add("source", JsonParser().parse(it.source).asJsonArray)
+                }
+            }.also {
+                arr.add(it.toString())
             }
-            emitter.onSuccess(arr.toString())
+            emitter.onSuccess(arr.asString)
         }).subscribeOn(Schedulers.io())
     }
 

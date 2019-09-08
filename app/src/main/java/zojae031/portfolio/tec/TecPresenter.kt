@@ -27,6 +27,8 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
     override fun onResume() {
         repository.getTecData()
             .map { data ->
+                Log.e("onResume : TecPresenter", data)
+                //TODO 변경 데이터 파싱 불가
                 JsonParser().parse(data).asJsonArray.run {
                     this.map {
                         return@map with(it.asJsonObject) {

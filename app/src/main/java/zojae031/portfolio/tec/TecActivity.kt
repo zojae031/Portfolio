@@ -7,20 +7,17 @@ import android.os.Bundle
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_tec.*
 import zojae031.portfolio.R
-import zojae031.portfolio.data.dao.tec.TecEntity
 
 class TecActivity : Activity() {
-    private val datas by lazy { intent.getParcelableExtra(EXTRA_DATA) as TecEntity }
+    private val url by lazy { intent.getStringExtra(EXTRA_DATA) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tec)
 
         setWebView()
     }
-
 
     private fun setWebView() {
         web_view.settings.javaScriptEnabled = true
@@ -31,14 +28,15 @@ class TecActivity : Activity() {
                 return false
             }
         }
-        val a = JsonParser().parse(datas.source).asJsonArray
+
         //TODO Button으로 옮겨다니기 visable invisable
-        web_view.loadUrl(a[0].asJsonObject.get("data1").asString)
+        if (url != "")
+            web_view.loadUrl(url)
     }
 
     companion object {
         private const val EXTRA_DATA = "EXTRA_DATA"
-        fun getIntent(context: Context, data: TecEntity): Intent =
+        fun getIntent(context: Context, data: String): Intent =
             Intent(context, TecActivity::class.java).apply { putExtra(EXTRA_DATA, data) }
 
     }
