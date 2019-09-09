@@ -18,12 +18,14 @@ class TecDialog(context: Context, private val data: TecEntity) : Dialog(context)
             .with(context)
             .load(data.image)
             .error(R.drawable.ic_launcher_foreground)
-            .override(150, 150)
+            .override(200, 200)
             .into(project_image)
 
         title.text = data.name
-        outer.removeView(text)
-
+        outer.apply {
+            removeView(text)
+            removeView(skill_text)
+        }
         JsonParser().parse(data.source).asJsonArray.map { element ->
             left.apply {
                 text = element.asJsonObject.get("left").asString
