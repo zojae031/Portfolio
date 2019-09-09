@@ -29,7 +29,6 @@ class TecActivity : Activity() {
             }
         }
 
-        //TODO Button으로 옮겨다니기 visable invisable
         if (url != "")
             web_view.loadUrl(url)
     }

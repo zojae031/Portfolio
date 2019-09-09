@@ -24,11 +24,6 @@ class TecDialog(context: Context, private val data: TecEntity) : Dialog(context)
         title.text = data.name
         outer.removeView(text)
 
-        //TODO UI 생각해보기!
-        //TODO TecActivity 는 WebView만 뿌려주기!!!
-        //TODO LEFT, Right 데이터 파싱 만들기
-
-
         JsonParser().parse(data.source).asJsonArray.map { element ->
             left.apply {
                 text = element.asJsonObject.get("left").asString
