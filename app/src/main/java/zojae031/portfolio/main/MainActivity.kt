@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         presenter.onCreate()
 
         setSupportActionBar(toolbar)
@@ -59,7 +58,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             R.drawable.indicator_on,
             0
         )
-        loadingAd()
+
+        adView.loadAd(AdRequest.Builder().build())
+
     }
 
     override fun showToast(text: String) {
@@ -75,9 +76,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             .into(image)
     }
 
-    private fun loadingAd() {
-        adView.loadAd(AdRequest.Builder().build())
-    }
 
     override fun onResume() {
         super.onResume()
