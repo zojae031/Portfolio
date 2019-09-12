@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
 
         with(pager) {
+            offscreenPageLimit = 2
             adapter = MainPagerAdapter(supportFragmentManager)
             addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrollStateChanged(state: Int) {
