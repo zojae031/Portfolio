@@ -46,4 +46,6 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
 
+    implementation 'com.google.android.gms:play-services-ads:18.2.0'
+
 }

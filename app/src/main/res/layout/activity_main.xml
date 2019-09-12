@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000000"
-
         tools:context=".main.MainActivity">
     <!--Main Layout-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,13 +71,15 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:background="#FFFFFF"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintBottom_toTopOf="@+id/adView"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frameLayout"></androidx.viewpager.widget.ViewPager>
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+                app:layout_constraintVertical_bias="0.0"></androidx.viewpager.widget.ViewPager>
 
         <zojae031.portfolio.main.Indicator
                 android:id="@+id/indicator"
@@ -85,9 +87,20 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:padding="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/adView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/ad_test"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--Second Layout-->
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

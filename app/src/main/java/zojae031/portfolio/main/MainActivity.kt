@@ -7,6 +7,7 @@ import androidx.core.view.GravityCompat
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import zojae031.portfolio.R
 
@@ -14,7 +15,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
 
     private val presenter = MainPresenter(this@MainActivity)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             R.drawable.indicator_on,
             0
         )
+        loadingAd()
     }
 
     override fun showToast(text: String) {
@@ -74,4 +75,22 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             .into(image)
     }
 
+    private fun loadingAd() {
+        adView.loadAd(AdRequest.Builder().build())
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adView.resume()
+    }
+
+    override fun onPause() {
+        adView.pause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
+    }
 }
