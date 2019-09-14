@@ -18,24 +18,19 @@ object RemoteDataSourceImpl : RemoteDataSource {
     override var isDirty: MutableList<Boolean> = mutableListOf(false, false, false)
 
 
-    override fun getData(type: RepositoryImpl.ParseData): Single<String> {
-        return parseUrl(type)
-    }
-
-    private fun parseUrl(idx: RepositoryImpl.ParseData): Single<String> =
+    override fun getData(type: RepositoryImpl.ParseData): Single<String> =
         Single.create(SingleOnSubscribe<String> {
             try {
-                Jsoup.connect(urlList[idx.ordinal])
+                Jsoup.connect(urlList[type.ordinal])
                     .method(Connection.Method.GET)
                     .execute()
                     .apply {
-                        isDirty[idx.ordinal] = true
+                        isDirty[type.ordinal] = true
                         it.onSuccess(this.parse().select(".d-block").select("p").text())
                     }
             } catch (e: Exception) {
                 it.tryOnError(e)
             }
         }).subscribeOn(Schedulers.io())
-
 
 }
