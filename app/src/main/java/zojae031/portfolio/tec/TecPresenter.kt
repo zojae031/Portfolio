@@ -5,8 +5,8 @@ import com.google.gson.JsonParser
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
+import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.tec.TecEntity
-import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
 
 class TecPresenter(private val view: TecContract.View, private val repository: Repository) :
     TecContract.Presenter {
@@ -25,7 +25,7 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
     }
 
     override fun onResume() {
-        repository.getData(RemoteDataSourceImpl.ParseData.TEC)
+        repository.getData(RepositoryImpl.ParseData.TEC)
             .map { data ->
                 JsonParser().parse(data).asJsonArray.run {
                     this.map {
@@ -40,7 +40,7 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
                 }
             }
             .doOnSuccess {
-                repository.insertData(RemoteDataSourceImpl.ParseData.TEC, it)
+                repository.insertData(RepositoryImpl.ParseData.TEC, it)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->

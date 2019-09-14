@@ -7,39 +7,39 @@ import com.google.gson.JsonParser
 import io.reactivex.Single
 import io.reactivex.SingleOnSubscribe
 import io.reactivex.schedulers.Schedulers
+import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.profile.BasicEntity
 import zojae031.portfolio.data.dao.project.CompetitionEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
-import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
 
 class LocalDataSourceImpl private constructor(context: Context) : LocalDataSource {
     private val db = LocalDataBase.getInstance(context)
     private val basicDao = db.basicDao()
     private val projectDao = db.projectDao()
     private val tecDao = db.tecDao()
-    override fun getData(type: RemoteDataSourceImpl.ParseData): Single<String> {
+    override fun getData(type: RepositoryImpl.ParseData): Single<String> {
         return when (type) {
-            RemoteDataSourceImpl.ParseData.PROFILE -> {
+            RepositoryImpl.ParseData.PROFILE -> {
                 getBasicData()
             }
-            RemoteDataSourceImpl.ParseData.PROJECT -> {
+            RepositoryImpl.ParseData.PROJECT -> {
                 getProjectData()
             }
-            RemoteDataSourceImpl.ParseData.TEC -> {
+            RepositoryImpl.ParseData.TEC -> {
                 getTecData()
             }
         }
     }
 
-    override fun insertData(type: RemoteDataSourceImpl.ParseData, data: Any) {
+    override fun insertData(type: RepositoryImpl.ParseData, data: Any) {
         when (type) {
-            RemoteDataSourceImpl.ParseData.PROFILE -> {
+            RepositoryImpl.ParseData.PROFILE -> {
                 basicDao.insert(data as BasicEntity)
             }
-            RemoteDataSourceImpl.ParseData.PROJECT -> {
+            RepositoryImpl.ParseData.PROJECT -> {
                 projectDao.insert(data as CompetitionEntity)
             }
-            RemoteDataSourceImpl.ParseData.TEC -> {
+            RepositoryImpl.ParseData.TEC -> {
                 tecDao.insert(data as TecEntity)
             }
         }

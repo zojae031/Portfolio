@@ -4,14 +4,13 @@ import android.net.ConnectivityManager
 import io.reactivex.Single
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
-import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
 
 class RepositoryImpl private constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
     private val manager: ConnectivityManager
 ) : Repository {
-    override fun getData(type: RemoteDataSourceImpl.ParseData): Single<String> {
+    override fun getData(type: ParseData): Single<String> {
         return if (manager.activeNetwork != null) {//네트워크 연결상태 on
             if (remoteDataSource.isDirty[type.ordinal]) {//캐시가 지저분하면 로컬에서 땡겨옴
                 localDataSource.getData(type)
@@ -23,18 +22,18 @@ class RepositoryImpl private constructor(
         }
     }
 
-    override fun insertData(type: RemoteDataSourceImpl.ParseData, data: Any) {
+    override fun insertData(type: ParseData, data: Any) {
         if (remoteDataSource.isDirty[type.ordinal]) { //캐시가 더러울때만 저장
             when (type) {
-                RemoteDataSourceImpl.ParseData.PROFILE -> {
+                ParseData.PROFILE -> {
                     localDataSource.insertData(type, data)
                 }
-                RemoteDataSourceImpl.ParseData.PROJECT -> {
+                ParseData.PROJECT -> {
                     for (list in data as Array<*>) {
                         localDataSource.insertData(type, list!!)
                     }
                 }
-                RemoteDataSourceImpl.ParseData.TEC -> {
+                ParseData.TEC -> {
                     for (list in data as Array<*>) {
                         localDataSource.insertData(type, list!!)
                     }
@@ -45,6 +44,9 @@ class RepositoryImpl private constructor(
         }
     }
 
+    enum class ParseData {
+        PROFILE, PROJECT, TEC
+    }
 
     companion object {
         private var INSTANCE: RepositoryImpl? = null

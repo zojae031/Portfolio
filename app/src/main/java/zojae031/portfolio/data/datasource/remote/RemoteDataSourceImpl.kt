@@ -5,6 +5,7 @@ import io.reactivex.SingleOnSubscribe
 import io.reactivex.schedulers.Schedulers
 import org.jsoup.Connection
 import org.jsoup.Jsoup
+import zojae031.portfolio.data.RepositoryImpl
 
 object RemoteDataSourceImpl : RemoteDataSource {
     private val urlList = listOf(
@@ -17,11 +18,11 @@ object RemoteDataSourceImpl : RemoteDataSource {
     override var isDirty: MutableList<Boolean> = mutableListOf(false, false, false)
 
 
-    override fun getData(type: ParseData): Single<String> {
+    override fun getData(type: RepositoryImpl.ParseData): Single<String> {
         return parseUrl(type)
     }
 
-    private fun parseUrl(idx: ParseData): Single<String> =
+    private fun parseUrl(idx: RepositoryImpl.ParseData): Single<String> =
         Single.create(SingleOnSubscribe<String> {
             try {
                 Jsoup.connect(urlList[idx.ordinal])
@@ -36,7 +37,5 @@ object RemoteDataSourceImpl : RemoteDataSource {
             }
         }).subscribeOn(Schedulers.io())
 
-    enum class ParseData {
-        PROFILE, PROJECT, TEC
-    }
+
 }
