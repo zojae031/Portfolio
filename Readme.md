@@ -34,14 +34,14 @@
 
 
 
-### 1. Main Activity
+### 1. [Main](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/main)
 
  - 내부 ViewPager와 LinearLayout을 사용한 Indicator를 이용하여 세가지 정보를 보여줌
    1. 기본정보
    2. 프로젝트
    3. 기술
 
-### 2. Profile
+### 2. [Profile](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/profile)
 
 - 사용자의 기본 정보를 보여주는 공간
   - 이름
@@ -51,7 +51,7 @@
   - 병역
   - 취미
   - Addtional (취미를 보여주고싶다면 Json에 데이터를 넣을 시 Visable)
-### 3. Project
+### 3. [Project](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/project)
 
 - 사용자의 프로젝트 연혁, 경력정보를 보여주는 공간
 
@@ -62,7 +62,7 @@
   - 시연 영상 주소
   - 깃허브 주소
 
-### 4. Tec 
+### 4. [Tec](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/tec)
 
 
 - 사용자가 사용한 기술을 보여주는 공간
