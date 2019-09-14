@@ -2,76 +2,49 @@ package zojae031.portfolio.data
 
 import android.net.ConnectivityManager
 import io.reactivex.Single
-import zojae031.portfolio.data.dao.profile.BasicEntity
-import zojae031.portfolio.data.dao.project.CompetitionEntity
-import zojae031.portfolio.data.dao.tec.TecEntity
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
+import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
 
 class RepositoryImpl private constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
     private val manager: ConnectivityManager
 ) : Repository {
-
-    override fun getBasicData(): Single<String> {
+    override fun getData(type: RemoteDataSourceImpl.Data): Single<String> {
         return if (manager.activeNetwork != null) {//네트워크 연결상태 on
-            if (remoteDataSource.isDirty[0]) {//캐시가 지저분하면 로컬에서 땡겨옴
-                localDataSource.getBasicData()
+            if (remoteDataSource.isDirty[type.ordinal]) {//캐시가 지저분하면 로컬에서 땡겨옴
+                localDataSource.getData(type)
             } else {
-                remoteDataSource.getBasicData()
+                remoteDataSource.getData(type)
             }
         } else {//네트워크 연결상태 off
-            localDataSource.getBasicData()
+            localDataSource.getData(type)
         }
     }
 
-    override fun insertBasicData(data: BasicEntity) {
-        if (remoteDataSource.isDirty[0]) { //캐시가 더러울때만 저장
-            localDataSource.insertBasicData(data)
-        }
-    }
+    override fun insertData(type: RemoteDataSourceImpl.Data, data: Any) {
+        if (remoteDataSource.isDirty[type.ordinal]) { //캐시가 더러울때만 저장
+            when (type) {
+                RemoteDataSourceImpl.Data.PROFILE -> {
+                    localDataSource.insertData(type, data)
+                }
+                RemoteDataSourceImpl.Data.PROJECT -> {
+                    for (list in data as Array<*>) {
+                        localDataSource.insertData(type, list!!)
+                    }
+                }
+                RemoteDataSourceImpl.Data.TEC -> {
+                    for (list in data as Array<*>) {
+                        localDataSource.insertData(type, list!!)
+                    }
 
-    override fun getCompetitionData(): Single<String> {
-        return if (manager.activeNetwork != null) {
-            if (remoteDataSource.isDirty[1]) {
-                localDataSource.getProjectData()
-            } else {
-                remoteDataSource.getProjectData()
+                }
             }
-        } else {
-            localDataSource.getProjectData()
-        }
 
-    }
-
-    override fun insertCompetitionData(data: Array<CompetitionEntity>) {
-        if (remoteDataSource.isDirty[1]) {
-            for (list in data) {
-                localDataSource.insertProjectData(list)
-            }
         }
     }
 
-    override fun getTecData(): Single<String> {
-        return if (manager.activeNetwork != null) {
-            if (remoteDataSource.isDirty[2]) {
-                localDataSource.getTecData()
-            } else {
-                remoteDataSource.getTecData()
-            }
-        } else {
-            localDataSource.getTecData()
-        }
-    }
-
-    override fun insertTecData(data: Array<TecEntity>) {
-        if (remoteDataSource.isDirty[2]) {
-            for (list in data) {
-                localDataSource.insertTecData(list)
-            }
-        }
-    }
 
     companion object {
         private var INSTANCE: RepositoryImpl? = null

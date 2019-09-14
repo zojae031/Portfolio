@@ -10,14 +10,42 @@ import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.dao.profile.BasicEntity
 import zojae031.portfolio.data.dao.project.CompetitionEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
+import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
 
 class LocalDataSourceImpl private constructor(context: Context) : LocalDataSource {
     private val db = LocalDataBase.getInstance(context)
     private val basicDao = db.basicDao()
     private val projectDao = db.projectDao()
     private val tecDao = db.tecDao()
+    override fun getData(type: RemoteDataSourceImpl.Data): Single<String> {
+        return when (type) {
+            RemoteDataSourceImpl.Data.PROFILE -> {
+                getBasicData()
+            }
+            RemoteDataSourceImpl.Data.PROJECT -> {
+                getProjectData()
+            }
+            RemoteDataSourceImpl.Data.TEC -> {
+                getTecData()
+            }
+        }
+    }
 
-    override fun getBasicData(): Single<String> {
+    override fun insertData(type: RemoteDataSourceImpl.Data, data: Any) {
+        when (type) {
+            RemoteDataSourceImpl.Data.PROFILE -> {
+                basicDao.insert(data as BasicEntity)
+            }
+            RemoteDataSourceImpl.Data.PROJECT -> {
+                projectDao.insert(data as CompetitionEntity)
+            }
+            RemoteDataSourceImpl.Data.TEC -> {
+                tecDao.insert(data as TecEntity)
+            }
+        }
+    }
+
+    private fun getBasicData(): Single<String> {
         return Single.create(SingleOnSubscribe<String> { emitter ->
             basicDao.select().map {
                 JsonObject().apply {
@@ -33,11 +61,8 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
         }).subscribeOn(Schedulers.io())
     }
 
-    override fun insertBasicData(data: BasicEntity) {
-        basicDao.insert(data)
-    }
 
-    override fun getProjectData(): Single<String> {
+    private fun getProjectData(): Single<String> {
         return Single.create(SingleOnSubscribe<String> { emitter ->
             val array = JsonArray()
             projectDao.select().map {
@@ -62,11 +87,8 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
         }).subscribeOn(Schedulers.io())
     }
 
-    override fun insertProjectData(data: CompetitionEntity) {
-        projectDao.insert(data)
-    }
 
-    override fun getTecData(): Single<String> {
+    private fun getTecData(): Single<String> {
         return Single.create(SingleOnSubscribe<String> { emitter ->
             val arr = JsonArray()
             tecDao.select().map {
@@ -82,9 +104,6 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
         }).subscribeOn(Schedulers.io())
     }
 
-    override fun insertTecData(data: TecEntity) {
-        tecDao.insert(data)
-    }
 
     companion object {
         private var INSTANCE: LocalDataSourceImpl? = null

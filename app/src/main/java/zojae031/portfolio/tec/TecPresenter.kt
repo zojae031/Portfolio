@@ -1,10 +1,12 @@
 package zojae031.portfolio.tec
 
+import android.util.Log
 import com.google.gson.JsonParser
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.dao.tec.TecEntity
+import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
 
 class TecPresenter(private val view: TecContract.View, private val repository: Repository) :
     TecContract.Presenter {
@@ -23,7 +25,7 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
     }
 
     override fun onResume() {
-        repository.getTecData()
+        repository.getData(RemoteDataSourceImpl.Data.TEC)
             .map { data ->
                 JsonParser().parse(data).asJsonArray.run {
                     this.map {
@@ -38,7 +40,7 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
                 }
             }
             .doOnSuccess {
-                repository.insertTecData(it)
+                repository.insertData(RemoteDataSourceImpl.Data.TEC, it)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->
@@ -47,6 +49,7 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
                 adapterView.notifyAdapter()
             }, { t ->
                 view.showToast(t.message.toString())
+                Log.e("TecPresenter", t.message)
             }).also { compositeDisposable.add(it) }
     }
 

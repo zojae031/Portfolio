@@ -16,26 +16,19 @@ object RemoteDataSourceImpl : RemoteDataSource {
     @Volatile
     override var isDirty: MutableList<Boolean> = mutableListOf(false, false, false)
 
-    override fun getBasicData(): Single<String> {
-        return parseUrl(0)
+
+    override fun getData(type: Data): Single<String> {
+        return parseUrl(type)
     }
 
-    override fun getProjectData(): Single<String> {
-        return parseUrl(1)
-    }
-
-    override fun getTecData(): Single<String> {
-        return parseUrl(2)
-    }
-
-    private fun parseUrl(idx: Int): Single<String> =
+    private fun parseUrl(idx: Data): Single<String> =
         Single.create(SingleOnSubscribe<String> {
             try {
-                Jsoup.connect(urlList[idx])
+                Jsoup.connect(urlList[idx.ordinal])
                     .method(Connection.Method.GET)
                     .execute()
                     .apply {
-                        isDirty[idx] = true
+                        isDirty[idx.ordinal] = true
                         it.onSuccess(this.parse().select(".d-block").select("p").text())
                     }
             } catch (e: Exception) {
@@ -43,4 +36,7 @@ object RemoteDataSourceImpl : RemoteDataSource {
             }
         }).subscribeOn(Schedulers.io())
 
+    enum class Data {
+        PROFILE, PROJECT, TEC
+    }
 }

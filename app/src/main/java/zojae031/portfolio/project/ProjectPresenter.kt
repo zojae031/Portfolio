@@ -7,6 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.dao.project.CompetitionEntity
+import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
 
 
 class ProjectPresenter(private val view: ProjectContract.View, private val repository: Repository) :
@@ -28,13 +29,13 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
 
     override fun onResume() {
         repository
-            .getCompetitionData()
+            .getData(RemoteDataSourceImpl.Data.PROJECT)
             .map { data ->
                 JsonParser().parse(data).asJsonArray.run {
                     Gson().fromJson(this, Array<CompetitionEntity>::class.java)
                 }
             }
-            .doOnSuccess { repository.insertCompetitionData(it) }
+            .doOnSuccess { repository.insertData(RemoteDataSourceImpl.Data.PROJECT, it) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ entity ->
                 adapterModel.clearList()
