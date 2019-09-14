@@ -29,13 +29,13 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
 
     override fun onResume() {
         repository
-            .getData(RemoteDataSourceImpl.Data.PROJECT)
+            .getData(RemoteDataSourceImpl.ParseData.PROJECT)
             .map { data ->
                 JsonParser().parse(data).asJsonArray.run {
                     Gson().fromJson(this, Array<CompetitionEntity>::class.java)
                 }
             }
-            .doOnSuccess { repository.insertData(RemoteDataSourceImpl.Data.PROJECT, it) }
+            .doOnSuccess { repository.insertData(RemoteDataSourceImpl.ParseData.PROJECT, it) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ entity ->
                 adapterModel.clearList()

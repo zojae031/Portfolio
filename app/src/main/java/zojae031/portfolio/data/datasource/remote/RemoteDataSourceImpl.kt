@@ -17,11 +17,11 @@ object RemoteDataSourceImpl : RemoteDataSource {
     override var isDirty: MutableList<Boolean> = mutableListOf(false, false, false)
 
 
-    override fun getData(type: Data): Single<String> {
+    override fun getData(type: ParseData): Single<String> {
         return parseUrl(type)
     }
 
-    private fun parseUrl(idx: Data): Single<String> =
+    private fun parseUrl(idx: ParseData): Single<String> =
         Single.create(SingleOnSubscribe<String> {
             try {
                 Jsoup.connect(urlList[idx.ordinal])
@@ -36,7 +36,7 @@ object RemoteDataSourceImpl : RemoteDataSource {
             }
         }).subscribeOn(Schedulers.io())
 
-    enum class Data {
+    enum class ParseData {
         PROFILE, PROJECT, TEC
     }
 }

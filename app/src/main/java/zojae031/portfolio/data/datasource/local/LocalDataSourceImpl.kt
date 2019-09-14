@@ -17,29 +17,29 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
     private val basicDao = db.basicDao()
     private val projectDao = db.projectDao()
     private val tecDao = db.tecDao()
-    override fun getData(type: RemoteDataSourceImpl.Data): Single<String> {
+    override fun getData(type: RemoteDataSourceImpl.ParseData): Single<String> {
         return when (type) {
-            RemoteDataSourceImpl.Data.PROFILE -> {
+            RemoteDataSourceImpl.ParseData.PROFILE -> {
                 getBasicData()
             }
-            RemoteDataSourceImpl.Data.PROJECT -> {
+            RemoteDataSourceImpl.ParseData.PROJECT -> {
                 getProjectData()
             }
-            RemoteDataSourceImpl.Data.TEC -> {
+            RemoteDataSourceImpl.ParseData.TEC -> {
                 getTecData()
             }
         }
     }
 
-    override fun insertData(type: RemoteDataSourceImpl.Data, data: Any) {
+    override fun insertData(type: RemoteDataSourceImpl.ParseData, data: Any) {
         when (type) {
-            RemoteDataSourceImpl.Data.PROFILE -> {
+            RemoteDataSourceImpl.ParseData.PROFILE -> {
                 basicDao.insert(data as BasicEntity)
             }
-            RemoteDataSourceImpl.Data.PROJECT -> {
+            RemoteDataSourceImpl.ParseData.PROJECT -> {
                 projectDao.insert(data as CompetitionEntity)
             }
-            RemoteDataSourceImpl.Data.TEC -> {
+            RemoteDataSourceImpl.ParseData.TEC -> {
                 tecDao.insert(data as TecEntity)
             }
         }

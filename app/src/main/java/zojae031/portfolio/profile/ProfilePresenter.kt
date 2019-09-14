@@ -18,14 +18,14 @@ class ProfilePresenter(private val view: ProfileContract.View, private val repos
 
     override fun onResume() {
         repository
-            .getData(RemoteDataSourceImpl.Data.PROFILE)
+            .getData(RemoteDataSourceImpl.ParseData.PROFILE)
             .map { data ->
                 JsonParser().parse(data).asJsonObject.run {
                     Gson().fromJson(this, BasicEntity::class.java)
                 }
             }
             .doOnSuccess { entity ->
-                repository.insertData(RemoteDataSourceImpl.Data.PROFILE, entity)
+                repository.insertData(RemoteDataSourceImpl.ParseData.PROFILE, entity)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ entity ->

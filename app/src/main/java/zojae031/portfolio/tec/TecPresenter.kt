@@ -25,7 +25,7 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
     }
 
     override fun onResume() {
-        repository.getData(RemoteDataSourceImpl.Data.TEC)
+        repository.getData(RemoteDataSourceImpl.ParseData.TEC)
             .map { data ->
                 JsonParser().parse(data).asJsonArray.run {
                     this.map {
@@ -40,7 +40,7 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
                 }
             }
             .doOnSuccess {
-                repository.insertData(RemoteDataSourceImpl.Data.TEC, it)
+                repository.insertData(RemoteDataSourceImpl.ParseData.TEC, it)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->

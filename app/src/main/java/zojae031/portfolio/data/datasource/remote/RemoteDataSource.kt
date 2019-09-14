@@ -6,5 +6,5 @@ interface RemoteDataSource {
 
     var isDirty: MutableList<Boolean>
 
-    fun getData(type: RemoteDataSourceImpl.Data): Single<String>
+    fun getData(type: RemoteDataSourceImpl.ParseData): Single<String>
 }
