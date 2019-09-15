@@ -92,4 +92,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         adView.destroy()
         super.onDestroy()
     }
+
+    override fun onBackPressed() {
+        if (drawer.isDrawerOpen(second)) {
+            drawer.closeDrawers()
+        }
+        super.onBackPressed()
+    }
+
 }
