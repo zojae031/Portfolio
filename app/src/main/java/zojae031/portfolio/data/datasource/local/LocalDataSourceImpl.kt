@@ -5,7 +5,6 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import io.reactivex.Single
-import io.reactivex.SingleOnSubscribe
 import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.main.MainEntity
@@ -34,7 +33,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
             RepositoryImpl.ParseData.USER_IMAGE -> {
                 getMainData()
             }
-        }
+        }.subscribeOn(Schedulers.io())
     }
 
     override fun insertData(type: RepositoryImpl.ParseData, data: Any) {
@@ -55,7 +54,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
     }
 
     private fun getBasicData(): Single<String> {
-        return Single.create(SingleOnSubscribe<String> { emitter ->
+        return Single.create { emitter ->
             basicDao.select().map {
                 JsonObject().apply {
                     addProperty("name", it.name)
@@ -67,12 +66,12 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
                     addProperty("additional", it.additional)
                 }.also { emitter.onSuccess(it.toString()) }
             }
-        }).subscribeOn(Schedulers.io())
+        }
     }
 
 
     private fun getProjectData(): Single<String> {
-        return Single.create(SingleOnSubscribe<String> { emitter ->
+        return Single.create { emitter ->
             val array = JsonArray()
             projectDao.select().map {
                 JsonObject().apply {
@@ -93,12 +92,12 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
             }
 
 
-        }).subscribeOn(Schedulers.io())
+        }
     }
 
 
     private fun getTecData(): Single<String> {
-        return Single.create(SingleOnSubscribe<String> { emitter ->
+        return Single.create { emitter ->
             val arr = JsonArray()
             tecDao.select().map {
                 JsonObject().apply {
@@ -110,18 +109,18 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
                 arr.add(it.toString())
             }
             emitter.onSuccess(arr.asString)
-        }).subscribeOn(Schedulers.io())
+        }
     }
 
     private fun getMainData(): Single<String> {
-        return Single.create(SingleOnSubscribe<String> { emitter ->
+        return Single.create { emitter ->
             userDao.select().map { entity ->
                 JsonObject().apply {
                     addProperty("userImage", entity.userImage)
                     addProperty("notice", entity.notice)
                 }.also { emitter.onSuccess(it.toString()) }
             }
-        }).subscribeOn(Schedulers.io())
+        }
     }
 
     companion object {
