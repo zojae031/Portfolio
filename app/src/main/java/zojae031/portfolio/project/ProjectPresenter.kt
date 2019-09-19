@@ -37,6 +37,8 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
             }
             .doOnSuccess { repository.insertData(RepositoryImpl.ParseData.PROJECT, it) }
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { view.showProgress() }
+            .doOnSuccess { view.hideProgress() }
             .subscribe({ entity ->
                 adapterModel.clearList()
                 adapterModel.updateList(entity)

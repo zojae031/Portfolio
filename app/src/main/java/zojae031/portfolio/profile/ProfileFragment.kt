@@ -21,6 +21,13 @@ class ProfileFragment : Fragment(), ProfileContract.View {
         )
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
+        inflater.inflate(R.layout.fragment_profile, container, false)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.onCreate()
@@ -36,12 +43,13 @@ class ProfileFragment : Fragment(), ProfileContract.View {
         super.onPause()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_profile, container, false)
+    override fun showProgress() {
+        profileProgressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        profileProgressBar.visibility = View.GONE
+    }
 
     override fun showToast(text: String) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()

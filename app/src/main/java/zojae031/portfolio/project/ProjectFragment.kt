@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_project.*
 import kotlinx.android.synthetic.main.fragment_project.view.*
 import zojae031.portfolio.Injection
 import zojae031.portfolio.R
@@ -38,6 +39,14 @@ class ProjectFragment : Fragment(), ProjectContract.View {
     override fun onResume() {
         super.onResume()
         presenter.onResume()
+    }
+
+    override fun showProgress() {
+        projectProgressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        projectProgressBar.visibility = View.GONE
     }
 
     override fun showToast(text: String) {

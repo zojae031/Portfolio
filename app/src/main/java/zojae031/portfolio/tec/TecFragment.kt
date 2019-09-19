@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_tec.*
 import kotlinx.android.synthetic.main.fragment_tec.view.*
 import zojae031.portfolio.Injection
 import zojae031.portfolio.R
@@ -43,6 +44,14 @@ class TecFragment : Fragment(), TecContract.View {
     override fun onResume() {
         super.onResume()
         presenter.onResume()
+    }
+
+    override fun showProgress() {
+        tecProgressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        tecProgressBar.visibility = View.GONE
     }
 
     override fun showToast(text: String) {
