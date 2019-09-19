@@ -10,9 +10,8 @@
 
 1. 자신의 Repository로 Fork
 2. Issue생성 
-3. Json 데이터 변경
+3. Issue안의 Json 데이터 변경
 4. RemoteDataSourceImpl.kt 파일의 urlList 수정
-5. MainActivity.kt 의 showUserImage Gilde.load() url 수정 //추후 변경 예정
 ```
 
 # 프로젝트 구조
