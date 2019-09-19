@@ -118,8 +118,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onBackPressed() {
         if (drawer.isDrawerOpen(second)) {
             drawer.closeDrawers()
-        }
-        super.onBackPressed()
+        } else super.onBackPressed()
     }
 
 }
