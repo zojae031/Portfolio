@@ -16,7 +16,7 @@ object RemoteDataSourceImpl : RemoteDataSource {
     )
 
     @Volatile
-    override var isDirty: MutableList<Boolean> = mutableListOf(false, false, false, false)
+    override var isDirty: MutableList<Boolean> = MutableList(urlList.size) { false }
 
 
     override fun getData(type: RepositoryImpl.ParseData): Single<String> =

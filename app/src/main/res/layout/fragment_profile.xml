@@ -162,7 +162,7 @@
                         android:layout_margin="4dp"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:visibility="invisible">
+                        android:visibility="gone">
 
                     <ImageView
                             android:id="@+id/play"
