@@ -1,6 +1,7 @@
 package zojae031.portfolio.main
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -69,6 +70,14 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         adView.loadAd(AdRequest.Builder().build())
 
+    }
+
+    override fun showProgress() {
+        imgProgressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        imgProgressBar.visibility = View.GONE
     }
 
     override fun showToast(text: String) {

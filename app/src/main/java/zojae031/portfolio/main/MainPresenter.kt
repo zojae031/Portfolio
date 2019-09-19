@@ -26,6 +26,8 @@ class MainPresenter(private val view: MainContract.View, private val repository:
                 repository.insertData(RepositoryImpl.ParseData.USER_IMAGE, entity)
             }
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSuccess { view.hideProgress() }
+            .doOnSubscribe { view.showProgress() }
             .subscribe({ entity ->
                 view.showUserImage(entity.userImage)
             }, { t ->
