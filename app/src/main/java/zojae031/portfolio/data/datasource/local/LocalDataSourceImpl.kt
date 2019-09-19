@@ -8,10 +8,10 @@ import io.reactivex.Single
 import io.reactivex.SingleOnSubscribe
 import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.RepositoryImpl
+import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.profile.BasicEntity
 import zojae031.portfolio.data.dao.project.CompetitionEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
-import zojae031.portfolio.data.dao.user.UserEntity
 
 class LocalDataSourceImpl private constructor(context: Context) : LocalDataSource {
     private val db = LocalDataBase.getInstance(context)
@@ -32,7 +32,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
                 getTecData()
             }
             RepositoryImpl.ParseData.USER_IMAGE -> {
-                getUserImage()
+                getMainData()
             }
         }
     }
@@ -49,7 +49,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
                 tecDao.insert(data as TecEntity)
             }
             RepositoryImpl.ParseData.USER_IMAGE -> {
-                userDao.insert(data as UserEntity)
+                userDao.insert(data as MainEntity)
             }
         }
     }
@@ -113,11 +113,12 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
         }).subscribeOn(Schedulers.io())
     }
 
-    private fun getUserImage(): Single<String> {
+    private fun getMainData(): Single<String> {
         return Single.create(SingleOnSubscribe<String> { emitter ->
             userDao.select().map { entity ->
                 JsonObject().apply {
                     addProperty("userImage", entity.userImage)
+                    addProperty("notice", entity.notice)
                 }.also { emitter.onSuccess(it.toString()) }
             }
         }).subscribeOn(Schedulers.io())

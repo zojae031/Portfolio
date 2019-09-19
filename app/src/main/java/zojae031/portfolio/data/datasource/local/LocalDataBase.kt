@@ -4,24 +4,24 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import zojae031.portfolio.data.dao.main.MainDao
+import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.profile.BasicDao
 import zojae031.portfolio.data.dao.profile.BasicEntity
 import zojae031.portfolio.data.dao.project.CompetitionEntity
 import zojae031.portfolio.data.dao.project.ProjectDao
 import zojae031.portfolio.data.dao.tec.TecDao
 import zojae031.portfolio.data.dao.tec.TecEntity
-import zojae031.portfolio.data.dao.user.UserDao
-import zojae031.portfolio.data.dao.user.UserEntity
 
 @Database(
-    entities = [BasicEntity::class, CompetitionEntity::class, TecEntity::class, UserEntity::class],
-    version = 1
+    entities = [BasicEntity::class, CompetitionEntity::class, TecEntity::class, MainEntity::class],
+    version = 2
 )
 abstract class LocalDataBase : RoomDatabase() {
     abstract fun basicDao(): BasicDao
     abstract fun projectDao(): ProjectDao
     abstract fun tecDao(): TecDao
-    abstract fun userDao(): UserDao
+    abstract fun userDao(): MainDao
 
     companion object {
         private var INSTANCE: LocalDataBase? = null
@@ -31,7 +31,9 @@ abstract class LocalDataBase : RoomDatabase() {
                     context.applicationContext,
                     LocalDataBase::class.java,
                     "db"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
             }
             return INSTANCE!!
         }

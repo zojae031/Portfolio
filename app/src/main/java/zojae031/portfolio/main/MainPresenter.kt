@@ -6,7 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
-import zojae031.portfolio.data.dao.user.UserEntity
+import zojae031.portfolio.data.dao.main.MainEntity
 
 class MainPresenter(private val view: MainContract.View, private val repository: Repository) :
     MainContract.Presenter {
@@ -20,7 +20,7 @@ class MainPresenter(private val view: MainContract.View, private val repository:
             .getData(RepositoryImpl.ParseData.USER_IMAGE)
             .map { data ->
                 JsonParser().parse(data).asJsonObject.run {
-                    Gson().fromJson(this, UserEntity::class.java)
+                    Gson().fromJson(this, MainEntity::class.java)
                 }
             }.doOnSuccess { entity ->
                 repository.insertData(RepositoryImpl.ParseData.USER_IMAGE, entity)
@@ -30,6 +30,7 @@ class MainPresenter(private val view: MainContract.View, private val repository:
             .doOnSubscribe { view.showProgress() }
             .subscribe({ entity ->
                 view.showUserImage(entity.userImage)
+                view.setNotice(entity.notice)
             }, { t ->
                 view.showToast(t.message.toString())
             }).also { compositeDisposable.add(it) }

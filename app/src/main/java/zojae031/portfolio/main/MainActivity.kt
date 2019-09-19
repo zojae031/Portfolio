@@ -72,6 +72,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     }
 
+    override fun setNotice(notice: String) {
+        this.notice.text = notice
+    }
+
     override fun showProgress() {
         imgProgressBar.visibility = View.VISIBLE
     }
