@@ -4,7 +4,7 @@ import zojae031.portfolio.BaseContract
 
 interface MainContract : BaseContract {
     interface View : BaseContract.View {
-        fun showUserImage()
+        fun showUserImage(url: String)
     }
 
     interface Presenter : BaseContract.Presenter

@@ -9,12 +9,19 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
+import zojae031.portfolio.Injection
 import zojae031.portfolio.R
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
 
-    private val presenter = MainPresenter(this@MainActivity)
+    private val presenter by lazy {
+        MainPresenter(
+            this,
+            Injection.getRepository(applicationContext)
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -68,9 +75,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showUserImage() {
+    override fun showUserImage(url: String) {
         Glide.with(this@MainActivity)
-            .load("https://avatars2.githubusercontent.com/u/31091115?s=400&u=6db0ee4cb9b8a82cef9fe3a4196b437dc537339d&v=4")
+            .load(url)
             .error(R.drawable.picture)
             .centerCrop()
             .apply(RequestOptions.circleCropTransform())
@@ -80,10 +87,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun onResume() {
         super.onResume()
+        presenter.onResume()
         adView.resume()
     }
 
     override fun onPause() {
+        presenter.onPause()
         adView.pause()
         super.onPause()
     }

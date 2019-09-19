@@ -1,16 +1,39 @@
 package zojae031.portfolio.main
 
-class MainPresenter(private val view: MainContract.View) :
+import com.google.gson.Gson
+import com.google.gson.JsonParser
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import zojae031.portfolio.data.Repository
+import zojae031.portfolio.data.RepositoryImpl
+import zojae031.portfolio.data.dao.user.UserEntity
+
+class MainPresenter(private val view: MainContract.View, private val repository: Repository) :
     MainContract.Presenter {
+    private val compositeDisposable = CompositeDisposable()
     override fun onCreate() {
-        view.showUserImage()
+
     }
 
     override fun onResume() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        repository
+            .getData(RepositoryImpl.ParseData.USER_IMAGE)
+            .map { data ->
+                JsonParser().parse(data).asJsonObject.run {
+                    Gson().fromJson(this, UserEntity::class.java)
+                }
+            }.doOnSuccess { entity ->
+                repository.insertData(RepositoryImpl.ParseData.USER_IMAGE, entity)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ entity ->
+                view.showUserImage(entity.userImage)
+            }, { t ->
+                view.showToast(t.message.toString())
+            }).also { compositeDisposable.add(it) }
     }
 
     override fun onPause() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        compositeDisposable.clear()
     }
 }

@@ -11,11 +11,12 @@ object RemoteDataSourceImpl : RemoteDataSource {
     private val urlList = listOf(
         "https://github.com/zojae031/Portfolio/issues/1",
         "https://github.com/zojae031/Portfolio/issues/2",
-        "https://github.com/zojae031/Portfolio/issues/3"
+        "https://github.com/zojae031/Portfolio/issues/3",
+        "https://github.com/zojae031/Portfolio/issues/5"
     )
 
     @Volatile
-    override var isDirty: MutableList<Boolean> = mutableListOf(false, false, false)
+    override var isDirty: MutableList<Boolean> = mutableListOf(false, false, false, false)
 
 
     override fun getData(type: RepositoryImpl.ParseData): Single<String> =

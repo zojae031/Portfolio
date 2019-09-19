@@ -37,7 +37,9 @@ class RepositoryImpl private constructor(
                     for (list in data as Array<*>) {
                         localDataSource.insertData(type, list!!)
                     }
-
+                }
+                ParseData.USER_IMAGE -> {
+                    localDataSource.insertData(type, data)
                 }
             }
 
@@ -45,7 +47,7 @@ class RepositoryImpl private constructor(
     }
 
     enum class ParseData {
-        PROFILE, PROJECT, TEC
+        PROFILE, PROJECT, TEC, USER_IMAGE
     }
 
     companion object {
