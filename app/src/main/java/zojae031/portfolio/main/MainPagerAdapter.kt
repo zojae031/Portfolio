@@ -7,7 +7,10 @@ import zojae031.portfolio.profile.ProfileFragment
 import zojae031.portfolio.project.ProjectFragment
 import zojae031.portfolio.tec.TecFragment
 
-class MainPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class MainPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(
+    fm,
+    BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+) {
     private val fragments = listOf<Fragment>(
         ProfileFragment(),
         ProjectFragment(),

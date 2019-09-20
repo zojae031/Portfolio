@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.core.view.setPadding
 
 class Indicator(private val mContext: Context, private val attrs: AttributeSet) :
     LinearLayout(mContext, attrs) {
@@ -25,12 +26,7 @@ class Indicator(private val mContext: Context, private val attrs: AttributeSet) 
 
         for (i in 0 until count) {
             imageDot.add(ImageView(mContext, attrs).apply {
-                setPadding(
-                    padding.toInt(),
-                    padding.toInt(),
-                    padding.toInt(),
-                    padding.toInt()
-                )
+                setPadding(padding.toInt())
             })
             this.addView(imageDot[i])
         }

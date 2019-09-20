@@ -10,7 +10,9 @@ import zojae031.portfolio.data.dao.main.MainEntity
 
 class MainPresenter(private val view: MainContract.View, private val repository: Repository) :
     MainContract.Presenter {
+
     private val compositeDisposable = CompositeDisposable()
+
     override fun onCreate() {
 
     }
