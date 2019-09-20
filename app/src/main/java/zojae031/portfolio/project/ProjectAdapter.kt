@@ -11,6 +11,7 @@ import zojae031.portfolio.data.dao.project.CompetitionEntity
 
 class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAdapterContract.View,
     ProjectAdapterContract.Model {
+
     private val lists: MutableList<CompetitionEntity> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder =
@@ -24,7 +25,6 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAda
 
 
     override fun getItemCount(): Int = lists.size
-
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(position)
@@ -41,7 +41,6 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAda
     override fun notifyAdapter() {
         this.notifyDataSetChanged()
     }
-
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {

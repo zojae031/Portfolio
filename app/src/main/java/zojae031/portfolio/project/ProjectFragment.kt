@@ -20,7 +20,6 @@ class ProjectFragment : Fragment(), ProjectContract.View {
         ).also { it.setAdapter(adapter, adapter) }
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,7 +28,6 @@ class ProjectFragment : Fragment(), ProjectContract.View {
         inflater.inflate(R.layout.fragment_project, container, false).apply {
             recycler.adapter = adapter
         }
-
 
     override fun onPause() {
         presenter.onPause()

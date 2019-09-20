@@ -24,7 +24,7 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
     }
 
     override fun onCreate() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onResume() {
