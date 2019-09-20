@@ -3,6 +3,7 @@ package zojae031.portfolio.tec
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import com.bumptech.glide.Glide
 import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.dialog.*
@@ -10,10 +11,16 @@ import zojae031.portfolio.R
 import zojae031.portfolio.data.dao.tec.TecEntity
 
 class TecDialog(context: Context, private val data: TecEntity) : Dialog(context) {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog)
 
+        uiSetting()
+        buttonSetting()
+    }
+
+    private fun uiSetting() {
         Glide
             .with(context)
             .load(data.image)
@@ -22,10 +29,11 @@ class TecDialog(context: Context, private val data: TecEntity) : Dialog(context)
             .into(project_image)
 
         title.text = data.name
-        outer.apply {
-            removeView(text)
-            removeView(skill_text)
-        }
+        text.visibility = View.GONE
+        skill_text.visibility = View.GONE
+    }
+
+    private fun buttonSetting() {
         JsonParser().parse(data.source).asJsonArray.map { element ->
             left.apply {
                 text = element.asJsonObject.get("left").asString
@@ -53,7 +61,6 @@ class TecDialog(context: Context, private val data: TecEntity) : Dialog(context)
 
         }
     }
-
 
 }
 

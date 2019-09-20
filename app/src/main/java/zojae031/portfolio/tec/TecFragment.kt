@@ -21,7 +21,6 @@ class TecFragment : Fragment(), TecContract.View {
         ).also { it.setAdapter(adapter, adapter) }
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

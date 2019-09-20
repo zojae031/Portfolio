@@ -12,8 +12,8 @@ import zojae031.portfolio.data.dao.tec.TecEntity
 class TecAdapter : RecyclerView.Adapter<TecAdapter.Holder>(), TecAdapterContract.View,
     TecAdapterContract.Model {
 
-
     private val lists = mutableListOf<TecEntity>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder =
         Holder(
             LayoutInflater.from(parent.context).inflate(
@@ -23,14 +23,11 @@ class TecAdapter : RecyclerView.Adapter<TecAdapter.Holder>(), TecAdapterContract
             )
         )
 
-
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(position)
     }
 
-
     override fun getItemCount(): Int = lists.size
-
 
     override fun updateList(lists: Array<TecEntity>) {
         this.lists.addAll(lists)
@@ -52,13 +49,15 @@ class TecAdapter : RecyclerView.Adapter<TecAdapter.Holder>(), TecAdapterContract
         }
 
         private val image = itemView.image
+
         fun bind(position: Int) {
             Glide
                 .with(itemView.context)
-                .load(lists[position].image)//.substring(1,lists[position].image.length-1)
+                .load(lists[position].image)
                 .error(R.drawable.ic_launcher_foreground)
                 .override(350, 350)
                 .into(image)
         }
     }
+
 }
