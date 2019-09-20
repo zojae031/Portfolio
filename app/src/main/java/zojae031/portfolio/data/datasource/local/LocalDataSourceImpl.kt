@@ -1,6 +1,5 @@
 package zojae031.portfolio.data.datasource.local
 
-import android.content.Context
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -11,16 +10,16 @@ import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.profile.BasicEntity
 import zojae031.portfolio.data.dao.project.CompetitionEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
+import zojae031.portfolio.data.datasource.DataBase
 
-class LocalDataSourceImpl private constructor(context: Context) : LocalDataSource {
-    private val db = LocalDataBase.getInstance(context)
+class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
     private val basicDao = db.basicDao()
     private val projectDao = db.projectDao()
     private val tecDao = db.tecDao()
     private val userDao = db.userDao()
 
-    override fun getData(type: RepositoryImpl.ParseData): Single<String> {
-        return when (type) {
+    override fun getData(type: RepositoryImpl.ParseData): Single<String> =
+        when (type) {
             RepositoryImpl.ParseData.PROFILE -> {
                 getBasicData()
             }
@@ -34,7 +33,7 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
                 getMainData()
             }
         }.subscribeOn(Schedulers.io())
-    }
+
 
     override fun insertData(type: RepositoryImpl.ParseData, data: Any) {
         when (type) {
@@ -53,8 +52,8 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
         }
     }
 
-    private fun getBasicData(): Single<String> {
-        return Single.create { emitter ->
+    private fun getBasicData(): Single<String> =
+        Single.create { emitter ->
             basicDao.select().map {
                 JsonObject().apply {
                     addProperty("name", it.name)
@@ -67,11 +66,10 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
                 }.also { emitter.onSuccess(it.toString()) }
             }
         }
-    }
 
 
-    private fun getProjectData(): Single<String> {
-        return Single.create { emitter ->
+    private fun getProjectData(): Single<String> =
+        Single.create { emitter ->
             val array = JsonArray()
             projectDao.select().map {
                 JsonObject().apply {
@@ -90,14 +88,11 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
             }.also {
                 emitter.onSuccess(array.toString())
             }
-
-
         }
-    }
 
 
-    private fun getTecData(): Single<String> {
-        return Single.create { emitter ->
+    private fun getTecData(): Single<String> =
+        Single.create { emitter ->
             val arr = JsonArray()
             tecDao.select().map {
                 JsonObject().apply {
@@ -110,10 +105,9 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
             }
             emitter.onSuccess(arr.asString)
         }
-    }
 
-    private fun getMainData(): Single<String> {
-        return Single.create { emitter ->
+    private fun getMainData(): Single<String> =
+        Single.create { emitter ->
             userDao.select().map { entity ->
                 JsonObject().apply {
                     addProperty("userImage", entity.userImage)
@@ -121,14 +115,13 @@ class LocalDataSourceImpl private constructor(context: Context) : LocalDataSourc
                 }.also { emitter.onSuccess(it.toString()) }
             }
         }
-    }
 
     companion object {
         private var INSTANCE: LocalDataSourceImpl? = null
-        fun getInstance(context: Context): LocalDataSourceImpl {
+        fun getInstance(db: DataBase): LocalDataSourceImpl {
             if (INSTANCE == null) {
                 INSTANCE =
-                    LocalDataSourceImpl(context)
+                    LocalDataSourceImpl(db)
             }
             return INSTANCE!!
         }

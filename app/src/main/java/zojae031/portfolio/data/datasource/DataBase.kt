@@ -1,4 +1,4 @@
-package zojae031.portfolio.data.datasource.local
+package zojae031.portfolio.data.datasource
 
 import android.content.Context
 import androidx.room.Database
@@ -17,19 +17,19 @@ import zojae031.portfolio.data.dao.tec.TecEntity
     entities = [BasicEntity::class, CompetitionEntity::class, TecEntity::class, MainEntity::class],
     version = 2
 )
-abstract class LocalDataBase : RoomDatabase() {
+abstract class DataBase : RoomDatabase() {
     abstract fun basicDao(): BasicDao
     abstract fun projectDao(): ProjectDao
     abstract fun tecDao(): TecDao
     abstract fun userDao(): MainDao
 
     companion object {
-        private var INSTANCE: LocalDataBase? = null
-        fun getInstance(context: Context): LocalDataBase {
+        private var INSTANCE: DataBase? = null
+        fun getInstance(context: Context): DataBase {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(
                     context.applicationContext,
-                    LocalDataBase::class.java,
+                    DataBase::class.java,
                     "db"
                 )
                     .fallbackToDestructiveMigration()
