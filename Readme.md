@@ -9,9 +9,8 @@
 자신의 포트폴리오로 사용하고 싶을시
 
 1. 자신의 Repository로 Fork
-2. Issue생성 
-3. Issue안의 Json 데이터 변경
-4. RemoteDataSourceImpl.kt 파일의 urlList 수정
+2. Issue생성 후, Json 데이터 변경
+3. RemoteDataSourceImpl.kt 파일의 urlList 수정
 ```
 
 # 프로젝트 구조
@@ -29,8 +28,6 @@
 - MVP 패턴을 적용
 - View와 Presenter의 1:1 대응
 - Adapter 에도 MVP 패턴을 적용
-- Passive한 VIew를 구성
-
 
 
 ### 1. [Main](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/main)
@@ -79,5 +76,7 @@
 5. room
 6. constraintlayout
 7. recyclerview
+8. play-services-ads
+9. rxandroid
 
 ```
