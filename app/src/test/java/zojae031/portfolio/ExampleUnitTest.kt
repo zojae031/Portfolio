@@ -4,6 +4,7 @@ import android.util.Log
 import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Test
+import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
 
@@ -21,11 +22,12 @@ class ExampleUnitTest {
 
     @Test
     fun addition_isCorrect() {
-        remoteDataSource!!.getBasicData()
+        remoteDataSource!!.getData(RepositoryImpl.ParseData.USER_IMAGE)
             .observeOn(Schedulers.io())
             .subscribe { data ->
                 Log.e("asd", data)
             }
+
 
     }
 }
