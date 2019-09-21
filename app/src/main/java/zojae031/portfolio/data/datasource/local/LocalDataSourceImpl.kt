@@ -117,8 +117,8 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
         }
 
     companion object {
-        private var INSTANCE: LocalDataSourceImpl? = null
-        fun getInstance(db: DataBase): LocalDataSourceImpl {
+        private var INSTANCE: LocalDataSource? = null
+        fun getInstance(db: DataBase): LocalDataSource {
             if (INSTANCE == null) {
                 INSTANCE =
                     LocalDataSourceImpl(db)
