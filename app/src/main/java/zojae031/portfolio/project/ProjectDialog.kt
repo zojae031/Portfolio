@@ -19,7 +19,7 @@ class ProjectDialog(context: Context, private val data: CompetitionEntity) : Dia
             .with(context)
             .load(data.image)
             .error(R.drawable.ic_launcher_foreground)
-            .override(150, 150)
+            .override(200, 200)
             .into(project_image)
 
         title.text = data.name
