@@ -35,7 +35,7 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
         }.subscribeOn(Schedulers.io())
 
 
-    override fun insertData(type: RepositoryImpl.ParseData, data: Any) {
+    override fun <T> insertData(type: RepositoryImpl.ParseData, data: T) {
         when (type) {
             RepositoryImpl.ParseData.PROFILE -> {
                 basicDao.insert(data as ProfileEntity)

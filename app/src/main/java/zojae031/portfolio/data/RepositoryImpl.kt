@@ -22,7 +22,7 @@ class RepositoryImpl private constructor(
         }
     }
 
-    override fun insertData(type: ParseData, data: Any) {
+    override fun <T> insertData(type: ParseData, data: T) {
         if (remoteDataSource.isDirty[type.ordinal]) { //캐시가 더러울때만 저장
             when (type) {
                 ParseData.PROFILE -> {
@@ -30,12 +30,12 @@ class RepositoryImpl private constructor(
                 }
                 ParseData.PROJECT -> {
                     for (list in data as Array<*>) {
-                        localDataSource.insertData(type, list!!)
+                        localDataSource.insertData(type, list)
                     }
                 }
                 ParseData.TEC -> {
                     for (list in data as Array<*>) {
-                        localDataSource.insertData(type, list!!)
+                        localDataSource.insertData(type, list)
                     }
                 }
                 ParseData.USER_IMAGE -> {

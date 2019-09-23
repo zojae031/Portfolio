@@ -8,8 +8,8 @@ import zojae031.portfolio.data.dao.main.MainDao
 import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.profile.ProfileDao
 import zojae031.portfolio.data.dao.profile.ProfileEntity
-import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.dao.project.ProjectDao
+import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.dao.tec.TecDao
 import zojae031.portfolio.data.dao.tec.TecEntity
 
