@@ -29,8 +29,8 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
             .map { data ->
                 JsonParser().parse(data).asJsonArray.run {
                     this.map {
-                        return@map with(it.asJsonObject) {
-                            return@with TecEntity(
+                        return@map it.asJsonObject.run {
+                            TecEntity(
                                 get("name").asString,
                                 get("image").asString,
                                 get("source").toString()
