@@ -5,7 +5,7 @@ import androidx.room.Query
 import zojae031.portfolio.data.dao.BaseDao
 
 @Dao
-interface BasicDao : BaseDao<BasicEntity> {
-    @Query("Select * from BasicEntity")
-    fun select(): List<BasicEntity>
+interface ProfileDao : BaseDao<ProfileEntity> {
+    @Query("Select * from ProfileEntity")
+    fun select(): List<ProfileEntity>
 }

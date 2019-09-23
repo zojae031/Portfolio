@@ -8,9 +8,9 @@ import android.os.Bundle
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.dialog.*
 import zojae031.portfolio.R
-import zojae031.portfolio.data.dao.project.CompetitionEntity
+import zojae031.portfolio.data.dao.project.ProjectEntity
 
-class ProjectDialog(context: Context, private val data: CompetitionEntity) : Dialog(context) {
+class ProjectDialog(context: Context, private val data: ProjectEntity) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog)

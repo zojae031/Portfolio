@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.project_list.view.*
 import zojae031.portfolio.R
-import zojae031.portfolio.data.dao.project.CompetitionEntity
+import zojae031.portfolio.data.dao.project.ProjectEntity
 
 class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAdapterContract.View,
     ProjectAdapterContract.Model {
 
-    private val lists: MutableList<CompetitionEntity> = mutableListOf()
+    private val lists: MutableList<ProjectEntity> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder =
         Holder(
@@ -34,7 +34,7 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectAdapter.Holder>(), ProjectAda
         lists.clear()
     }
 
-    override fun updateList(lists: Array<CompetitionEntity>) {
+    override fun updateList(lists: Array<ProjectEntity>) {
         this.lists.addAll(lists)
     }
 

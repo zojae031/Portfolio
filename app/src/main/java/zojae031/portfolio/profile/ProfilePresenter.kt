@@ -7,7 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
-import zojae031.portfolio.data.dao.profile.BasicEntity
+import zojae031.portfolio.data.dao.profile.ProfileEntity
 
 class ProfilePresenter(private val view: ProfileContract.View, private val repository: Repository) :
     ProfileContract.Presenter {
@@ -23,7 +23,7 @@ class ProfilePresenter(private val view: ProfileContract.View, private val repos
             .getData(RepositoryImpl.ParseData.PROFILE)
             .map { data ->
                 JsonParser().parse(data).asJsonObject.run {
-                    Gson().fromJson(this, BasicEntity::class.java)
+                    Gson().fromJson(this, ProfileEntity::class.java)
                 }
             }
             .doOnSuccess { entity ->

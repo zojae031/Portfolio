@@ -5,7 +5,7 @@ import androidx.room.Query
 import zojae031.portfolio.data.dao.BaseDao
 
 @Dao
-interface ProjectDao : BaseDao<CompetitionEntity> {
-    @Query("select * from CompetitionEntity")
-    fun select(): List<CompetitionEntity>
+interface ProjectDao : BaseDao<ProjectEntity> {
+    @Query("select * from ProjectEntity")
+    fun select(): List<ProjectEntity>
 }

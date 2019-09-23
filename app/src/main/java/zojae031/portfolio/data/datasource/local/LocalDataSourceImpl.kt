@@ -7,8 +7,8 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.main.MainEntity
-import zojae031.portfolio.data.dao.profile.BasicEntity
-import zojae031.portfolio.data.dao.project.CompetitionEntity
+import zojae031.portfolio.data.dao.profile.ProfileEntity
+import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
 import zojae031.portfolio.data.datasource.DataBase
 
@@ -38,10 +38,10 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
     override fun insertData(type: RepositoryImpl.ParseData, data: Any) {
         when (type) {
             RepositoryImpl.ParseData.PROFILE -> {
-                basicDao.insert(data as BasicEntity)
+                basicDao.insert(data as ProfileEntity)
             }
             RepositoryImpl.ParseData.PROJECT -> {
-                projectDao.insert(data as CompetitionEntity)
+                projectDao.insert(data as ProjectEntity)
             }
             RepositoryImpl.ParseData.TEC -> {
                 tecDao.insert(data as TecEntity)

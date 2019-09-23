@@ -6,19 +6,19 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import zojae031.portfolio.data.dao.main.MainDao
 import zojae031.portfolio.data.dao.main.MainEntity
-import zojae031.portfolio.data.dao.profile.BasicDao
-import zojae031.portfolio.data.dao.profile.BasicEntity
-import zojae031.portfolio.data.dao.project.CompetitionEntity
+import zojae031.portfolio.data.dao.profile.ProfileDao
+import zojae031.portfolio.data.dao.profile.ProfileEntity
+import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.dao.project.ProjectDao
 import zojae031.portfolio.data.dao.tec.TecDao
 import zojae031.portfolio.data.dao.tec.TecEntity
 
 @Database(
-    entities = [BasicEntity::class, CompetitionEntity::class, TecEntity::class, MainEntity::class],
-    version = 2
+    entities = [ProfileEntity::class, ProjectEntity::class, TecEntity::class, MainEntity::class],
+    version = 3
 )
 abstract class DataBase : RoomDatabase() {
-    abstract fun basicDao(): BasicDao
+    abstract fun basicDao(): ProfileDao
     abstract fun projectDao(): ProjectDao
     abstract fun tecDao(): TecDao
     abstract fun userDao(): MainDao

@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class BasicEntity(
+data class ProfileEntity(
     @PrimaryKey val name: String,
     val age: String,
     val university: String,

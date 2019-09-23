@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 import zojae031.portfolio.Injection
 import zojae031.portfolio.R
-import zojae031.portfolio.data.dao.profile.BasicEntity
+import zojae031.portfolio.data.dao.profile.ProfileEntity
 
 
 class ProfileFragment : Fragment(), ProfileContract.View {
@@ -55,7 +55,7 @@ class ProfileFragment : Fragment(), ProfileContract.View {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showBasicInformation(data: BasicEntity) {
+    override fun showBasicInformation(data: ProfileEntity) {
         name.text = "이름 : ${data.name}"
         age.text = "나이 : ${data.age}"
         university.text = "학력 : ${data.university}"

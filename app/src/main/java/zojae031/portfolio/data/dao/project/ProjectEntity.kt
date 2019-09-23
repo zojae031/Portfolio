@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class CompetitionEntity(
+data class ProjectEntity(
     @PrimaryKey val image: String,
     val name: String,
     val prize: String,
