@@ -17,10 +17,11 @@
 
 #### [Repository](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/data)
 
-- Repository 패턴을 적용하여 GitHub Issue (서버대용)을 크롤링한다. [RemoteDataSourceImpl](https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/data/datasource/remote/RemoteDataSourceImpl.kt)
-- 성공시 Local DataBase(Room)에 저장(Cahing)을 한다. [LocalDataSourceImpl](https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/data/datasource/local/LocalDataSourceImpl.kt)
+- Repository 패턴을 적용하여 remote와 local 어디에서 데이터를 가지고 올 지 결정한다.
+- RemoteDataSource 에서는 GitHub Issue을 크롤링한다. [RemoteDataSourceImpl](https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/data/datasource/remote/RemoteDataSourceImpl.kt)
+- 성공시 LocalDataSource에서 DataBase(Room)에 저장(Cahing)을 한다. [LocalDataSourceImpl](https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/data/datasource/local/LocalDataSourceImpl.kt)
 - 인터넷 연결이 안되어 있으면 Local에서 가지고 온다.
-- 앱 실행 후 Remote에서 최초 가져온 이후는 Local에서 가지고 온다.
+- 앱 실행 이후에는 Local에서 가지고 온다.
 
 
 #### MVP Pattern
