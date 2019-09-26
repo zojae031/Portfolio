@@ -24,11 +24,9 @@ class MainPresenter(private val view: MainContract.View, private val repository:
                 JsonParser().parse(data).asJsonObject.run {
                     Gson().fromJson(this, MainEntity::class.java)
                 }
-            }.doOnSuccess { entity ->
-                repository.insertData(RepositoryImpl.ParseData.USER_IMAGE, entity)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSuccess { view.hideProgress() }
+            .doOnRequest { view.hideProgress() }
             .doOnSubscribe { view.showProgress() }
             .subscribe({ entity ->
                 view.showUserImage(entity.userImage)

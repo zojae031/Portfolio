@@ -1,7 +1,11 @@
 package zojae031.portfolio.data
 
 import android.net.ConnectivityManager
+import android.util.Log
+import io.reactivex.Flowable
+import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 
@@ -10,16 +14,10 @@ class RepositoryImpl private constructor(
     private val remoteDataSource: RemoteDataSource,
     private val manager: ConnectivityManager
 ) : Repository {
-    override fun getData(type: ParseData): Single<String> {
-        return if (manager.activeNetwork != null) {//네트워크 연결상태 on
-            if (remoteDataSource.isDirty[type.ordinal]) {//캐시가 지저분하면 로컬에서 땡겨옴
-                localDataSource.getData(type)
-            } else {
-                remoteDataSource.getData(type)
-            }
-        } else {//네트워크 연결상태 off
-            localDataSource.getData(type)
-        }
+    override fun getData(type: ParseData): Flowable<String> {
+        return Single.concat(
+            localDataSource.getData(type),
+            remoteDataSource.getData(type).doAfterSuccess { insert(type, it) })
     }
 
     override fun <T> insertData(type: ParseData, data: T) {
@@ -44,6 +42,15 @@ class RepositoryImpl private constructor(
             }
 
         }
+    }
+
+    fun <T> insert(type: ParseData, data: T) {
+        Observable.fromCallable { localDataSource.insertData(type, data) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+            .subscribe {
+                Log.e("fromCallable", "앙")
+            }
     }
 
     enum class ParseData {

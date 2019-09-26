@@ -67,7 +67,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             R.drawable.indicator_on,
             0
         )
-
+        addBtn.setOnClickListener {
+            //TODO 다이얼로그 만들어서
+            // 1. gitHub id
+            // 2. Repository name
+            // 입력한후 SharedPreference 에 저장하기
+        }
         adView.loadAd(AdRequest.Builder().build())
 
     }

@@ -26,12 +26,9 @@ class ProfilePresenter(private val view: ProfileContract.View, private val repos
                     Gson().fromJson(this, ProfileEntity::class.java)
                 }
             }
-            .doOnSuccess { entity ->
-                repository.insertData(RepositoryImpl.ParseData.PROFILE, entity)
-            }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { view.showProgress() }
-            .doOnSuccess { view.hideProgress() }
+            .doOnNext { view.hideProgress() }
             .subscribe({ entity ->
                 view.showBasicInformation(entity)
 

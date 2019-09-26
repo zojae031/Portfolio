@@ -39,11 +39,8 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
                     }.toTypedArray()
                 }
             }
-            .doOnSuccess {
-                repository.insertData(RepositoryImpl.ParseData.TEC, it)
-            }
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSuccess { view.hideProgress() }
+            .doOnNext { view.hideProgress() }
             .doOnSubscribe { view.showProgress() }
             .subscribe({ data ->
                 adapterModel.clearList()

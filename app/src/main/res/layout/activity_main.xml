@@ -125,8 +125,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--Second Layout-->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <LinearLayout
         android:id="@+id/second"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -135,48 +135,77 @@
         android:gravity="center|left"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/notice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:fontFamily="@font/main_font"
-            android:padding="16dp"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:gravity="center|start"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:fontFamily="@font/main_font"
-            android:padding="4dp"
-            android:text="@string/email"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/notice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/main_font"
+                android:padding="16dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:autoLink="web"
-            android:fontFamily="@font/main_font"
-            android:linksClickable="true"
-            android:padding="4dp"
-            android:text="@string/git"
-            android:textColor="#FFFFFF"
-            android:textColorLink="@android:color/white"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="16dp"
+                android:autoLink="web"
+                android:fontFamily="@font/main_font"
+                android:linksClickable="true"
+                android:padding="4dp"
+                android:text="@string/git"
+                android:textColor="#FFFFFF"
+                android:textColorLink="@android:color/white"
+                android:textSize="14sp"
+                ads:layout_constraintBottom_toBottomOf="parent"
+                ads:layout_constraintEnd_toEndOf="parent"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/main_font"
+                android:padding="4dp"
+                android:text="@string/email"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                ads:layout_constraintBottom_toBottomOf="parent"
+                ads:layout_constraintEnd_toEndOf="parent"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/black">
+
+            <Button
+                android:id="@+id/addBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@null"
+                android:foreground="@android:drawable/ic_menu_add"
+                android:foregroundGravity="center"
+                ads:layout_constraintBottom_toBottomOf="parent"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 
