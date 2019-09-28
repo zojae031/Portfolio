@@ -7,6 +7,7 @@ import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.main.MainEntity
+import zojae031.portfolio.data.util.DataConverUtil
 
 class MainPresenter(private val view: MainContract.View, private val repository: Repository) :
     MainContract.Presenter {
@@ -21,9 +22,7 @@ class MainPresenter(private val view: MainContract.View, private val repository:
         repository
             .getData(RepositoryImpl.ParseData.USER_IMAGE)
             .map { data ->
-                JsonParser().parse(data).asJsonObject.run {
-                    Gson().fromJson(this, MainEntity::class.java)
-                }
+                DataConverUtil.StringToMainEntity(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnRequest { view.hideProgress() }

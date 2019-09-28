@@ -1,13 +1,11 @@
 package zojae031.portfolio.profile
 
 import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.JsonParser
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
-import zojae031.portfolio.data.dao.profile.ProfileEntity
+import zojae031.portfolio.data.util.DataConverUtil
 
 class ProfilePresenter(private val view: ProfileContract.View, private val repository: Repository) :
     ProfileContract.Presenter {
@@ -22,9 +20,7 @@ class ProfilePresenter(private val view: ProfileContract.View, private val repos
         repository
             .getData(RepositoryImpl.ParseData.PROFILE)
             .map { data ->
-                JsonParser().parse(data).asJsonObject.run {
-                    Gson().fromJson(this, ProfileEntity::class.java)
-                }
+                DataConverUtil.StringToProfileEntity(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { view.showProgress() }

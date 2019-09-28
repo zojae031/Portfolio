@@ -1,13 +1,11 @@
 package zojae031.portfolio.project
 
 import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.JsonParser
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
-import zojae031.portfolio.data.dao.project.ProjectEntity
+import zojae031.portfolio.data.util.DataConverUtil
 
 
 class ProjectPresenter(private val view: ProjectContract.View, private val repository: Repository) :
@@ -31,9 +29,7 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
         repository
             .getData(RepositoryImpl.ParseData.PROJECT)
             .map { data ->
-                JsonParser().parse(data).asJsonArray.run {
-                    Gson().fromJson(this, Array<ProjectEntity>::class.java)
-                }
+                DataConverUtil.StringToProjectArray(data)
             }
 
             .observeOn(AndroidSchedulers.mainThread())

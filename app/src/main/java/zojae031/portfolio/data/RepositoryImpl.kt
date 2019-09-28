@@ -17,34 +17,10 @@ class RepositoryImpl private constructor(
     override fun getData(type: ParseData): Flowable<String> {
         return Single.concat(
             localDataSource.getData(type),
-            remoteDataSource.getData(type).doAfterSuccess { insert(type, it) })
+            remoteDataSource.getData(type).doOnSuccess { insertData(type, it) })
     }
 
-    override fun <T> insertData(type: ParseData, data: T) {
-        if (remoteDataSource.isDirty[type.ordinal]) { //캐시가 더러울때만 저장
-            when (type) {
-                ParseData.PROFILE -> {
-                    localDataSource.insertData(type, data)
-                }
-                ParseData.PROJECT -> {
-                    for (list in data as Array<*>) {
-                        localDataSource.insertData(type, list)
-                    }
-                }
-                ParseData.TEC -> {
-                    for (list in data as Array<*>) {
-                        localDataSource.insertData(type, list)
-                    }
-                }
-                ParseData.USER_IMAGE -> {
-                    localDataSource.insertData(type, data)
-                }
-            }
-
-        }
-    }
-
-    fun <T> insert(type: ParseData, data: T) {
+    override fun insertData(type: ParseData, data: String) {
         Observable.fromCallable { localDataSource.insertData(type, data) }
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
@@ -52,6 +28,7 @@ class RepositoryImpl private constructor(
                 Log.e("fromCallable", "앙")
             }
     }
+
 
     enum class ParseData {
         PROFILE, PROJECT, TEC, USER_IMAGE

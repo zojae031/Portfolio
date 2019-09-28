@@ -1,5 +1,6 @@
 package zojae031.portfolio.data.datasource.local
 
+import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -35,19 +36,45 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
         }.subscribeOn(Schedulers.io())
 
 
-    override fun <T> insertData(type: RepositoryImpl.ParseData, data: T) {
+    override fun insertData(type: RepositoryImpl.ParseData, data: String) {
         when (type) {
             RepositoryImpl.ParseData.PROFILE -> {
-                basicDao.insert(data as ProfileEntity)
+                JsonParser().parse(data).asJsonObject.run {
+                    Gson().fromJson(this, ProfileEntity::class.java)
+                }.also { basicDao.insert(it) }
             }
             RepositoryImpl.ParseData.PROJECT -> {
-                projectDao.insert(data as ProjectEntity)
+                JsonParser().parse(data).asJsonArray.run {
+                    Gson().fromJson(this, Array<ProjectEntity>::class.java)
+                }.also {
+                    for (list in it) {
+                        projectDao.insert(list)
+                    }
+                }
             }
             RepositoryImpl.ParseData.TEC -> {
-                tecDao.insert(data as TecEntity)
+                JsonParser().parse(data).asJsonArray.run {
+                    this.map {
+                        return@map it.asJsonObject.run {
+                            TecEntity(
+                                get("name").asString,
+                                get("image").asString,
+                                get("source").toString()
+                            )
+                        }
+                    }.toTypedArray()
+                }.also {
+                    for (list in it) {
+                        tecDao.insert(list)
+                    }
+                }
             }
             RepositoryImpl.ParseData.USER_IMAGE -> {
-                userDao.insert(data as MainEntity)
+                JsonParser().parse(data).asJsonObject.run {
+                    Gson().fromJson(this, MainEntity::class.java)
+                }.also { userDao.insert(it) }
+
+
             }
         }
     }

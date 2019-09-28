@@ -6,6 +6,6 @@ import zojae031.portfolio.data.RepositoryImpl
 interface LocalDataSource {
     fun getData(type: RepositoryImpl.ParseData): Single<String>
 
-    fun <T> insertData(type: RepositoryImpl.ParseData, data: T)
+    fun insertData(type: RepositoryImpl.ParseData, data: String)
 
 }
