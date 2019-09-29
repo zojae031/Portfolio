@@ -5,7 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
-import zojae031.portfolio.data.util.DataConverUtil
+import zojae031.portfolio.data.util.DataConvertUtil
 
 class ProfilePresenter(private val view: ProfileContract.View, private val repository: Repository) :
     ProfileContract.Presenter {
@@ -20,14 +20,13 @@ class ProfilePresenter(private val view: ProfileContract.View, private val repos
         repository
             .getData(RepositoryImpl.ParseData.PROFILE)
             .map { data ->
-                DataConverUtil.StringToProfileEntity(data)
+                DataConvertUtil.StringToProfile(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { view.showProgress() }
-            .doOnNext { view.hideProgress() }
+            .doOnSuccess { view.hideProgress() }
             .subscribe({ entity ->
                 view.showBasicInformation(entity)
-
             }, { t ->
                 view.showToast(t.message.toString())
                 Log.e("ProfilePresenter", t.message)
