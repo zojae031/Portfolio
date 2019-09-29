@@ -1,8 +1,6 @@
 package zojae031.portfolio.data
 
-import android.net.ConnectivityManager
 import android.util.Log
-import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -13,10 +11,11 @@ class RepositoryImpl private constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) : Repository {
-    override fun getData(type: ParseData): Flowable<String> {
-        return Single.concat(
-            localDataSource.getData(type),
-            remoteDataSource.getData(type).doOnSuccess { insertData(type, it) })
+    override fun getData(type: ParseData): Single<String> {
+        return localDataSource.getData(type)
+//        Single.concat(
+//            ,
+//            remoteDataSource.getData(type).doOnSuccess { insertData(type, it) }).first("")
     }
 
     override fun insertData(type: ParseData, data: String) {

@@ -29,7 +29,7 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
         repository
             .getData(RepositoryImpl.ParseData.PROJECT)
             .map { data ->
-                DataConvertUtil.StringToProjectArray(data)
+                DataConvertUtil.stringToProjectArray(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { view.showProgress() }

@@ -20,7 +20,7 @@ class ProfilePresenter(private val view: ProfileContract.View, private val repos
         repository
             .getData(RepositoryImpl.ParseData.PROFILE)
             .map { data ->
-                DataConvertUtil.StringToProfile(data)
+                DataConvertUtil.stringToProfile(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { view.showProgress() }

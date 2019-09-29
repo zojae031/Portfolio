@@ -1,6 +1,5 @@
 package zojae031.portfolio.main
 
-import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
@@ -20,14 +19,12 @@ class MainPresenter(private val view: MainContract.View, private val repository:
         repository
             .getData(RepositoryImpl.ParseData.MAIN)
             .map { data ->
-                Log.e("data",data)
-                DataConvertUtil.StringToMain(data)
+                DataConvertUtil.stringToMain(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess { view.hideProgress() }
             .doOnSubscribe { view.showProgress() }
             .subscribe({ entity ->
-                Log.e("MainP", entity.toString())
                 view.showUserImage(entity.userImage)
                 view.setNotice(entity.notice)
             }, { t ->

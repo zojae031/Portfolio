@@ -9,25 +9,25 @@ import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
 
 object DataConvertUtil {
-    fun StringToMain(data: String): MainEntity {
+    fun stringToMain(data: String): MainEntity {
         return JsonParser().parse(data).asJsonObject.run {
             Gson().fromJson(this, MainEntity::class.java)
         }
     }
 
-    fun StringToProfile(data: String): ProfileEntity {
+    fun stringToProfile(data: String): ProfileEntity {
         return JsonParser().parse(data).asJsonObject.run {
             Gson().fromJson(this, ProfileEntity::class.java)
         }
     }
 
-    fun StringToProjectArray(data: String): Array<ProjectEntity> {
+    fun stringToProjectArray(data: String): Array<ProjectEntity> {
         return JsonParser().parse(data).asJsonArray.run {
             Gson().fromJson(this, Array<ProjectEntity>::class.java)
         }
     }
 
-    fun StringToTecArray(data: String): Array<TecEntity> {
+    fun stringToTecArray(data: String): Array<TecEntity> {
         return JsonParser().parse(data).asJsonArray.run {
             this.map { element ->
                 return@map element.asJsonObject.run {

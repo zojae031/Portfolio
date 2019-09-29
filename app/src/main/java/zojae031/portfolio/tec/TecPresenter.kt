@@ -26,11 +26,11 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
     override fun onResume() {
         repository.getData(RepositoryImpl.ParseData.TEC)
             .map { data ->
-                DataConvertUtil.StringToTecArray(data)
+                DataConvertUtil.stringToTecArray(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSuccess { view.hideProgress() }
             .doOnSubscribe { view.showProgress() }
+            .doOnSuccess { view.hideProgress() }
             .subscribe({ data ->
                 adapterModel.clearList()
                 adapterModel.updateList(data)
