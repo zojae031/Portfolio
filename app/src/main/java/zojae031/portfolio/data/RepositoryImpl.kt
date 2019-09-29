@@ -11,8 +11,7 @@ import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 
 class RepositoryImpl private constructor(
     private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource,
-    private val manager: ConnectivityManager
+    private val remoteDataSource: RemoteDataSource
 ) : Repository {
     override fun getData(type: ParseData): Flowable<String> {
         return Single.concat(
@@ -31,18 +30,17 @@ class RepositoryImpl private constructor(
 
 
     enum class ParseData {
-        PROFILE, PROJECT, TEC, USER_IMAGE
+        PROFILE, PROJECT, TEC, MAIN
     }
 
     companion object {
         private var INSTANCE: RepositoryImpl? = null
         fun getInstance(
             localDataSource: LocalDataSource,
-            remoteDataSource: RemoteDataSource,
-            manager: ConnectivityManager
+            remoteDataSource: RemoteDataSource
         ): RepositoryImpl {
             if (INSTANCE == null) {
-                INSTANCE = RepositoryImpl(localDataSource, remoteDataSource, manager)
+                INSTANCE = RepositoryImpl(localDataSource, remoteDataSource)
             }
             return INSTANCE!!
         }

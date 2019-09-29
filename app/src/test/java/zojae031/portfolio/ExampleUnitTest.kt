@@ -22,7 +22,7 @@ class ExampleUnitTest {
 
     @Test
     fun addition_isCorrect() {
-        remoteDataSource!!.getData(RepositoryImpl.ParseData.USER_IMAGE)
+        remoteDataSource!!.getData(RepositoryImpl.ParseData.MAIN)
             .observeOn(Schedulers.io())
             .subscribe { data ->
                 Log.e("asd", data)

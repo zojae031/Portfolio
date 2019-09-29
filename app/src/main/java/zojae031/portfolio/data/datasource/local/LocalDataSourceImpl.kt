@@ -30,7 +30,7 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
             RepositoryImpl.ParseData.TEC -> {
                 getTecData()
             }
-            RepositoryImpl.ParseData.USER_IMAGE -> {
+            RepositoryImpl.ParseData.MAIN -> {
                 getMainData()
             }
         }.subscribeOn(Schedulers.io())
@@ -69,7 +69,7 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
                     }
                 }
             }
-            RepositoryImpl.ParseData.USER_IMAGE -> {
+            RepositoryImpl.ParseData.MAIN -> {
                 JsonParser().parse(data).asJsonObject.run {
                     Gson().fromJson(this, MainEntity::class.java)
                 }.also { userDao.insert(it) }

@@ -15,8 +15,7 @@ object Injection {
     fun getRepository(context: Context): Repository =
         RepositoryImpl.getInstance(
             getLocalDataSource(context),
-            getRemoteDataSource(),
-            getConnectivityManager(context)
+            getRemoteDataSource()
         )
 
     fun getLocalDataSource(context: Context): LocalDataSource =
