@@ -41,6 +41,11 @@ object DataConvertUtil {
         }
     }
 
+    fun mainToJson(data: MainEntity) = JsonObject().apply {
+        addProperty("userImage", data.userImage)
+        addProperty("notice", data.notice)
+    }.toString()
+
     fun profileToJson(data: ProfileEntity) =
         JsonObject().apply {
             addProperty("name", data.name)
@@ -70,10 +75,5 @@ object DataConvertUtil {
         addProperty("image", data.image)
         add("source", JsonParser().parse(data.source).asJsonArray)
     }
-
-    fun mainToJson(data: MainEntity) = JsonObject().apply {
-        addProperty("userImage", data.userImage)
-        addProperty("notice", data.notice)
-    }.toString()
 
 }

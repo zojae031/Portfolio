@@ -1,5 +1,6 @@
 package zojae031.portfolio.data
 
+import android.util.Log
 import io.reactivex.Maybe
 import io.reactivex.Single
 import zojae031.portfolio.data.datasource.local.LocalDataSource
@@ -12,12 +13,11 @@ class RepositoryImpl private constructor(
     override fun getData(type: ParseData): Single<String> {
         return Maybe.concat(
             localDataSource.getData(type),
-            remoteDataSource.getData(type).doOnSuccess { data ->
-                localDataSource.insertData(
-                    type,
-                    data
-                )
-            }).filter { it != "[]" }.firstOrError()
+            remoteDataSource.getData(type).doOnSuccess {
+                Log.e("insertData", it)
+                localDataSource.insertData(type, it)
+            })
+            .filter { it != "[]" }.firstOrError()
     }
 
     enum class ParseData {
