@@ -1,7 +1,7 @@
 package zojae031.portfolio.data.datasource.local
 
 import com.google.gson.JsonArray
-import io.reactivex.Single
+import io.reactivex.Maybe
 import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.datasource.DataBase
@@ -11,21 +11,34 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
     private val basicDao = db.basicDao()
     private val projectDao = db.projectDao()
     private val tecDao = db.tecDao()
-    private val userDao = db.userDao()
+    private val mainDao = db.mainDao()
 
-    override fun getData(type: RepositoryImpl.ParseData): Single<String> =
+    override fun getData(type: RepositoryImpl.ParseData): Maybe<String> =
         when (type) {
+            RepositoryImpl.ParseData.MAIN -> {
+                mainDao.select().map { entity ->
+                    DataConvertUtil.mainToJson(entity)
+                }
+            }
             RepositoryImpl.ParseData.PROFILE -> {
-                getBasicData()
+                basicDao
+                    .select()
+                    .map { entity ->
+                        DataConvertUtil.profileToJson(entity)
+                    }
             }
             RepositoryImpl.ParseData.PROJECT -> {
-                getProjectData()
+                val array = JsonArray()
+                projectDao.select().map { entity ->
+                    array.add(DataConvertUtil.projectToJson(entity)) as String
+                }
             }
             RepositoryImpl.ParseData.TEC -> {
-                getTecData()
-            }
-            RepositoryImpl.ParseData.MAIN -> {
-                getMainData()
+                val arr = JsonArray()
+                tecDao.select().map { entity ->
+                    arr.add(DataConvertUtil.tecToJson(entity)) as String
+                }
+
             }
         }.subscribeOn(Schedulers.io())
 
@@ -50,54 +63,13 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
                 }
             }
             RepositoryImpl.ParseData.MAIN -> {
-                DataConvertUtil.stringToMain(data).also { userDao.insert(it) }
+                DataConvertUtil.stringToMain(data).also { mainDao.insert(it) }
 
 
             }
         }
     }
 
-    private fun getBasicData(): Single<String> =
-        Single.create { emitter ->
-            basicDao
-                .select()
-                .map { entity ->
-                DataConvertUtil.profileToJson(entity)
-                    .also { emitter.onSuccess(it.toString()) }
-            }
-        }
-
-
-    private fun getProjectData(): Single<String> =
-        Single.create { emitter ->
-            val array = JsonArray()
-            projectDao.select().map { entity ->
-                DataConvertUtil.projectToJson(entity)
-            }.map {
-                array.add(it)
-            }.also {
-                emitter.onSuccess(array.toString())
-            }
-        }
-
-
-    private fun getTecData(): Single<String> =
-        Single.create { emitter ->
-            val arr = JsonArray()
-            tecDao.select().map { entity ->
-                DataConvertUtil.tecToJson(entity)
-            }.also {
-                arr.add(it.toString())
-            }
-            emitter.onSuccess(arr.asString)
-        }
-
-    private fun getMainData(): Single<String> =
-        Single.create { emitter ->
-            userDao.select().map { entity ->
-                DataConvertUtil.mainToJson(entity).also { emitter.onSuccess(it.toString()) }
-            }
-        }
 
     companion object {
         private var INSTANCE: LocalDataSource? = null

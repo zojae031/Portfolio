@@ -21,7 +21,7 @@ abstract class DataBase : RoomDatabase() {
     abstract fun basicDao(): ProfileDao
     abstract fun projectDao(): ProjectDao
     abstract fun tecDao(): TecDao
-    abstract fun userDao(): MainDao
+    abstract fun mainDao(): MainDao
 
     companion object {
         private var INSTANCE: DataBase? = null

@@ -41,7 +41,7 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
 
             }, { t ->
                 view.showToast(t.message.toString())
-                Log.e("ProjectPresenter", t.message)
+                Log.e("ProjectPresenter", t.localizedMessage)
             }).also { compositeDisposable.add(it) }
     }
 

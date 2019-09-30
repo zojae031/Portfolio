@@ -50,7 +50,7 @@ object DataConvertUtil {
             addProperty("military", data.military)
             addProperty("hobby", data.hobby)
             addProperty("additional", data.additional)
-        }
+        }.toString()
 
     fun projectToJson(data: ProjectEntity) =
         JsonObject().apply {
@@ -63,17 +63,17 @@ object DataConvertUtil {
             addProperty("skills", data.skills)
             addProperty("git", data.git)
             addProperty("date", data.date)
-        }
+        }.toString()
 
     fun tecToJson(data: TecEntity) = JsonObject().apply {
         addProperty("name", data.name)
         addProperty("image", data.image)
         add("source", JsonParser().parse(data.source).asJsonArray)
-    }
+    }.toString()
 
     fun mainToJson(data: MainEntity) = JsonObject().apply {
         addProperty("userImage", data.userImage)
         addProperty("notice", data.notice)
-    }
+    }.toString()
 
 }
