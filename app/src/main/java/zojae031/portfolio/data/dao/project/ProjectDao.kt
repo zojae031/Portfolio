@@ -8,5 +8,5 @@ import zojae031.portfolio.data.dao.BaseDao
 @Dao
 interface ProjectDao : BaseDao<ProjectEntity> {
     @Query("select * from ProjectEntity")
-    fun select(): Maybe<ProjectEntity>
+    fun select(): Maybe<List<ProjectEntity>>
 }

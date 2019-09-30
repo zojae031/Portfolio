@@ -29,16 +29,21 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
             }
             RepositoryImpl.ParseData.PROJECT -> {
                 val array = JsonArray()
-                projectDao.select().map { entity ->
-                    array.add(DataConvertUtil.projectToJson(entity)) as String
+                projectDao.select().map { lists ->
+                    lists.map { entity ->
+                        array.add(DataConvertUtil.projectToJson(entity))
+                    }
+                }.map {
+                    array.toString()
                 }
             }
             RepositoryImpl.ParseData.TEC -> {
-                val arr = JsonArray()
-                tecDao.select().map { entity ->
-                    arr.add(DataConvertUtil.tecToJson(entity)) as String
-                }
-
+                val array = JsonArray()
+                tecDao.select().map { lists ->
+                    lists.map { entity ->
+                        array.add(DataConvertUtil.tecToJson(entity))
+                    }
+                }.map { array.toString() }
             }
         }.subscribeOn(Schedulers.io())
 
@@ -64,8 +69,6 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
             }
             RepositoryImpl.ParseData.MAIN -> {
                 DataConvertUtil.stringToMain(data).also { mainDao.insert(it) }
-
-
             }
         }
     }

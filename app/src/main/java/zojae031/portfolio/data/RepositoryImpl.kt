@@ -1,6 +1,7 @@
 package zojae031.portfolio.data
 
 import io.reactivex.Maybe
+import io.reactivex.Single
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 
@@ -8,15 +9,15 @@ class RepositoryImpl private constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) : Repository {
-    override fun getData(type: ParseData): Maybe<String> {
+    override fun getData(type: ParseData): Single<String> {
         return Maybe.concat(
             localDataSource.getData(type),
-            remoteDataSource.getData(type).toMaybe().doOnSuccess { data ->
+            remoteDataSource.getData(type).doOnSuccess { data ->
                 localDataSource.insertData(
                     type,
                     data
                 )
-            }).first("first Data").filter { true }
+            }).filter { it != "[]" }.firstOrError()
     }
 
     enum class ParseData {

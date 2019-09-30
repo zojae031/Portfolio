@@ -1,11 +1,8 @@
 package zojae031.portfolio.data.datasource.remote
 
-import io.reactivex.Single
+import io.reactivex.Maybe
 import zojae031.portfolio.data.RepositoryImpl
 
 interface RemoteDataSource {
-
-    var isDirty: MutableList<Boolean>
-
-    fun getData(type: RepositoryImpl.ParseData): Single<String>
+    fun getData(type: RepositoryImpl.ParseData): Maybe<String>
 }
