@@ -1,10 +1,10 @@
 package zojae031.portfolio.data
 
 
-import io.reactivex.Single
+import io.reactivex.Flowable
 
 interface Repository {
 
-    fun getData(type: RepositoryImpl.ParseData): Single<String>
+    fun getData(type: RepositoryImpl.ParseData): Flowable<String>
 
 }

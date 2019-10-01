@@ -24,9 +24,8 @@ class ProfilePresenter(private val view: ProfileContract.View, private val repos
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { view.showProgress() }
-            .doOnSuccess { view.hideProgress() }
+            .doAfterNext { view.hideProgress() }
             .subscribe({ entity ->
-                Log.e("ProfileP", entity.toString())
                 view.showBasicInformation(entity)
             }, { t ->
                 view.showToast(t.message.toString())

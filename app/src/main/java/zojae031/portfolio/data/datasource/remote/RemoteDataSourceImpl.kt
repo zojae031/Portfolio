@@ -1,7 +1,7 @@
 package zojae031.portfolio.data.datasource.remote
 
-import io.reactivex.Maybe
-import io.reactivex.MaybeOnSubscribe
+import io.reactivex.Single
+import io.reactivex.SingleOnSubscribe
 import io.reactivex.schedulers.Schedulers
 import org.jsoup.Connection
 import org.jsoup.Jsoup
@@ -15,8 +15,9 @@ object RemoteDataSourceImpl : RemoteDataSource {
         "https://github.com/zojae031/Portfolio/issues/5"
     )
 
-    override fun getData(type: RepositoryImpl.ParseData): Maybe<String> =
-        Maybe.create(MaybeOnSubscribe<String> {
+
+    override fun getData(type: RepositoryImpl.ParseData): Single<String> =
+        Single.create(SingleOnSubscribe<String> {
             try {
                 Jsoup.connect(urlList[type.ordinal])
                     .method(Connection.Method.GET)

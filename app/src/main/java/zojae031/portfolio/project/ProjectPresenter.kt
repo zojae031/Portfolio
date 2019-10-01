@@ -33,12 +33,11 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { view.showProgress() }
-            .doOnSuccess { view.hideProgress() }
+            .doAfterNext { view.hideProgress() }
             .subscribe({ entity ->
                 adapterModel.clearList()
                 adapterModel.updateList(entity)
                 adapterView.notifyAdapter()
-
             }, { t ->
                 view.showToast(t.message.toString())
                 Log.e("ProjectPresenter", t.localizedMessage)

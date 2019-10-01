@@ -43,7 +43,9 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
                     lists.map { entity ->
                         array.add(DataConvertUtil.tecToJson(entity))
                     }
-                }.map { array.toString() }
+                }.map {
+                    array.toString()
+                }
             }
         }.subscribeOn(Schedulers.io())
 

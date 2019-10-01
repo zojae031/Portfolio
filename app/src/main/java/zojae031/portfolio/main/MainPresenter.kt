@@ -23,7 +23,7 @@ class MainPresenter(private val view: MainContract.View, private val repository:
                 DataConvertUtil.stringToMain(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSuccess { view.hideProgress() }
+            .doAfterNext { view.hideProgress() }
             .doOnSubscribe { view.showProgress() }
             .subscribe({ entity ->
                 view.showUserImage(entity.userImage)

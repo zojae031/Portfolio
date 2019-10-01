@@ -14,19 +14,15 @@ import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
-    var remoteDataSource: RemoteDataSource? = null
+
     @Before
     fun init() {
-        remoteDataSource = RemoteDataSourceImpl
+
     }
 
     @Test
     fun addition_isCorrect() {
-        remoteDataSource!!.getData(RepositoryImpl.ParseData.MAIN)
-            .observeOn(Schedulers.io())
-            .subscribe { data ->
-                Log.e("asd", data)
-            }
+
 
 
     }
