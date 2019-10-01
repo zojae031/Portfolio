@@ -2,7 +2,7 @@
 
    # 프로젝트 구성도
 
-   ![Architecture](https://user-images.githubusercontent.com/31091115/65955513-44585880-e483-11e9-95a1-70cf97647ff0.png)
+   ![Architecture](https://user-images.githubusercontent.com/31091115/65956380-39062c80-e485-11e9-9515-bf4d364b4b90.png)
 
    <hr>  
 
