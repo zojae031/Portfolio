@@ -1,73 +1,75 @@
 # Protfolio
 
-# 프로젝트 구성도
-![Architecture](https://user-images.githubusercontent.com/31091115/64670125-ef867b00-d49e-11e9-8342-1aa8d699556c.png)
+   # 프로젝트 구성도
 
-<hr>  
+   ![Architecture](https://user-images.githubusercontent.com/31091115/65955513-44585880-e483-11e9-95a1-70cf97647ff0.png)
 
-```
-자신의 포트폴리오로 사용하고 싶을시
+   <hr>  
 
-1. 자신의 Repository로 Fork
-2. Issue생성 후, Json 데이터 변경
-3. RemoteDataSourceImpl.kt 파일의 urlList 수정
-```
+   ```
+   자신의 포트폴리오로 사용하고 싶을시
+   
+   1. 자신의 Repository로 Fork
+   2. Issue생성 후, Json 데이터 변경
+   3. RemoteDataSourceImpl.kt 파일의 urlList 수정
+   ```
 
-# 프로젝트 구조
+   # 프로젝트 구조
 
-#### [Repository](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/data)
+   #### [Repository](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/data)
 
-- Repository 패턴을 적용하여 remote와 local 어디에서 데이터를 가지고 올 지 결정한다.
-- RemoteDataSource 에서는 GitHub Issue을 크롤링한다. [RemoteDataSourceImpl](https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/data/datasource/remote/RemoteDataSourceImpl.kt)
-- 성공시 LocalDataSource에서 DataBase(Room)에 저장(Cahing)을 한다. [LocalDataSourceImpl](https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/data/datasource/local/LocalDataSourceImpl.kt)
-- 인터넷 연결이 안되어 있으면 Local에서 가지고 온다.
-- 앱 실행 이후에는 Local에서 가지고 온다.
+   - Local 에서 데이터를 가져온다.
+   - 인터넷에 연결되어 있을 시 Remote에서 가져와 Local에 저장
 
+   #### MVP Pattern
 
-#### MVP Pattern
+   - MVP 패턴을 적용
+   - View와 Presenter의 1:1 대응
 
-- MVP 패턴을 적용
-- View와 Presenter의 1:1 대응
-- Adapter 에도 MVP 패턴을 적용
-
+   
 
 ### 1. [Main](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/main)
 
- - 내부 ViewPager와 LinearLayout을 사용한 Indicator를 이용하여 세가지 정보를 보여줌
+1. 내부 ViewPager와 LinearLayout을 사용한 Indicator를 이용하여 세가지 정보를 보여줌
    1. 기본정보
    2. 프로젝트
    3. 기술
+2. 기본적인 데이터를 가져옴
+   1. 사용자 이미지
+   2. Drawable에 띄울 Notice정보
 
 ### 2. [Profile](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/profile)
 
 - 사용자의 기본 정보를 보여주는 공간
-  - 이름
-  - 나이
-  - 학력
-  - 전공
-  - 병역
-  - 취미
-  - Addtional (취미를 보여주고싶다면 Json에 데이터를 넣을 시 Visable)
-### 3. [Project](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/project)
+  1. 이름
+  2. 나이
+  3. 학력
+  4. 전공
+  5. 병역
+  6. 취미
+  7. Addtional (빈 공간일시 보이지 않음)
+
+### 3. [Project](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/project)  
 
 - 사용자의 프로젝트 연혁, 경력정보를 보여주는 공간
-
-  - 기본 이미지
-  - 제목
-  - 내용
-  - 기술
-  - 시연 영상 주소
-  - 깃허브 주소
+  1. 기본 이미지
+  2. 제목
+  3. 내용
+  4. 기술
+  5. 시연 영상 주소
+  6. 깃허브 주소
 
 ### 4. [Tec](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/tec)
 
-
 - 사용자가 사용한 기술을 보여주는 공간
+  1. 기본 이미지
+  2. 기술 이름
+  3. 기술 소스 (빈 공간일시 보이지 않음)
+     1. 좌측 소스
+     2. 우측 소스
+     3. 왼쪽 버튼 이름
+     4. 오른쪽 버튼 이름
 
-  - 기본 이미지
-  - 기술 이름
-  - 보여줄 소스 1 (제목)
-  - 보여줄 소스 2 (제목)
 ```
 사용된 라이브러리
 1. Gilde
