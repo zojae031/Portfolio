@@ -7,14 +7,7 @@ import org.jsoup.Connection
 import org.jsoup.Jsoup
 import zojae031.portfolio.data.RepositoryImpl
 
-object RemoteDataSourceImpl : RemoteDataSource {
-    private val urlList = listOf(
-        "https://github.com/zojae031/Portfolio/issues/1",
-        "https://github.com/zojae031/Portfolio/issues/2",
-        "https://github.com/zojae031/Portfolio/issues/3",
-        "https://github.com/zojae031/Portfolio/issues/5"
-    )
-
+class RemoteDataSourceImpl(private val urlList: List<String>) : RemoteDataSource {
 
     override fun getData(type: RepositoryImpl.ParseData): Single<String> =
         Single.create(SingleOnSubscribe<String> {
@@ -30,4 +23,13 @@ object RemoteDataSourceImpl : RemoteDataSource {
             }
         }).subscribeOn(Schedulers.io())
 
+    companion object {
+        private var INSTANCE: RemoteDataSource? = null
+        fun getInstance(urlList: List<String>): RemoteDataSource {
+            if (INSTANCE == null) {
+                INSTANCE = RemoteDataSourceImpl(urlList)
+            }
+            return INSTANCE!!
+        }
+    }
 }
