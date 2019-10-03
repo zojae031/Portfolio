@@ -19,7 +19,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     private val presenter by lazy {
         MainPresenter(
             this,
-            Injection.getRepository(applicationContext)
+            Injection.getRepository(applicationContext),
+            Injection.getNetworkUtil(applicationContext)
         )
     }
 
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             R.drawable.indicator_on,
             0
         )
+        addBtn.visibility = View.GONE
         addBtn.setOnClickListener {
             //TODO 다이얼로그 만들어서
             // 1. gitHub id

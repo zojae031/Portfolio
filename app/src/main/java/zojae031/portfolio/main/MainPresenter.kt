@@ -1,13 +1,20 @@
 package zojae031.portfolio.main
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.util.DataConvertUtil
+import zojae031.portfolio.data.util.NetworkUtil
 
-class MainPresenter(private val view: MainContract.View, private val repository: Repository) :
+class MainPresenter(
+    private val view: MainContract.View,
+    private val repository: Repository,
+    private val network: NetworkUtil
+) :
     MainContract.Presenter {
 
     private val compositeDisposable = CompositeDisposable()
@@ -16,7 +23,9 @@ class MainPresenter(private val view: MainContract.View, private val repository:
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onResume() {
+        network.checkNetworkInfo()
         repository
             .getData(RepositoryImpl.ParseData.MAIN)
             .map { data ->

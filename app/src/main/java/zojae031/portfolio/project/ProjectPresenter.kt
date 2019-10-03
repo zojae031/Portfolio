@@ -32,8 +32,8 @@ class ProjectPresenter(private val view: ProjectContract.View, private val repos
                 DataConvertUtil.stringToProjectArray(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { view.showProgress() }
             .doAfterNext { view.hideProgress() }
+            .doOnSubscribe { view.showProgress() }
             .subscribe({ entity ->
                 adapterModel.clearList()
                 adapterModel.updateList(entity)

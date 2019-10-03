@@ -23,8 +23,8 @@ class ProfilePresenter(private val view: ProfileContract.View, private val repos
                 DataConvertUtil.stringToProfile(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { view.showProgress() }
             .doAfterNext { view.hideProgress() }
+            .doOnSubscribe { view.showProgress() }
             .subscribe({ entity ->
                 view.showBasicInformation(entity)
             }, { t ->
