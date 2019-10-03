@@ -20,5 +20,10 @@ class MainDialog(context: Context, private val urlUtil: UrlUtil) : Dialog(contex
             Toast.makeText(context, "적용 되었습니다.", Toast.LENGTH_SHORT).show()
             this.dismiss()
         }
+        button2.setOnClickListener {
+            urlUtil.setUrl(context.resources.getString(R.string.git_name))
+            Toast.makeText(context, "초기화 되었습니다.", Toast.LENGTH_SHORT).show()
+            this.dismiss()
+        }
     }
 }

@@ -1,6 +1,7 @@
 package zojae031.portfolio
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.net.ConnectivityManager
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
@@ -17,7 +18,7 @@ object Injection {
     fun getRepository(context: Context): Repository =
         RepositoryImpl.getInstance(
             getLocalDataSource(context),
-            getRemoteDataSource(getUrlUtil().urlList),
+            getRemoteDataSource(getUrlUtil(context.applicationContext).urlList),
             getNetworkUtil(context)
         )
 
@@ -35,5 +36,9 @@ object Injection {
     fun getNetworkUtil(context: Context): NetworkUtil =
         NetworkUtil.getInstance(getConnectivityManager(context))
 
-    fun getUrlUtil(): UrlUtil = UrlUtil.getInstance()
+    fun getUrlUtil(context: Context): UrlUtil = UrlUtil.getInstance(getSharedPreference(context))
+
+    fun getSharedPreference(context: Context) =
+        context.applicationContext.getSharedPreferences("pref", MODE_PRIVATE)
+
 }
