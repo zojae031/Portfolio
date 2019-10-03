@@ -16,7 +16,7 @@ object Injection {
         "https://github.com/zojae031/Portfolio/issues/1",
         "https://github.com/zojae031/Portfolio/issues/2",
         "https://github.com/zojae031/Portfolio/issues/3",
-        "https://github.com/zojae031/Portfolio/issues/5"
+        "https://github.com/zojae031/Portfolio/issues/4"
     )
 
     fun getRepository(context: Context): Repository =
