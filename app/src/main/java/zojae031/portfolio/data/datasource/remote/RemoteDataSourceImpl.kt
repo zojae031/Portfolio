@@ -16,7 +16,8 @@ class RemoteDataSourceImpl(private val urlList: List<String>) : RemoteDataSource
                     .method(Connection.Method.GET)
                     .execute()
                     .apply {
-                        it.onSuccess(this.parse().select(".d-block").select("p").text())
+                        val data= this.parse().select(".Box-body").select("tbody").text()
+                        it.onSuccess(data)
                     }
             } catch (e: Exception) {
                 it.tryOnError(e)
