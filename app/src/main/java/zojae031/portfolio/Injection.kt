@@ -9,20 +9,15 @@ import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.local.LocalDataSourceImpl
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
-import zojae031.portfolio.data.util.NetworkUtil
+import zojae031.portfolio.util.NetworkUtil
+import zojae031.portfolio.util.UrlUtil
 
 object Injection {
-    private val urlList = listOf(
-        "https://github.com/zojae031/Portfolio/issues/1",
-        "https://github.com/zojae031/Portfolio/issues/2",
-        "https://github.com/zojae031/Portfolio/issues/3",
-        "https://github.com/zojae031/Portfolio/issues/4"
-    )
 
     fun getRepository(context: Context): Repository =
         RepositoryImpl.getInstance(
             getLocalDataSource(context),
-            getRemoteDataSource(urlList),
+            getRemoteDataSource(getUrlUtil().urlList),
             getNetworkUtil(context)
         )
 
@@ -39,4 +34,6 @@ object Injection {
 
     fun getNetworkUtil(context: Context): NetworkUtil =
         NetworkUtil.getInstance(getConnectivityManager(context))
+
+    fun getUrlUtil(): UrlUtil = UrlUtil.getInstance()
 }

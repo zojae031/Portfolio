@@ -5,7 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
-import zojae031.portfolio.data.util.DataConvertUtil
+import zojae031.portfolio.util.DataConvertUtil
 
 
 class ProjectPresenter(private val view: ProjectContract.View, private val repository: Repository) :

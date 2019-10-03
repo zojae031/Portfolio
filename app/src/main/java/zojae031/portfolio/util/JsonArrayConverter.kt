@@ -1,4 +1,4 @@
-package zojae031.portfolio.data.util
+package zojae031.portfolio.util
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

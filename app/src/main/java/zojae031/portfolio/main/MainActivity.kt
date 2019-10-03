@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 override fun onPageSelected(position: Int) {
                     indicator.selectDot(position)
                 }
-
             })
         }
         indicator.createDotPanel(
@@ -68,12 +67,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             R.drawable.indicator_on,
             0
         )
-        addBtn.visibility = View.GONE
         addBtn.setOnClickListener {
-            //TODO 다이얼로그 만들어서
-            // 1. gitHub id
-            // 2. Repository name
-            // 입력한후 SharedPreference 에 저장하기
+            MainDialog(this,Injection.getUrlUtil()).show()
         }
         adView.loadAd(AdRequest.Builder().build())
 

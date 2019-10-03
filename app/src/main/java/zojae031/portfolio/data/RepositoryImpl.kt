@@ -4,7 +4,7 @@ import android.util.Log
 import io.reactivex.Flowable
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
-import zojae031.portfolio.data.util.NetworkUtil
+import zojae031.portfolio.util.NetworkUtil
 
 class RepositoryImpl private constructor(
     private val localDataSource: LocalDataSource,

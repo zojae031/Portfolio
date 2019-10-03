@@ -5,7 +5,7 @@ import io.reactivex.Maybe
 import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.datasource.DataBase
-import zojae031.portfolio.data.util.DataConvertUtil
+import zojae031.portfolio.util.DataConvertUtil
 
 class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
     private val basicDao = db.basicDao()
