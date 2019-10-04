@@ -73,6 +73,8 @@ class ProfileFragment : Fragment(), ProfileContract.View {
                     context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data)))
                 }
             }
+        } else {
+            additional.visibility = View.GONE
         }
     }
 }
