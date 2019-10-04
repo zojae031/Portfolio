@@ -2,7 +2,6 @@ package zojae031.portfolio.util
 
 import android.content.SharedPreferences
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 
 @RequiresApi(Build.VERSION_CODES.N)
@@ -20,7 +19,6 @@ class UrlUtil private constructor(pref: SharedPreferences) {
 
     init {
         pref.getString("id", "zojae031")?.apply {
-            Log.e("seturl", this)
             setUrl(this)
         }
     }

@@ -10,17 +10,18 @@ import zojae031.portfolio.data.RepositoryImpl
 class RemoteDataSourceImpl(private val urlList: List<String>) : RemoteDataSource {
 
     override fun getData(type: RepositoryImpl.ParseData): Single<String> =
-        Single.create(SingleOnSubscribe<String> {
+        Single.create(SingleOnSubscribe<String> { emitter ->
             try {
                 Jsoup.connect(urlList[type.ordinal])
                     .method(Connection.Method.GET)
                     .execute()
                     .apply {
-                        val data= this.parse().select(".Box-body").select("tbody").text()
-                        it.onSuccess(data)
+                        this.parse().select(".Box-body").select("tbody").text().also {
+                            emitter.onSuccess(it)
+                        }
                     }
             } catch (e: Exception) {
-                it.tryOnError(e)
+                emitter.tryOnError(e)
             }
         }).subscribeOn(Schedulers.io())
 
