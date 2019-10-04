@@ -1,9 +1,6 @@
 package zojae031.portfolio.data.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface BaseDao<T> {
@@ -12,4 +9,7 @@ interface BaseDao<T> {
 
     @Update(onConflict = OnConflictStrategy.ABORT)
     fun update(obj: T)
+
+    @Delete
+    fun delete(obj: T)
 }
