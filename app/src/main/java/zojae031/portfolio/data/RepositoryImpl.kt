@@ -2,7 +2,6 @@ package zojae031.portfolio.data
 
 import android.util.Log
 import io.reactivex.Flowable
-import zojae031.portfolio.Injection
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 import zojae031.portfolio.util.NetworkUtil
@@ -17,9 +16,11 @@ class RepositoryImpl private constructor(
         Log.e("connect", network.isConnect.toString())
         return if (network.isConnect) {//기본 네트워크 살아있니?
             Flowable.concat(
-                localDataSource.getData(type).toFlowable(),
+                localDataSource.getData(type).toFlowable().doOnNext {
+                    localDataSource.deleteData(type, it)
+                },
                 remoteDataSource.getData(type).doOnNext {
-                    localDataSource.updateData(type, it)
+                    localDataSource.insertData(type, it)
                 }
             )
         } else {

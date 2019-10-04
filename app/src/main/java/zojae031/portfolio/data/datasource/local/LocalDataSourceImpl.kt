@@ -50,31 +50,55 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
         }.subscribeOn(Schedulers.io())
 
 
-    override fun updateData(type: RepositoryImpl.ParseData, data: String) {
+    override fun insertData(type: RepositoryImpl.ParseData, data: String) {
         when (type) {
             RepositoryImpl.ParseData.PROFILE -> {
-                DataConvertUtil.stringToProfile(data).also { basicDao.update(it) }
+                DataConvertUtil.stringToProfile(data).also { basicDao.insert(it) }
             }
             RepositoryImpl.ParseData.PROJECT -> {
                 DataConvertUtil.stringToProjectArray(data).also {
                     for (list in it) {
-                        projectDao.update(list)
+                        projectDao.insert(list)
                     }
                 }
             }
             RepositoryImpl.ParseData.TEC -> {
                 DataConvertUtil.stringToTecArray(data).also {
                     for (list in it) {
-                        tecDao.update(list)
+                        tecDao.insert(list)
                     }
                 }
             }
             RepositoryImpl.ParseData.MAIN -> {
-                DataConvertUtil.stringToMain(data).also { mainDao.update(it) }
+                DataConvertUtil.stringToMain(data).also { mainDao.insert(it) }
             }
         }
     }
 
+    override fun deleteData(type: RepositoryImpl.ParseData, data: String) {
+        when (type) {
+            RepositoryImpl.ParseData.PROFILE -> {
+                DataConvertUtil.stringToProfile(data).also { basicDao.delete(it) }
+            }
+            RepositoryImpl.ParseData.PROJECT -> {
+                DataConvertUtil.stringToProjectArray(data).also {
+                    for (list in it) {
+                        projectDao.delete(list)
+                    }
+                }
+            }
+            RepositoryImpl.ParseData.TEC -> {
+                DataConvertUtil.stringToTecArray(data).also {
+                    for (list in it) {
+                        tecDao.delete(list)
+                    }
+                }
+            }
+            RepositoryImpl.ParseData.MAIN -> {
+                DataConvertUtil.stringToMain(data).also { mainDao.delete(it) }
+            }
+        }
+    }
 
     companion object {
         private var INSTANCE: LocalDataSource? = null
