@@ -1,10 +1,9 @@
 package zojae031.portfolio.data
 
-import android.util.Log
 import io.reactivex.Flowable
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
-import zojae031.portfolio.data.util.NetworkUtil
+import zojae031.portfolio.util.NetworkUtil
 
 class RepositoryImpl private constructor(
     private val localDataSource: LocalDataSource,
@@ -13,12 +12,13 @@ class RepositoryImpl private constructor(
 ) : Repository {
 
     override fun getData(type: ParseData): Flowable<String> {
-        Log.e("네트워크", network.isConnect.toString())
         return if (network.isConnect) {//기본 네트워크 살아있니?
-            localDataSource.getData(type)
-                .concatWith(remoteDataSource.getData(type).doOnSuccess {
-                    localDataSource.insertData(type, it)
-                }.toMaybe())
+            Flowable.concat(
+                localDataSource.getData(type).toFlowable(),
+                remoteDataSource.getData(type).doOnNext {
+                    localDataSource.updateData(type, it)
+                }
+            )
         } else {
             localDataSource.getData(type).toFlowable()
         }

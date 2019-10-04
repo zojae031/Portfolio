@@ -5,7 +5,7 @@ import io.reactivex.Maybe
 import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.datasource.DataBase
-import zojae031.portfolio.data.util.DataConvertUtil
+import zojae031.portfolio.util.DataConvertUtil
 
 class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
     private val basicDao = db.basicDao()
@@ -50,27 +50,27 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
         }.subscribeOn(Schedulers.io())
 
 
-    override fun insertData(type: RepositoryImpl.ParseData, data: String) {
+    override fun updateData(type: RepositoryImpl.ParseData, data: String) {
         when (type) {
             RepositoryImpl.ParseData.PROFILE -> {
-                DataConvertUtil.stringToProfile(data).also { basicDao.insert(it) }
+                DataConvertUtil.stringToProfile(data).also { basicDao.update(it) }
             }
             RepositoryImpl.ParseData.PROJECT -> {
                 DataConvertUtil.stringToProjectArray(data).also {
                     for (list in it) {
-                        projectDao.insert(list)
+                        projectDao.update(list)
                     }
                 }
             }
             RepositoryImpl.ParseData.TEC -> {
                 DataConvertUtil.stringToTecArray(data).also {
                     for (list in it) {
-                        tecDao.insert(list)
+                        tecDao.update(list)
                     }
                 }
             }
             RepositoryImpl.ParseData.MAIN -> {
-                DataConvertUtil.stringToMain(data).also { mainDao.insert(it) }
+                DataConvertUtil.stringToMain(data).also { mainDao.update(it) }
             }
         }
     }

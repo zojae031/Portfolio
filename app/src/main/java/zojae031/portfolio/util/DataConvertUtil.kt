@@ -1,4 +1,4 @@
-package zojae031.portfolio.data.util
+package zojae031.portfolio.util
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject

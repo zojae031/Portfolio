@@ -1,7 +1,8 @@
 package zojae031.portfolio.data.datasource.remote
 
-import io.reactivex.Single
-import io.reactivex.SingleOnSubscribe
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
+import io.reactivex.FlowableOnSubscribe
 import io.reactivex.schedulers.Schedulers
 import org.jsoup.Connection
 import org.jsoup.Jsoup
@@ -9,19 +10,21 @@ import zojae031.portfolio.data.RepositoryImpl
 
 class RemoteDataSourceImpl(private val urlList: List<String>) : RemoteDataSource {
 
-    override fun getData(type: RepositoryImpl.ParseData): Single<String> =
-        Single.create(SingleOnSubscribe<String> {
+    override fun getData(type: RepositoryImpl.ParseData): Flowable<String> =
+        Flowable.create(FlowableOnSubscribe<String> { emitter ->
             try {
                 Jsoup.connect(urlList[type.ordinal])
                     .method(Connection.Method.GET)
                     .execute()
                     .apply {
-                        it.onSuccess(this.parse().select(".d-block").select("p").text())
+                        this.parse().select(".Box-body").select("tbody").text().also {
+                            emitter.onNext(it)
+                        }
                     }
             } catch (e: Exception) {
-                it.tryOnError(e)
+                emitter.tryOnError(e)
             }
-        }).subscribeOn(Schedulers.io())
+        }, BackpressureStrategy.BUFFER).subscribeOn(Schedulers.io())
 
     companion object {
         private var INSTANCE: RemoteDataSource? = null

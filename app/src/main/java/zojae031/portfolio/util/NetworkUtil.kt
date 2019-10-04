@@ -1,4 +1,4 @@
-package zojae031.portfolio.data.util
+package zojae031.portfolio.util
 
 import android.net.ConnectivityManager
 import android.net.Network

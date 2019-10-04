@@ -1,8 +1,10 @@
 package zojae031.portfolio.main
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.viewpager.widget.ViewPager
@@ -59,7 +61,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 override fun onPageSelected(position: Int) {
                     indicator.selectDot(position)
                 }
-
             })
         }
         indicator.createDotPanel(
@@ -68,12 +69,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             R.drawable.indicator_on,
             0
         )
-        addBtn.visibility = View.GONE
         addBtn.setOnClickListener {
-            //TODO 다이얼로그 만들어서
-            // 1. gitHub id
-            // 2. Repository name
-            // 입력한후 SharedPreference 에 저장하기
+            MainDialog(this, Injection.getUrlUtil(this.applicationContext)).show()
         }
         adView.loadAd(AdRequest.Builder().build())
 
@@ -105,6 +102,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onResume() {
         super.onResume()
         presenter.onResume()

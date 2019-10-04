@@ -7,8 +7,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
-import zojae031.portfolio.data.util.DataConvertUtil
-import zojae031.portfolio.data.util.NetworkUtil
+import zojae031.portfolio.util.DataConvertUtil
+import zojae031.portfolio.util.NetworkUtil
 
 class MainPresenter(
     private val view: MainContract.View,
@@ -39,7 +39,7 @@ class MainPresenter(
                 view.setNotice(entity.notice)
             }, { t ->
                 view.showToast(t.message.toString())
-                Log.e("MainPresenter", t.localizedMessage)
+                Log.e("MainPresenter", t.message)
             }).also { compositeDisposable.add(it) }
     }
 
