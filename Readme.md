@@ -10,8 +10,10 @@
    자신의 포트폴리오로 사용하고 싶을시
    
    1. 자신의 Repository로 Fork
-   2. Issue생성 후, Json 데이터 변경
-   3. RemoteDataSourceImpl.kt 파일의 urlList 수정
+   2. Json Branch의 데이터 변경
+   3. 어플리케이션 메뉴 클릭
+   4. + 버튼 클릭
+   5. 자신의 깃허브 아이디 입력 후 apply
    ```
 
    # 프로젝트 구조
