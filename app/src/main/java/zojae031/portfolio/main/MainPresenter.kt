@@ -39,7 +39,7 @@ class MainPresenter(
                 view.setNotice(entity.notice)
             }, { t ->
                 view.showToast(t.message.toString())
-                Log.e("MainPresenter", t.localizedMessage)
+                Log.e("MainPresenter", t.message)
             }).also { compositeDisposable.add(it) }
     }
 

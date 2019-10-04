@@ -13,10 +13,12 @@ class RepositoryImpl private constructor(
 
     override fun getData(type: ParseData): Flowable<String> {
         return if (network.isConnect) {//기본 네트워크 살아있니?
-            localDataSource.getData(type)
-                .concatWith(remoteDataSource.getData(type).doOnSuccess {
+            Flowable.concat(
+                localDataSource.getData(type).toFlowable(),
+                remoteDataSource.getData(type).doOnNext {
                     localDataSource.updateData(type, it)
-                }.toMaybe())
+                }
+            )
         } else {
             localDataSource.getData(type).toFlowable()
         }
