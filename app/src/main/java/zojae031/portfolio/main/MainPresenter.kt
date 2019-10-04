@@ -25,7 +25,6 @@ class MainPresenter(
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onResume() {
-        network.checkNetworkInfo()
         repository
             .getData(RepositoryImpl.ParseData.MAIN)
             .map { data ->
