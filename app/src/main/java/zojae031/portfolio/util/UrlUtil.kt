@@ -26,8 +26,15 @@ class UrlUtil private constructor(pref: SharedPreferences) {
 
     fun setUrl(name: String) {
         var index = 0
-        urlList.replaceAll {
-            front + name + end + session[index++]
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            for (i in 0 until urlList.size) {
+                urlList.removeAt(0)
+                urlList.add(front + name + end + session[index++])
+            }
+        } else {
+            urlList.replaceAll {
+                front + name + end + session[index++]
+            }
         }
 
         with(editor) {
