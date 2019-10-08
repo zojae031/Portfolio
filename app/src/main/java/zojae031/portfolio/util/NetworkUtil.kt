@@ -4,11 +4,11 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 
 class NetworkUtil private constructor(private val manager: ConnectivityManager) {
     @Volatile
     var isConnect = true
+
 
     fun checkNetworkInfo() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
@@ -51,4 +51,5 @@ class NetworkUtil private constructor(private val manager: ConnectivityManager) 
             return INSTANCE!!
         }
     }
+
 }

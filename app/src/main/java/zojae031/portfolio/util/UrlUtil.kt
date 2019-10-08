@@ -35,6 +35,7 @@ class UrlUtil private constructor(pref: SharedPreferences) {
             urlList.replaceAll {
                 front + name + end + session[index++]
             }
+
         }
 
         with(editor) {
