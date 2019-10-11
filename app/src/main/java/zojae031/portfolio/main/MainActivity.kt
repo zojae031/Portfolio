@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             MainDialog(this, Injection.getUrlUtil(this.applicationContext)).show()
         }
         userBtn.setOnClickListener {
-
+            MainUserDialog(this).show()
         }
         adView.loadAd(AdRequest.Builder().build())
 
