@@ -1,4 +1,4 @@
-package zojae031.portfolio.main
+package zojae031.portfolio.main.dialog
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,10 @@ import kotlinx.android.synthetic.main.user_list.view.*
 import zojae031.portfolio.R
 import zojae031.portfolio.data.dao.main.MainUserEntity
 
-class MainUserAdapter : RecyclerView.Adapter<MainUserAdapter.Holder>() {
+class MainUserAdapter : RecyclerView.Adapter<MainUserAdapter.Holder>(),
+    MainUserDialogAdapterContract.View, MainUserDialogAdapterContract.Model {
+
+
     private val lists: MutableList<MainUserEntity> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder = Holder(
@@ -27,15 +30,15 @@ class MainUserAdapter : RecyclerView.Adapter<MainUserAdapter.Holder>() {
         holder.bind(position)
     }
 
-    fun clearList() {
+    override fun clearList() {
         lists.clear()
     }
 
-    fun updateList(lists: Array<MainUserEntity>) {
+    override fun updateList(lists: Array<MainUserEntity>) {
         this.lists.addAll(lists)
     }
 
-    fun notifyData() {
+    override fun notifyAdapter() {
         this.notifyDataSetChanged()
     }
 

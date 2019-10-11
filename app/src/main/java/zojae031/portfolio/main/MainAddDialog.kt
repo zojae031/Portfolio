@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.user_dialog.*
 import zojae031.portfolio.R
 import zojae031.portfolio.util.UrlUtil
 
-class MainDialog(context: Context, private val urlUtil: UrlUtil) : Dialog(context) {
+class MainAddDialog(context: Context, private val urlUtil: UrlUtil) : Dialog(context) {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

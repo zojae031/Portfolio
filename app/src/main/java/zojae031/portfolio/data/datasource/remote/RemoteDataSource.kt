@@ -5,6 +5,6 @@ import io.reactivex.Single
 import zojae031.portfolio.data.RepositoryImpl
 
 interface RemoteDataSource {
-    fun getUserList() : Single<List<String>>
+    fun getUserList(): Single<List<String>>
     fun getData(type: RepositoryImpl.ParseData): Flowable<String>
 }

@@ -14,6 +14,7 @@ import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import zojae031.portfolio.Injection
 import zojae031.portfolio.R
+import zojae031.portfolio.main.dialog.MainUserDialog
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             0
         )
         addBtn.setOnClickListener {
-            MainDialog(this, Injection.getUrlUtil(this.applicationContext)).show()
+            MainAddDialog(this, Injection.getUrlUtil(this.applicationContext)).show()
         }
         userBtn.setOnClickListener {
             MainUserDialog(this).show()

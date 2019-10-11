@@ -8,6 +8,6 @@ interface LocalDataSource {
 
     fun insertData(type: RepositoryImpl.ParseData, data: String)
 
-    fun deleteData(type: RepositoryImpl.ParseData,data: String)
+    fun deleteData(type: RepositoryImpl.ParseData, data: String)
 
 }
