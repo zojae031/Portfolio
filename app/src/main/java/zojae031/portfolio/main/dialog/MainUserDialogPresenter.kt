@@ -29,6 +29,7 @@ class MainUserDialogPresenter(
                     Gson().fromJson(it, MainUserEntity::class.java)
                 }.toTypedArray()
             }
+            .doOnError { Log.e("MainUserDialogPresenter", it.message) }
             .subscribe { data ->
                 adapterModel.clearList()
                 adapterModel.updateList(data)
