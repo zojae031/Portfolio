@@ -71,6 +71,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         addBtn.setOnClickListener {
             MainDialog(this, Injection.getUrlUtil(this.applicationContext)).show()
         }
+        userBtn.setOnClickListener {
+
+        }
         adView.loadAd(AdRequest.Builder().build())
 
     }
