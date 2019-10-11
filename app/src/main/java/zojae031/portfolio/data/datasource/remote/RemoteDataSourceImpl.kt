@@ -3,11 +3,13 @@ package zojae031.portfolio.data.datasource.remote
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.google.gson.Gson
 import io.reactivex.*
 import io.reactivex.schedulers.Schedulers
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import zojae031.portfolio.data.RepositoryImpl
+import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.util.UrlUtil
 
 class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
@@ -19,8 +21,12 @@ class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
                 .method(Connection.Method.GET)
                 .execute()
                 .apply {
-                    this.parse().select(".network").select(".repo").text().also {
-                        Log.e("parseData", it)
+                    this.parse().select(".network").select(".repo").select(".gravatar").also {
+                        it.map { element->
+                            val src = element.attr("src")
+                            val alt =element.attr("alt")
+                        }
+
 //                        emitter.onSuccess(it)
                     }
                 }
