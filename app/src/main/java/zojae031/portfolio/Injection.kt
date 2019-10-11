@@ -18,7 +18,7 @@ object Injection {
     fun getRepository(context: Context): Repository =
         RepositoryImpl.getInstance(
             getLocalDataSource(context),
-            getRemoteDataSource(getUrlUtil(context.applicationContext).urlList),
+            getRemoteDataSource(getUrlUtil(context.applicationContext)),
             getNetworkUtil(context)
         )
 
@@ -27,8 +27,8 @@ object Injection {
 
     fun getDataBase(context: Context): DataBase = DataBase.getInstance(context)
 
-    fun getRemoteDataSource(urlList: List<String>): RemoteDataSource =
-        RemoteDataSourceImpl.getInstance(urlList)
+    fun getRemoteDataSource(urlUtil: UrlUtil): RemoteDataSource =
+        RemoteDataSourceImpl.getInstance(urlUtil)
 
     fun getConnectivityManager(context: Context): ConnectivityManager =
         context.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

@@ -45,8 +45,11 @@ class UrlUtil private constructor(pref: SharedPreferences) {
 
     }
 
+    fun getUserListUrl() = BASIC_URL
+
     companion object {
         private var INSTANCE: UrlUtil? = null
+        private const val BASIC_URL = "https://github.com/zojae031/Portfolio/network/members"
         fun getInstance(pref: SharedPreferences): UrlUtil {
             if (INSTANCE == null) {
                 INSTANCE = UrlUtil(pref)
