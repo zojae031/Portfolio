@@ -8,12 +8,10 @@ import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.util.DataConvertUtil
-import zojae031.portfolio.util.NetworkUtil
 
 class MainPresenter(
     private val view: MainContract.View,
-    private val repository: Repository,
-    private val network: NetworkUtil
+    private val repository: Repository
 ) :
     MainContract.Presenter {
 

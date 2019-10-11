@@ -21,8 +21,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     private val presenter by lazy {
         MainPresenter(
             this,
-            Injection.getRepository(applicationContext),
-            Injection.getNetworkUtil(applicationContext)
+            Injection.getRepository(applicationContext)
         )
     }
 
