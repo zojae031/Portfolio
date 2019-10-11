@@ -28,10 +28,10 @@
         android:ems="10"
         android:fontFamily="@font/main_font"
         android:gravity="center"
-        android:textColorHint="@android:color/darker_gray"
         android:hint="GitHub Id"
         android:inputType="textPersonName"
         android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />

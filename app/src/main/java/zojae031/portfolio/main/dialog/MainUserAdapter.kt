@@ -2,7 +2,6 @@ package zojae031.portfolio.main.dialog
 
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,8 +55,15 @@ class MainUserAdapter(private val urlUtil: UrlUtil) :
         init {
             itemView.setOnClickListener {
                 urlUtil.setUrl(lists[adapterPosition].name.replace("@", ""))
-                Toast.makeText(itemView.context, "${lists[adapterPosition].name} 님의 포트폴리오를 확인합니다.", Toast.LENGTH_SHORT).show()
-                Intent(itemView.context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                Toast.makeText(
+                    itemView.context,
+                    "${lists[adapterPosition].name} 님의 포트폴리오를 확인합니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Intent(
+                    itemView.context,
+                    MainActivity::class.java
+                ).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     .apply { itemView.context.startActivity(this) }
             }
         }
