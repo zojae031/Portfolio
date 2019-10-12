@@ -18,6 +18,7 @@ class MainViewModel(
     var loadingState = MutableLiveData<Boolean>()
     var userImage = MutableLiveData<String>()
     var notice = MutableLiveData<String>()
+    var error = MutableLiveData<String>()
 
     override fun onResume() {
         repository
@@ -26,13 +27,13 @@ class MainViewModel(
                 DataConvertUtil.stringToMain(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .doAfterNext { loadingState.value = false }
+            .doOnComplete {loadingState.value = false }
             .doOnSubscribe { loadingState.value = true }
             .subscribe({ entity ->
                 userImage.value = entity.userImage
                 notice.value = entity.notice
             }, { t ->
-                //                view.showToast(t.message.toString())
+                error.value = t.message
                 Log.e("MainViewModel", t.message)
             }).also { compositeDisposable.add(it) }
     }

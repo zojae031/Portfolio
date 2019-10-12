@@ -1,16 +1,13 @@
 package zojae031.portfolio.main
 
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
-import androidx.databinding.BindingAdapter
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import zojae031.portfolio.BaseActivity
@@ -55,6 +52,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 })
 
             }
+
+            mainViewModel.error.observe(this@MainActivity, Observer {
+                Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
+            })
         }
 
         setSupportActionBar(toolbar)
@@ -79,11 +80,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
         adView.loadAd(AdRequest.Builder().build())
 
-    }
-
-    //    @BindingAdapter("show_toast")
-    fun showToast(text: String) {
-        Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
     }
 
 
