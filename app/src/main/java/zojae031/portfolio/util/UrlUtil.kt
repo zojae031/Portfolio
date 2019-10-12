@@ -26,8 +26,16 @@ class UrlUtil private constructor(pref: SharedPreferences) {
 
     fun setUrl(name: String) {
         var index = 0
-        urlList.replaceAll {
-            front + name + end + session[index++]
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            for (i in 0 until urlList.size) {
+                urlList.removeAt(0)
+                urlList.add(front + name + end + session[index++])
+            }
+        } else {
+            urlList.replaceAll {
+                front + name + end + session[index++]
+            }
+
         }
 
         with(editor) {
@@ -37,8 +45,11 @@ class UrlUtil private constructor(pref: SharedPreferences) {
 
     }
 
+    fun getUserListUrl() = BASIC_URL
+
     companion object {
         private var INSTANCE: UrlUtil? = null
+        private const val BASIC_URL = "https://github.com/zojae031/Portfolio/network/members"
         fun getInstance(pref: SharedPreferences): UrlUtil {
             if (INSTANCE == null) {
                 INSTANCE = UrlUtil(pref)
