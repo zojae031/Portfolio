@@ -1,27 +1,24 @@
 package zojae031.portfolio.main
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
+import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import zojae031.portfolio.BaseViewModel
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.util.DataConvertUtil
 
-class MainPresenter(
-    private val view: MainContract.View,
+class MainViewModel(
     private val repository: Repository
 ) :
-    MainContract.Presenter {
+    BaseViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
+    override val compositeDisposable = CompositeDisposable()
+    var loadingState = MutableLiveData<Boolean>()
+    var userImage = MutableLiveData<String>()
+    var notice = MutableLiveData<String>()
 
-    override fun onCreate() {
-
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onResume() {
         repository
             .getData(RepositoryImpl.ParseData.MAIN)
@@ -29,18 +26,16 @@ class MainPresenter(
                 DataConvertUtil.stringToMain(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .doAfterNext { view.hideProgress() }
-            .doOnSubscribe { view.showProgress() }
+            .doAfterNext { loadingState.value = false }
+            .doOnSubscribe { loadingState.value = true }
             .subscribe({ entity ->
-                view.showUserImage(entity.userImage)
-                view.setNotice(entity.notice)
+                userImage.value = entity.userImage
+                notice.value = entity.notice
             }, { t ->
-                view.showToast(t.message.toString())
-                Log.e("MainPresenter", t.message)
+                //                view.showToast(t.message.toString())
+                Log.e("MainViewModel", t.message)
             }).also { compositeDisposable.add(it) }
     }
 
-    override fun onPause() {
-        compositeDisposable.clear()
-    }
+
 }
