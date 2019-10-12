@@ -18,18 +18,18 @@
 
         <ImageView
             android:id="@+id/userImage"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             app:loadUrl="@{userData.images}"
             app:srcCompat="@android:drawable/sym_def_app_icon" />
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="8"
             android:background="@android:color/white"
             android:fontFamily="@font/main_font"
             android:padding="4dp"

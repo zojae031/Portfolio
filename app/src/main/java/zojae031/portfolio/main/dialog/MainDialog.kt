@@ -26,7 +26,6 @@ class MainDialog :
         }).get(MainDialogViewModel::class.java)
     }
 
-    //TODO 1. Dialog Activity Error 잡기
     // 2. Adpater를 이용하여 onClick 구현하기
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,7 @@ class MainDialog :
                 error.observe(this@MainDialog, Observer {
                     Toast.makeText(this@MainDialog, it, Toast.LENGTH_SHORT).show()
                 })
-            }
+            }.also { it.onCreate() }
         }
 
         recyclerView.adapter =
@@ -45,7 +44,6 @@ class MainDialog :
             ) {
 
             }
-
     }
 
 

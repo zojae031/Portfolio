@@ -15,16 +15,15 @@ class MainDialogViewModel(
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     var error = MutableLiveData<String>()
-    var userList = MutableLiveData<Array<MainUserEntity>>()
+    var userList = MutableLiveData<List<MainUserEntity>>()
 
     override fun onCreate() {
-
         repository.getUserList()
             .observeOn(AndroidSchedulers.mainThread())
             .map { data ->
                 data.map {
                     Gson().fromJson(it, MainUserEntity::class.java)
-                }.toTypedArray()
+                }
             }
             .doOnError {
                 error.value = it.message
