@@ -28,5 +28,8 @@
         android:layout_margin="8dp"
         android:background="@android:color/white"
         android:foregroundGravity="center"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>

@@ -16,9 +16,9 @@ import zojae031.portfolio.main.MainActivity
 import zojae031.portfolio.util.UrlUtil
 
 @RequiresApi(Build.VERSION_CODES.N)
-class MainUserAdapter(private val urlUtil: UrlUtil) :
-    RecyclerView.Adapter<MainUserAdapter.Holder>(),
-    MainUserDialogAdapterContract.View, MainUserDialogAdapterContract.Model {
+class MainDialogAdapter(private val urlUtil: UrlUtil) :
+    RecyclerView.Adapter<MainDialogAdapter.Holder>(),
+    MainDialogAdapterContract.View, MainDialogAdapterContract.Model {
 
 
     private val lists: MutableList<MainUserEntity> = mutableListOf()
