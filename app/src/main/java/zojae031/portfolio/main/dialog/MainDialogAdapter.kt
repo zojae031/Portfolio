@@ -15,10 +15,8 @@ import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.main.MainActivity
 import zojae031.portfolio.util.UrlUtil
 
-@RequiresApi(Build.VERSION_CODES.N)
 class MainDialogAdapter(private val urlUtil: UrlUtil) :
-    RecyclerView.Adapter<MainDialogAdapter.Holder>(),
-    MainDialogAdapterContract.View, MainDialogAdapterContract.Model {
+    RecyclerView.Adapter<MainDialogAdapter.Holder>() {
 
 
     private val lists: MutableList<MainUserEntity> = mutableListOf()
@@ -38,28 +36,16 @@ class MainDialogAdapter(private val urlUtil: UrlUtil) :
         holder.bind(position)
     }
 
-    override fun clearList() {
-        lists.clear()
-    }
 
-    override fun updateList(lists: Array<MainUserEntity>) {
-        this.lists.addAll(lists)
-    }
-
-    override fun notifyAdapter() {
-        this.notifyDataSetChanged()
-    }
-
-
-    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener {
-                urlUtil.setUrl(lists[adapterPosition].name.replace("@", ""))
-                Toast.makeText(
-                    itemView.context,
-                    "${lists[adapterPosition].name} 님의 포트폴리오를 확인합니다.",
-                    Toast.LENGTH_SHORT
-                ).show()
+//                urlUtil.setUrl(lists[adapterPosition].name.replace("@", ""))
+//                Toast.makeText(
+//                    itemView.context,
+//                    "${lists[adapterPosition].name} 님의 포트폴리오를 확인합니다.",
+//                    Toast.LENGTH_SHORT
+//                ).show()
                 Intent(
                     itemView.context,
                     MainActivity::class.java
@@ -71,14 +57,14 @@ class MainDialogAdapter(private val urlUtil: UrlUtil) :
         private val image = itemView.userImage
         private val name = itemView.name
         fun bind(position: Int) {
-            Glide
-                .with(itemView.context)
-                .load(lists[position].images)
-                .error(R.drawable.ic_launcher_foreground)
-                .override(150, 150)
-                .into(image)
-
-            name.text = lists[position].name
+//            Glide
+//                .with(itemView.context)
+//                .load(lists[position].images)
+//                .error(R.drawable.ic_launcher_foreground)
+//                .override(150, 150)
+//                .into(image)
+//
+//            name.text = lists[position].name
         }
     }
 }

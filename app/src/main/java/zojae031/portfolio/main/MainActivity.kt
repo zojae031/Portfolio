@@ -76,7 +76,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             0
         )
         userBtn.setOnClickListener {
-            MainDialog(this).show()
+            startActivity(MainDialog.getIntent(this))
         }
         adView.loadAd(AdRequest.Builder().build())
 

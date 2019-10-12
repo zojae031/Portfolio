@@ -27,6 +27,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".tec.TecActivity" />
+        <activity
+            android:name=".main.dialog.MainDialog"
+            android:theme="@style/UserDialog"></activity>
+
+
     </application>
 
 </manifest>

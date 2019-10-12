@@ -20,6 +20,10 @@ class MainViewModel(
     var notice = MutableLiveData<String>()
     var error = MutableLiveData<String>()
 
+    override fun onCreate() {
+
+    }
+
     override fun onResume() {
         repository
             .getData(RepositoryImpl.ParseData.MAIN)

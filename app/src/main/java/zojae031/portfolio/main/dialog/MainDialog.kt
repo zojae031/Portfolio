@@ -1,45 +1,56 @@
 package zojae031.portfolio.main.dialog
 
-import android.app.Dialog
 import android.content.Context
-import android.os.Build
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.user_list_dialog.*
-import zojae031.portfolio.Injection
-import zojae031.portfolio.R
+import zojae031.portfolio.*
+import zojae031.portfolio.data.dao.main.MainUserEntity
+import zojae031.portfolio.databinding.UserListBinding
+import zojae031.portfolio.databinding.UserListDialogBinding
 
-@RequiresApi(Build.VERSION_CODES.N)
-class MainDialog(context: Context) : Dialog(context), MainDialogContract.View {
 
-    private val userAdapter = MainDialogAdapter(Injection.getUrlUtil(context))
-    private val presenter = MainDialogPresenter(
-        this,
-        Injection.getRepository(context)
-    )
+class MainDialog :
+    BaseActivity<UserListDialogBinding>(R.layout.user_list_dialog) {
 
+    private val mainDialogViewModel by lazy {
+        ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return MainDialogViewModel(Injection.getRepository(this@MainDialog)) as T
+            }
+        }).get(MainDialogViewModel::class.java)
+    }
+
+    //TODO 1. Dialog Activity Error 잡기
+    // 2. Adpater를 이용하여 onClick 구현하기
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.user_list_dialog)
-        recyclerView.adapter = userAdapter
-
-        with(presenter) {
-            setAdapter(userAdapter, userAdapter)
-            onCreate()
+        with(binding) {
+            vm = mainDialogViewModel.apply {
+                error.observe(this@MainDialog, Observer {
+                    Toast.makeText(this@MainDialog, it, Toast.LENGTH_SHORT).show()
+                })
+            }
         }
 
+        recyclerView.adapter =
+            object : BaseRecyclerViewAdapter<MainUserEntity, UserListBinding>(
+                R.layout.user_list,
+                BR.userData
+            ) {
+
+            }
+
     }
 
-    override fun showToast(text: String) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
-    }
 
-    override fun showProgress() {
-
-    }
-
-    override fun hideProgress() {
-
+    companion object {
+        fun getIntent(context: Context) =
+            Intent(context, MainDialog::class.java)
     }
 }
