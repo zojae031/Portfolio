@@ -3,10 +3,10 @@
 <font-family xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <font
-        android:font="@font/dotum_bold"
+        android:font="@font/bmdohyeon"
         android:fontStyle="normal"
         android:fontWeight="400"
-        app:font="@font/dotum_bold"
+        app:font="@font/bmdohyeon"
         app:fontStyle="normal"
         app:fontWeight="400" />
 
