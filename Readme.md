@@ -10,7 +10,7 @@
    
    # MVVM 구성도
 
-   ![Architecture](https://user-images.githubusercontent.com/31091115/65956380-39062c80-e485-11e9-9515-bf4d364b4b90.png)
+   ![Architecture](https://user-images.githubusercontent.com/31091115/66820540-d67c5880-ef7b-11e9-9895-e7ea8c92cc6b.png)
 
    <hr>  
 
