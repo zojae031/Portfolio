@@ -1,7 +1,9 @@
 # Protfolio(Master Branch)
 
    #### [Master Branch](https://github.com/zojae031/Portfolio/tree/master)
-   - MVVM 패턴을 적용
+   - AAC ViewModel
+   - LiveData
+   - Koin
    - 현재 개발중
    
    #### [MVP Branch](https://github.com/zojae031/Portfolio/tree/mvp)
@@ -86,5 +88,6 @@
 7. recyclerview
 8. play-services-ads
 9. rxandroid
+10. koin
 
 ```
