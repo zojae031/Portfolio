@@ -15,10 +15,11 @@ class MainViewModel(
     ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
-    var loadingState = MutableLiveData<Boolean>()
-    var userImage = MutableLiveData<String>()
-    var notice = MutableLiveData<String>()
-    var error = MutableLiveData<String>()
+    val pageLimit = 2
+    val loadingState = MutableLiveData<Boolean>()
+    val userImage = MutableLiveData<String>()
+    val notice = MutableLiveData<String>()
+    val error = MutableLiveData<String>()
 
     fun onResume() {
         repository
@@ -41,5 +42,6 @@ class MainViewModel(
     fun onPause() {
         compositeDisposable.clear()
     }
+
 
 }

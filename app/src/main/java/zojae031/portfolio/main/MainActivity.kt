@@ -33,7 +33,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             viewModel = mainViewModel
 
             pager.apply {
-                offscreenPageLimit = 2
                 adapter = MainPagerAdapter(supportFragmentManager)
                 addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                     override fun onPageScrollStateChanged(state: Int) {

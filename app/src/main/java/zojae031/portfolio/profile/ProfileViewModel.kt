@@ -15,9 +15,9 @@ class ProfileViewModel(private val repository: Repository) :
 
     private val compositeDisposable = CompositeDisposable()
     val error = MutableLiveData<String>()
-    var loadingState = MutableLiveData<Boolean>()
+    val loadingState = MutableLiveData<Boolean>()
     val profileEntity = MutableLiveData<ProfileEntity>()
-
+    val buttonEvent = MutableLiveData<String>()
 
     fun onResume() {
         repository
@@ -29,9 +29,7 @@ class ProfileViewModel(private val repository: Repository) :
             .doAfterNext { loadingState.value = false }
             .doOnSubscribe { loadingState.value = true }
             .subscribe({ entity ->
-                Log.e("받아온 데이터", entity.toString())
                 profileEntity.value = entity
-
             }, { t ->
                 error.value = t.message.toString()
                 Log.e("ProfileViewModel", t.message)
@@ -41,5 +39,9 @@ class ProfileViewModel(private val repository: Repository) :
 
     fun onPause() {
         compositeDisposable.clear()
+    }
+
+    fun buttonClicked(data: String) {
+        buttonEvent.value = data
     }
 }

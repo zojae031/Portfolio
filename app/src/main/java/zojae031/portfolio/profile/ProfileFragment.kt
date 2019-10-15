@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -26,7 +27,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = profileViewModel
+        binding.vm = profileViewModel.apply {
+            buttonEvent.observe(this@ProfileFragment, Observer {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
+            })
+        }
+
     }
 
 
@@ -39,10 +45,5 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
         profileViewModel.onPause()
         super.onPause()
     }
-
-    fun buttonClicked(data: String) {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data)))
-    }
-
 
 }
