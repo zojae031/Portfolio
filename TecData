@@ -30,8 +30,8 @@
 "image":"https://user-images.githubusercontent.com/31091115/64010082-069aa400-cb54-11e9-887a-fd363ed72f92.png",
 "source": [
 {
-"data1":"https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/profile/ProfilePresenter.kt",
-"data2":"https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/profile/ProfileFragment.kt",
+"data1":"https://github.com/zojae031/Portfolio/blob/mvp/app/src/main/java/zojae031/portfolio/profile/ProfilePresenter.kt",
+"data2":"https://github.com/zojae031/Portfolio/blob/mvp/app/src/main/java/zojae031/portfolio/profile/ProfileFragment.kt",
 "left":"Presenter",
 "right":"View"
 }
