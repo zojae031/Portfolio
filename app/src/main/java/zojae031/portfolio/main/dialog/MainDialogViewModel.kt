@@ -1,7 +1,6 @@
 package zojae031.portfolio.main.dialog
 
 import android.util.Log
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,27 +19,22 @@ class MainDialogViewModel(
     var error = MutableLiveData<String>()
     var userList = MutableLiveData<List<MainUserEntity>>()
 
+
     override fun onCreate() {
         repository.getUserList()
-            .observeOn(AndroidSchedulers.mainThread())
             .map { data ->
                 data.map {
                     Gson().fromJson(it, MainUserEntity::class.java)
+                        .also { entity -> entity.listener = ::onClick }
                 }
-            }.map {
-                it.map { entity ->
-                    urlUtil.setUrl(entity.name.replace("@", ""))
-                    entity.listener = ::onClick
-                }
-                it
             }
+            .observeOn(AndroidSchedulers.mainThread())
             .doOnError {
                 error.value = it.message
                 Log.e("MainDialogViewModel", it.message)
             }
             .subscribe { data ->
                 userList.value = data
-
             }.also { compositeDisposable.add(it) }
     }
 
@@ -48,8 +42,7 @@ class MainDialogViewModel(
 
     }
 
-    fun onClick(string: String) {
-        Log.e("앙 클릭띠", string)
-
+    private fun onClick(name: String) {
+        urlUtil.setUrl(name.replace("@", ""))
     }
 }
