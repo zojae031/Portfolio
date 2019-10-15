@@ -22,12 +22,14 @@
 
    - Local 에서 데이터를 가져온다.
    - 인터넷에 연결되어 있을 시 Remote에서 가져와 Local에 저장
-
-   #### MVP Pattern
-
+   
+   #### [Master Branch](https://github.com/zojae031/Portfolio/tree/master)
+   - MVVM 패턴을 적용
+   - 현재 개발중
+   
+   #### [MVP Branch](https://github.com/zojae031/Portfolio/tree/mvp)
    - MVP 패턴을 적용
    - View와 Presenter의 1:1 대응
-
    
 
 ### 1. [Main](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/main)
