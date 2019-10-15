@@ -5,8 +5,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import zojae031.portfolio.base.BaseRecyclerViewAdapter
 import zojae031.portfolio.R
+import zojae031.portfolio.base.BaseRecyclerViewAdapter
 
 @BindingAdapter(value = ["loadUrlCircle"])
 fun ImageView.showImageCircle(url: String?) {
@@ -32,9 +32,16 @@ fun ImageView.showImage(url: String?) {
     }
 }
 
-@BindingAdapter(value = ["replaceAll"])
-fun RecyclerView.replaceAll(list: List<Any>?) {
+@BindingAdapter(value = ["listReplaceAll"])
+fun RecyclerView.listReplaceAll(list: List<Any>?) {
     if (list != null) {
         (this.adapter as? BaseRecyclerViewAdapter<Any, *>)?.updateLists(list)
+    }
+}
+
+@BindingAdapter(value = ["arrayReplaceAll"])
+fun RecyclerView.arrayReplaceAll(list: Array<Any>?) {
+    if (list != null) {
+        (this.adapter as? BaseRecyclerViewAdapter<Any, *>)?.updateArrays(list)
     }
 }

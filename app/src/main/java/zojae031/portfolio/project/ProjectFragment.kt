@@ -1,54 +1,48 @@
 package zojae031.portfolio.project
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.databinding.library.baseAdapters.BR
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_project.*
-import kotlinx.android.synthetic.main.fragment_project.view.*
 import org.koin.android.ext.android.inject
 import zojae031.portfolio.R
+import zojae031.portfolio.base.BaseFragment
+import zojae031.portfolio.base.BaseRecyclerViewAdapter
 import zojae031.portfolio.data.Repository
+import zojae031.portfolio.data.dao.project.ProjectEntity
+import zojae031.portfolio.databinding.FragmentProjectBinding
+import zojae031.portfolio.databinding.ProjectListBinding
 
-class ProjectFragment : Fragment(), ProjectContract.View {
+class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_project) {
     private val repository: Repository by inject()
-    private val adapter = ProjectAdapter()
-    private val presenter by lazy {
-        ProjectPresenter(
-            this@ProjectFragment, repository
-        ).also { it.setAdapter(adapter, adapter) }
+    private val projectViewModel by lazy {
+        ViewModelProviders.of(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return ProjectViewModel(repository) as T
+            }
+        }).get(ProjectViewModel::class.java)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? =
-        inflater.inflate(R.layout.fragment_project, container, false).apply {
-            recycler.adapter = adapter
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.vm = projectViewModel
+        recycler.adapter = object : BaseRecyclerViewAdapter<ProjectEntity, ProjectListBinding>(
+            R.layout.project_list,
+            BR.projectEntity
+        ) {}
+    }
 
     override fun onPause() {
-        presenter.onPause()
+        projectViewModel.onPause()
         super.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.onResume()
+        projectViewModel.onResume()
     }
 
-    override fun showProgress() {
-        projectProgressBar.visibility = View.VISIBLE
-    }
-
-    override fun hideProgress() {
-        projectProgressBar.visibility = View.GONE
-    }
-
-    override fun showToast(text: String) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
-    }
 }
