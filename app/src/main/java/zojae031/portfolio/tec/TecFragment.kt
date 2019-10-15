@@ -8,16 +8,17 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_tec.*
 import kotlinx.android.synthetic.main.fragment_tec.view.*
-import zojae031.portfolio.Injection
+import org.koin.android.ext.android.inject
 import zojae031.portfolio.R
+import zojae031.portfolio.data.Repository
 
 class TecFragment : Fragment(), TecContract.View {
-
+    private val repository: Repository by inject()
     private val adapter = TecAdapter()
     private val presenter by lazy {
         TecPresenter(
             this,
-            Injection.getRepository(context!!.applicationContext)
+            repository
         ).also { it.setAdapter(adapter, adapter) }
     }
 

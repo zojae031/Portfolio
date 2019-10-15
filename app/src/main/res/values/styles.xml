@@ -9,4 +9,8 @@
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="UserDialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

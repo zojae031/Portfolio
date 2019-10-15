@@ -1,35 +1,63 @@
 package zojae031.portfolio.main
 
-import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
-import zojae031.portfolio.Injection
+import org.koin.android.ext.android.inject
 import zojae031.portfolio.R
+import zojae031.portfolio.base.BaseActivity
+import zojae031.portfolio.data.Repository
+import zojae031.portfolio.databinding.ActivityMainBinding
 import zojae031.portfolio.main.dialog.MainDialog
 
-class MainActivity : AppCompatActivity(), MainContract.View {
-
-
-    private val presenter by lazy {
-        MainPresenter(
-            this,
-            Injection.getRepository(applicationContext)
-        )
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+    private val repository: Repository by inject()
+    private val mainViewModel by lazy {
+        ViewModelProviders.of(this@MainActivity, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return MainViewModel(repository) as T
+            }
+        }).get(MainViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        presenter.onCreate()
+        with(binding) {
+            viewModel = mainViewModel.apply {
+                error.observe(this@MainActivity, Observer {
+                    Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
+                })
+            }
+
+            pager.apply {
+                adapter = MainPagerAdapter(supportFragmentManager)
+                addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                    override fun onPageScrollStateChanged(state: Int) {
+
+                    }
+
+                    override fun onPageScrolled(
+                        position: Int,
+                        positionOffset: Float,
+                        positionOffsetPixels: Int
+                    ) {
+
+                    }
+
+                    override fun onPageSelected(position: Int) {
+                        indicator.selectDot(position)
+                    }
+                })
+
+            }
+        }
 
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener {
@@ -42,27 +70,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        with(pager) {
-            offscreenPageLimit = 2
-            adapter = MainPagerAdapter(supportFragmentManager)
-            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-                override fun onPageScrollStateChanged(state: Int) {
-
-                }
-
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
-                ) {
-
-                }
-
-                override fun onPageSelected(position: Int) {
-                    indicator.selectDot(position)
-                }
-            })
-        }
         indicator.createDotPanel(
             pager.adapter!!.count,
             R.drawable.indicator_off,
@@ -70,47 +77,21 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             0
         )
         userBtn.setOnClickListener {
-            MainDialog(this).show()
+            startActivity(MainDialog.getIntent(this))
         }
         adView.loadAd(AdRequest.Builder().build())
 
     }
 
-    override fun setNotice(notice: String) {
-        this.notice.text = notice
-    }
 
-    override fun showProgress() {
-        imgProgressBar.visibility = View.VISIBLE
-    }
-
-    override fun hideProgress() {
-        imgProgressBar.visibility = View.GONE
-    }
-
-    override fun showToast(text: String) {
-        Toast.makeText(this@MainActivity, text, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun showUserImage(url: String) {
-        Glide.with(this@MainActivity)
-            .load(url)
-            .error(R.drawable.picture)
-            .centerCrop()
-            .apply(RequestOptions.circleCropTransform())
-            .into(image)
-    }
-
-
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onResume() {
         super.onResume()
-        presenter.onResume()
+        mainViewModel.onResume()
         adView.resume()
     }
 
     override fun onPause() {
-        presenter.onPause()
+        mainViewModel.onPause()
         adView.pause()
         super.onPause()
     }
@@ -127,3 +108,4 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
 }
+

@@ -22,6 +22,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -39,11 +42,20 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.12.1'
     implementation 'com.google.code.gson:gson:2.8.5'
 
-    def room_version = '2.2.0-rc01'
+    def room_version = "2.2.0"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
 
     implementation 'com.google.android.gms:play-services-ads:18.2.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 
+    //koin
+    def koin_version = '2.0.1'
+    // Koin AndroidX Scope features
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    // Koin AndroidX ViewModel features
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    // Koin AndroidX Experimental features
+    implementation "org.koin:koin-androidx-ext:$koin_version"
 }
