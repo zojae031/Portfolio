@@ -62,6 +62,18 @@
 "right":"View"
 }
 ]
+},
+{
+"name":"koin",
+"image":"https://user-images.githubusercontent.com/31091115/66817782-37edf880-ef77-11e9-8e9a-0e4808e2c625.jpg",
+"source": [
+{
+"data1":"https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/base/BaseApplication.kt",
+"data2":"https://github.com/zojae031/Portfolio/blob/56f9bc8516b5cc13fd21d7902a5246ba61fb9a5f/app/src/main/java/zojae031/portfolio/main/MainActivity.kt#L21",
+"left":"startKoin",
+"right":"Injection"
+}
+]
 }
 
 ]
