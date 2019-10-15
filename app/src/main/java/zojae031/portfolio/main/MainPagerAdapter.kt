@@ -9,7 +9,7 @@ import zojae031.portfolio.tec.TecFragment
 
 class MainPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-    private val fragments = listOf<Fragment>(
+    private val fragments = listOf(
         ProfileFragment(),
         ProjectFragment(),
         TecFragment()

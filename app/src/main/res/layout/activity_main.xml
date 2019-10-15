@@ -85,7 +85,7 @@
                         android:outlineProvider="background"
                         android:padding="8dp"
                         android:scaleType="fitCenter"
-                        app:loadUrlCircle="@{viewModel.userImage}" />
+                        app:loadUrlCircle="@{viewModel.mainEntity.userImage}" />
                 </FrameLayout>
 
                 <androidx.viewpager.widget.ViewPager
@@ -164,7 +164,7 @@
                     android:layout_marginLeft="16dp"
                     android:fontFamily="@font/main_font"
                     android:padding="16dp"
-                    android:text="@{viewModel.notice}"
+                    android:text="@{viewModel.mainEntity.notice}"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
 

@@ -7,18 +7,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
+import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.util.DataConvertUtil
 
-class MainViewModel(
-    private val repository: Repository
-) :
-    ViewModel() {
+class MainViewModel(private val repository: Repository) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
     val pageLimit = 2
     val loadingState = MutableLiveData<Boolean>()
-    val userImage = MutableLiveData<String>()
-    val notice = MutableLiveData<String>()
+    val mainEntity = MutableLiveData<MainEntity>()
     val error = MutableLiveData<String>()
 
     fun onResume() {
@@ -31,8 +28,7 @@ class MainViewModel(
             .doOnComplete { loadingState.value = false }
             .doOnSubscribe { loadingState.value = true }
             .subscribe({ entity ->
-                userImage.value = entity.userImage
-                notice.value = entity.notice
+                mainEntity.value = entity
             }, { t ->
                 error.value = t.message
                 Log.e("MainViewModel", t.message)

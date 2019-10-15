@@ -30,7 +30,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         with(binding) {
-            viewModel = mainViewModel
+            viewModel = mainViewModel.apply {
+                error.observe(this@MainActivity, Observer {
+                    Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
+                })
+            }
 
             pager.apply {
                 adapter = MainPagerAdapter(supportFragmentManager)
@@ -53,10 +57,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 })
 
             }
-
-            mainViewModel.error.observe(this@MainActivity, Observer {
-                Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
-            })
         }
 
         setSupportActionBar(toolbar)
