@@ -34,9 +34,26 @@ class MainDialog :
         super.onCreate(savedInstanceState)
         with(binding) {
             vm = mainDialogViewModel.apply {
+
                 error.observe(this@MainDialog, Observer {
                     Toast.makeText(this@MainDialog, it, Toast.LENGTH_SHORT).show()
                 })
+
+                userName.observe(this@MainDialog, Observer {
+                    Toast.makeText(
+                        this@MainDialog,
+                        "$it 님의 포트폴리오를 확인합니다.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Intent(
+                        this@MainDialog,
+                        MainActivity::class.java
+                    ).apply {
+                        startActivity(this)
+                        finish()
+                    }
+                })
+                
             }.also { it.onCreate() }
         }
 

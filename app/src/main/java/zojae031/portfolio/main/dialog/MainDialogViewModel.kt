@@ -18,7 +18,7 @@ class MainDialogViewModel(
 
     var error = MutableLiveData<String>()
     var userList = MutableLiveData<List<MainUserEntity>>()
-
+    var userName = MutableLiveData<String>()
 
     override fun onCreate() {
         repository.getUserList()
@@ -44,5 +44,6 @@ class MainDialogViewModel(
 
     private fun onClick(name: String) {
         urlUtil.setUrl(name.replace("@", ""))
+        userName.value = name
     }
 }
