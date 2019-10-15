@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.user_list_dialog.*
 import zojae031.portfolio.*
+import zojae031.portfolio.base.BaseActivity
+import zojae031.portfolio.base.BaseRecyclerViewAdapter
 import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.databinding.UserListBinding
 import zojae031.portfolio.databinding.UserListDialogBinding

@@ -1,12 +1,11 @@
 package zojae031.portfolio.util
 
-import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import zojae031.portfolio.BaseRecyclerViewAdapter
+import zojae031.portfolio.base.BaseRecyclerViewAdapter
 import zojae031.portfolio.R
 
 @BindingAdapter(value = ["loadUrlCircle"])

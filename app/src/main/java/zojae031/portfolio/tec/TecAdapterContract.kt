@@ -1,6 +1,6 @@
 package zojae031.portfolio.tec
 
-import zojae031.portfolio.BaseAdapterContract
+import zojae031.portfolio.base.BaseAdapterContract
 import zojae031.portfolio.data.dao.tec.TecEntity
 
 interface TecAdapterContract {

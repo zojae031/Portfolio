@@ -1,6 +1,6 @@
 package zojae031.portfolio.tec
 
-import zojae031.portfolio.BaseContract
+import zojae031.portfolio.base.BaseContract
 
 interface TecContract {
     interface View : BaseContract.View

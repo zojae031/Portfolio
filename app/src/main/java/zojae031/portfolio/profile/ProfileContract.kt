@@ -1,6 +1,6 @@
 package zojae031.portfolio.profile
 
-import zojae031.portfolio.BaseContract
+import zojae031.portfolio.base.BaseContract
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 
 interface ProfileContract : BaseContract {

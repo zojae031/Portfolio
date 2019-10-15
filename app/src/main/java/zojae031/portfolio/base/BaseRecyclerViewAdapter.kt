@@ -1,4 +1,4 @@
-package zojae031.portfolio
+package zojae031.portfolio.base
 
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
