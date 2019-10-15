@@ -13,6 +13,7 @@ import zojae031.portfolio.*
 import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.databinding.UserListBinding
 import zojae031.portfolio.databinding.UserListDialogBinding
+import zojae031.portfolio.main.MainActivity
 
 
 class MainDialog :
@@ -21,12 +22,14 @@ class MainDialog :
     private val mainDialogViewModel by lazy {
         ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return MainDialogViewModel(Injection.getRepository(this@MainDialog)) as T
+                return MainDialogViewModel(
+                    Injection.getRepository(this@MainDialog),
+                    Injection.getUrlUtil(this@MainDialog)
+                ) as T
             }
         }).get(MainDialogViewModel::class.java)
     }
 
-    // 2. Adpater를 이용하여 onClick 구현하기
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         with(binding) {
@@ -45,7 +48,6 @@ class MainDialog :
 
             }
     }
-
 
     companion object {
         fun getIntent(context: Context) =

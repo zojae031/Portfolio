@@ -10,7 +10,6 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
     private val bindingVariableId: Int? = null
 ) : RecyclerView.Adapter<BaseViewHolder<B>>() {
 
-
     private val items = mutableListOf<ITEM>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<B> =
@@ -18,9 +17,7 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
             layoutId,
             parent,
             bindingVariableId
-        ) {
-        }
-
+        ) {}
 
     override fun getItemCount(): Int = items.size
 

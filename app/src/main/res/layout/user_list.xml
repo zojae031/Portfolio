@@ -7,6 +7,10 @@
         <variable
             name="userData"
             type="zojae031.portfolio.data.dao.main.MainUserEntity" />
+
+        <variable
+            name="vm"
+            type="zojae031.portfolio.main.dialog.MainDialogViewModel" />
     </data>
 
     <LinearLayout
@@ -14,7 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:background="@android:color/white"
-        android:backgroundTint="@android:color/white">
+        android:backgroundTint="@android:color/white"
+        android:onClick="@{()->userData.listener.invoke(userData.name)}">
+
 
         <ImageView
             android:id="@+id/userImage"

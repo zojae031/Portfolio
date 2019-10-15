@@ -1,5 +1,6 @@
 package zojae031.portfolio.util
 
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -33,7 +34,7 @@ fun ImageView.showImage(url: String?) {
 }
 
 @BindingAdapter(value = ["replaceAll"])
-fun RecyclerView.replaceAll(list:List<Any>?){
+fun RecyclerView.replaceAll(list: List<Any>?) {
     if (list != null) {
         (this.adapter as? BaseRecyclerViewAdapter<Any, *>)?.updateLists(list)
     }
