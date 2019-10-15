@@ -53,7 +53,7 @@ class MainDialog :
                         finish()
                     }
                 })
-                
+
             }.also { it.onCreate() }
         }
 
@@ -64,6 +64,11 @@ class MainDialog :
             ) {
 
             }
+    }
+
+    override fun onPause() {
+        mainDialogViewModel.onPause()
+        super.onPause()
     }
 
     companion object {
