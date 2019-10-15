@@ -8,14 +8,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_project.*
 import kotlinx.android.synthetic.main.fragment_project.view.*
+import org.koin.android.ext.android.inject
 import zojae031.portfolio.R
+import zojae031.portfolio.data.Repository
 
 class ProjectFragment : Fragment(), ProjectContract.View {
-
+    private val repository: Repository by inject()
     private val adapter = ProjectAdapter()
     private val presenter by lazy {
         ProjectPresenter(
-            this@ProjectFragment, Injection.getRepository(context!!)
+            this@ProjectFragment, repository
         ).also { it.setAdapter(adapter, adapter) }
     }
 

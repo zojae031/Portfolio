@@ -9,14 +9,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_profile.*
+import org.koin.android.ext.android.inject
 import zojae031.portfolio.R
+import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 
 
 class ProfileFragment : Fragment(), ProfileContract.View {
+    private val repository: Repository by inject()
     private val presenter by lazy {
         ProfilePresenter(
-            this@ProfileFragment, Injection.getRepository(context!!)
+            this@ProfileFragment, repository
         )
     }
 

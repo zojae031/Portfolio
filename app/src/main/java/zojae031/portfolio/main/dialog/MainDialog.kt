@@ -9,24 +9,29 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.user_list_dialog.*
-import zojae031.portfolio.*
+import org.koin.android.ext.android.inject
+import zojae031.portfolio.BR
+import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseActivity
 import zojae031.portfolio.base.BaseRecyclerViewAdapter
+import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.databinding.UserListBinding
 import zojae031.portfolio.databinding.UserListDialogBinding
 import zojae031.portfolio.main.MainActivity
+import zojae031.portfolio.util.UrlUtil
 
 
 class MainDialog :
     BaseActivity<UserListDialogBinding>(R.layout.user_list_dialog) {
-
+    private val repository: Repository by inject()
+    private val urlUtil: UrlUtil by inject()
     private val mainDialogViewModel by lazy {
         ViewModelProviders.of(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                 return MainDialogViewModel(
-                    Injection.getRepository(this@MainDialog),
-                    Injection.getUrlUtil(this@MainDialog)
+                    repository,
+                    urlUtil
                 ) as T
             }
         }).get(MainDialogViewModel::class.java)

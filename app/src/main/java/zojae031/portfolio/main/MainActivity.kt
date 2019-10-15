@@ -10,16 +10,19 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
-import zojae031.portfolio.base.BaseActivity
+import org.koin.android.ext.android.inject
 import zojae031.portfolio.R
+import zojae031.portfolio.base.BaseActivity
+import zojae031.portfolio.data.Repository
 import zojae031.portfolio.databinding.ActivityMainBinding
 import zojae031.portfolio.main.dialog.MainDialog
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+    private val repository: Repository by inject()
     private val mainViewModel by lazy {
         ViewModelProviders.of(this@MainActivity, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return MainViewModel(Injection.getRepository(applicationContext)) as T
+                return MainViewModel(repository) as T
             }
         }).get(MainViewModel::class.java)
     }
