@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_project.*
 import kotlinx.android.synthetic.main.fragment_project.view.*
-import zojae031.portfolio.Injection
 import zojae031.portfolio.R
 
 class ProjectFragment : Fragment(), ProjectContract.View {

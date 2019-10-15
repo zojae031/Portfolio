@@ -11,7 +11,6 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import zojae031.portfolio.base.BaseActivity
-import zojae031.portfolio.Injection
 import zojae031.portfolio.R
 import zojae031.portfolio.databinding.ActivityMainBinding
 import zojae031.portfolio.main.dialog.MainDialog

@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_profile.*
-import zojae031.portfolio.Injection
 import zojae031.portfolio.R
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 
