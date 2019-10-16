@@ -6,6 +6,7 @@ import com.google.gson.JsonParser
 import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.data.dao.project.ProjectEntity
+import zojae031.portfolio.data.dao.project.ProjectEntityOnListener
 import zojae031.portfolio.data.dao.tec.TecEntity
 
 object DataConvertUtil {
@@ -21,11 +22,18 @@ object DataConvertUtil {
         }
     }
 
-    fun stringToProjectArray(data: String): Array<ProjectEntity> {
+    fun stringToProjectList(data: String): List<ProjectEntity> {
         return JsonParser().parse(data).asJsonArray.run {
             Gson().fromJson(this, Array<ProjectEntity>::class.java)
-        }
+        }.asList()
     }
+
+    fun stringToProjectOnListenerList(data: String): List<ProjectEntityOnListener> {
+        return JsonParser().parse(data).asJsonArray.run {
+            Gson().fromJson(this, Array<ProjectEntityOnListener>::class.java)
+        }.asList()
+    }
+
 
     fun stringToTecArray(data: String): Array<TecEntity> {
         return JsonParser().parse(data).asJsonArray.run {

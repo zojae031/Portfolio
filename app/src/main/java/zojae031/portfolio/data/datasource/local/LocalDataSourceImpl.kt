@@ -56,7 +56,7 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
                 DataConvertUtil.stringToProfile(data).also { basicDao.insert(it) }
             }
             RepositoryImpl.ParseData.PROJECT -> {
-                DataConvertUtil.stringToProjectArray(data).also {
+                DataConvertUtil.stringToProjectList(data).also {
                     for (list in it) {
                         projectDao.insert(list)
                     }
@@ -81,7 +81,7 @@ class LocalDataSourceImpl private constructor(db: DataBase) : LocalDataSource {
                 DataConvertUtil.stringToProfile(data).also { basicDao.delete(it) }
             }
             RepositoryImpl.ParseData.PROJECT -> {
-                DataConvertUtil.stringToProjectArray(data).also {
+                DataConvertUtil.stringToProjectList(data).also {
                     for (list in it) {
                         projectDao.delete(list)
                     }

@@ -6,13 +6,14 @@
 
         <variable
             name="projectEntity"
-            type="zojae031.portfolio.data.dao.project.ProjectEntity" />
+            type="zojae031.portfolio.data.dao.project.ProjectEntityOnListener" />
     </data>
 
     <LinearLayout
         android:id="@+id/project_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{()->projectEntity.listener.invoke(projectEntity)}"
         android:orientation="horizontal">
 
         <ImageView

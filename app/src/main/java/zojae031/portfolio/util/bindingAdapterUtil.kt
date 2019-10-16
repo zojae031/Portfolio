@@ -32,16 +32,9 @@ fun ImageView.showImage(url: String?) {
     }
 }
 
-@BindingAdapter(value = ["listReplaceAll"])
-fun RecyclerView.listReplaceAll(list: List<Any>?) {
+@BindingAdapter(value = ["ReplaceAll"])
+fun RecyclerView.ReplaceAll(list: List<Any>?) {
     if (list != null) {
         (this.adapter as? BaseRecyclerViewAdapter<Any, *>)?.updateLists(list)
-    }
-}
-
-@BindingAdapter(value = ["arrayReplaceAll"])
-fun RecyclerView.arrayReplaceAll(list: Array<Any>?) {
-    if (list != null) {
-        (this.adapter as? BaseRecyclerViewAdapter<Any, *>)?.updateArrays(list)
     }
 }

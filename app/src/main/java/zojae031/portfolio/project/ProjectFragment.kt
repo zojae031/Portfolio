@@ -1,8 +1,10 @@
 package zojae031.portfolio.project
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.library.baseAdapters.BR
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -12,7 +14,7 @@ import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragment
 import zojae031.portfolio.base.BaseRecyclerViewAdapter
 import zojae031.portfolio.data.Repository
-import zojae031.portfolio.data.dao.project.ProjectEntity
+import zojae031.portfolio.data.dao.project.ProjectEntityOnListener
 import zojae031.portfolio.databinding.FragmentProjectBinding
 import zojae031.portfolio.databinding.ProjectListBinding
 
@@ -29,10 +31,14 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_p
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = projectViewModel
-        recycler.adapter = object : BaseRecyclerViewAdapter<ProjectEntity, ProjectListBinding>(
-            R.layout.project_list,
-            BR.projectEntity
-        ) {}
+        recycler.adapter =
+            object : BaseRecyclerViewAdapter<ProjectEntityOnListener, ProjectListBinding>(
+                R.layout.project_list,
+                BR.projectEntity
+            ) {}
+        projectViewModel.listData.observe(this, Observer {
+            startActivity()
+        })
     }
 
     override fun onPause() {
