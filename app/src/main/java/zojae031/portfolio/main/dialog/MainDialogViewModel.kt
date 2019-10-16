@@ -1,6 +1,7 @@
 package zojae031.portfolio.main.dialog
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
@@ -16,9 +17,18 @@ class MainDialogViewModel(
 ) : ViewModel() {
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    var error = MutableLiveData<String>()
-    var userList = MutableLiveData<List<MainUserEntity>>()
-    var userName = MutableLiveData<String>()
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
+
+    private val _userList = MutableLiveData<List<MainUserEntity>>()
+    val userList: LiveData<List<MainUserEntity>>
+        get() = _userList
+
+    private val _userName = MutableLiveData<String>()
+    val userName: LiveData<String>
+        get() = _userName
+
 
     fun onCreate() {
         repository.getUserList()
@@ -30,11 +40,11 @@ class MainDialogViewModel(
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnError {
-                error.value = it.message
+                _error.value = it.message
                 Log.e("MainDialogViewModel", it.message)
             }
             .subscribe { data ->
-                userList.value = data
+                _userList.value = data
             }.also { compositeDisposable.add(it) }
     }
 
@@ -44,6 +54,6 @@ class MainDialogViewModel(
 
     private fun onClick(name: String) {
         urlUtil.setUrl(name.replace("@", ""))
-        userName.value = name
+        _userName.value = name
     }
 }
