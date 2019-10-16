@@ -1,6 +1,7 @@
 package zojae031.portfolio.project
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,9 +16,18 @@ class ProjectViewModel(private val repository: Repository) :
     ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
-    val projectEntity = MutableLiveData<Array<ProjectEntity>>()
-    val loadingState = MutableLiveData<Boolean>()
-    val error = MutableLiveData<String>()
+
+    private val _projectEntity = MutableLiveData<Array<ProjectEntity>>()
+    val projectEntity: LiveData<Array<ProjectEntity>>
+        get() = _projectEntity
+
+    private val _loadingState = MutableLiveData<Boolean>()
+    val loadingState: LiveData<Boolean>
+        get() = _loadingState
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
 
     fun onResume() {
         repository
@@ -26,12 +36,12 @@ class ProjectViewModel(private val repository: Repository) :
                 DataConvertUtil.stringToProjectArray(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .doAfterNext { loadingState.value = false }
-            .doOnSubscribe { loadingState.value = true }
+            .doAfterNext { _loadingState.value = false }
+            .doOnSubscribe { _loadingState.value = true }
             .subscribe({ entity ->
-                projectEntity.value = entity
+                _projectEntity.value = entity
             }, { t ->
-                error.value = t.message
+                _error.value = t.message
                 Log.e("ProjectViewModel", t.localizedMessage)
             }).also { compositeDisposable.add(it) }
     }
