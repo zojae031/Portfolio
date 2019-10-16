@@ -1,6 +1,7 @@
 package zojae031.portfolio.main
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,9 +15,18 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
     val pageLimit = 2
-    val loadingState = MutableLiveData<Boolean>()
-    val mainEntity = MutableLiveData<MainEntity>()
-    val error = MutableLiveData<String>()
+
+    private val _loadingState = MutableLiveData<Boolean>()
+    val loadingState: LiveData<Boolean>
+        get() = _loadingState
+
+    private val _mainEntity = MutableLiveData<MainEntity>()
+    val mainEntity: LiveData<MainEntity>
+        get() = _mainEntity
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
 
     fun onResume() {
         repository
@@ -25,12 +35,12 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
                 DataConvertUtil.stringToMain(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnComplete { loadingState.value = false }
-            .doOnSubscribe { loadingState.value = true }
+            .doOnComplete { _loadingState.value = false }
+            .doOnSubscribe { _loadingState.value = true }
             .subscribe({ entity ->
-                mainEntity.value = entity
+                _mainEntity.value = entity
             }, { t ->
-                error.value = t.message
+                _error.value = t.message
                 Log.e("MainViewModel", t.message)
             }).also { compositeDisposable.add(it) }
     }
