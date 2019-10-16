@@ -1,6 +1,7 @@
 package zojae031.portfolio.profile
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,10 +15,23 @@ class ProfileViewModel(private val repository: Repository) :
     ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
-    val error = MutableLiveData<String>()
-    val loadingState = MutableLiveData<Boolean>()
-    val profileEntity = MutableLiveData<ProfileEntity>()
-    val buttonEvent = MutableLiveData<String>()
+
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String>
+        get() = _error
+
+    private val _loadingState = MutableLiveData<Boolean>()
+    val loadingState: LiveData<Boolean>
+        get() = _loadingState
+
+    private val _profileEntity = MutableLiveData<ProfileEntity>()
+    val profileEntity: LiveData<ProfileEntity>
+        get() = _profileEntity
+
+    private val _buttonEvent = MutableLiveData<String>()
+    val buttonEvent: LiveData<String>
+        get() = _buttonEvent
 
     fun onResume() {
         repository
@@ -26,12 +40,12 @@ class ProfileViewModel(private val repository: Repository) :
                 DataConvertUtil.stringToProfile(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .doAfterNext { loadingState.value = false }
-            .doOnSubscribe { loadingState.value = true }
+            .doAfterNext { _loadingState.value = false }
+            .doOnSubscribe { _loadingState.value = true }
             .subscribe({ entity ->
-                profileEntity.value = entity
+                _profileEntity.value = entity
             }, { t ->
-                error.value = t.message.toString()
+                _error.value = t.message.toString()
                 Log.e("ProfileViewModel", t.message)
             }
             ).also { compositeDisposable.add(it) }
@@ -42,6 +56,6 @@ class ProfileViewModel(private val repository: Repository) :
     }
 
     fun buttonClicked(data: String) {
-        buttonEvent.value = data
+        _buttonEvent.value = data
     }
 }
