@@ -21,7 +21,7 @@
 
         <activity
             android:name=".main.MainActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,10 +32,6 @@
         <activity
             android:name=".tec.TecActivity"
             android:launchMode="singleTop" />
-        <activity
-            android:name=".main.dialog.MainDialog"
-            android:launchMode="singleTop"
-            android:theme="@style/UserDialog"></activity>
 
     </application>
 

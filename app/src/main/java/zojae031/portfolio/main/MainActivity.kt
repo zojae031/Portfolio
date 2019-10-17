@@ -14,6 +14,7 @@ import zojae031.portfolio.databinding.ActivityMainBinding
 import zojae031.portfolio.main.dialog.MainDialog
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+
     private val mainViewModel by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +24,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 error.observe(this@MainActivity, Observer {
                     Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
                 })
-            }
+            }.also { it.onCreate() }
 
             pager.apply {
                 adapter = MainPagerAdapter(supportFragmentManager)
@@ -65,10 +66,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             R.drawable.indicator_on,
             0
         )
-        userBtn.setOnClickListener {
-            startActivity(MainDialog.getIntent(this))
-        }
         adView.loadAd(AdRequest.Builder().build())
+
+        userBtn.setOnClickListener {
+            MainDialog().show(supportFragmentManager, "mainDialog")
+        }
 
     }
 

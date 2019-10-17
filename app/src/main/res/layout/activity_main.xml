@@ -11,6 +11,11 @@
         <variable
             name="viewModel"
             type="zojae031.portfolio.main.MainViewModel" />
+
+        <variable
+            name="activity"
+            type="zojae031.portfolio.main.MainActivity" />
+
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

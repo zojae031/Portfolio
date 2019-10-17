@@ -8,8 +8,8 @@ import zojae031.portfolio.profile.ProfileViewModel
 import zojae031.portfolio.project.ProjectViewModel
 
 val viewModelModule = module {
-    viewModel { MainViewModel(get()) }
-    viewModel { MainDialogViewModel(get(),get()) }
+    viewModel { MainViewModel(get(), get()) }
+    viewModel { MainDialogViewModel(get(), get()) }
     viewModel { ProjectViewModel(get()) }
     viewModel { ProfileViewModel(get()) }
 

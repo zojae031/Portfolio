@@ -21,3 +21,7 @@ class BaseApplication : Application() {
         }
     }
 }
+//TODO
+// 1. UserList 띄우는거 리팩토링
+// 2. ProjectList 버튼 Event
+// 3. Repository 패턴 문제 해결

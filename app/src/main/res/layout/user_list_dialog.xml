@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="zojae031.portfolio.main.dialog.MainDialogViewModel" />
+            type="zojae031.portfolio.main.MainViewModel" />
     </data>
 
     <LinearLayout
