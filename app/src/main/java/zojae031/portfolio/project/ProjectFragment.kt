@@ -1,7 +1,6 @@
 package zojae031.portfolio.project
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
@@ -37,7 +36,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_p
                 BR.projectEntity
             ) {}
         projectViewModel.listData.observe(this, Observer {
-            startActivity()
+            ProjectDialog().show(fragmentManager!!,"")
         })
     }
 

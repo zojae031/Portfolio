@@ -36,7 +36,6 @@
             android:launchMode="singleTop"
             android:theme="@style/UserDialog"></activity>
 
-
     </application>
 
 </manifest>
