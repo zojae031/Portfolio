@@ -5,25 +5,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragment
-import zojae031.portfolio.data.Repository
 import zojae031.portfolio.databinding.FragmentProfileBinding
 
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
-    private val repository: Repository by inject()
-    private val profileViewModel by lazy {
-        ViewModelProviders.of(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return ProfileViewModel(repository) as T
-            }
-        }).get(ProfileViewModel::class.java)
-    }
+    private val profileViewModel by viewModel<ProfileViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

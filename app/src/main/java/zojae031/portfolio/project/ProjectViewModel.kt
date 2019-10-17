@@ -60,6 +60,7 @@ class ProjectViewModel(private val repository: Repository) :
     }
 
     private fun onClick(data: ProjectEntityOnListener) {
+        Log.e("onClick", data.toString())
         _listData.value = data
     }
 
