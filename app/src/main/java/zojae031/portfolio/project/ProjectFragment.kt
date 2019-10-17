@@ -5,7 +5,7 @@ import android.view.View
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_project.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragment
 import zojae031.portfolio.base.BaseRecyclerViewAdapter
@@ -14,8 +14,8 @@ import zojae031.portfolio.databinding.FragmentProjectBinding
 import zojae031.portfolio.databinding.ProjectListBinding
 
 class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_project) {
-    private val projectViewModel by viewModel<ProjectViewModel>()
-
+    private val projectViewModel by sharedViewModel<ProjectViewModel>()
+    private val dialog = ProjectDialog()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = projectViewModel
@@ -24,8 +24,9 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_p
                 R.layout.project_list,
                 BR.projectEntity
             ) {}
+
         projectViewModel.listData.observe(this, Observer {
-            ProjectDialog().show(fragmentManager!!, "")
+            dialog.show(fragmentManager!!, "")
         })
     }
 
