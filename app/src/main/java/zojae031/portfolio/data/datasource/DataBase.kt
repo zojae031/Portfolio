@@ -1,8 +1,6 @@
 package zojae031.portfolio.data.datasource
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import zojae031.portfolio.data.dao.main.MainDao
 import zojae031.portfolio.data.dao.main.MainEntity
@@ -23,19 +21,5 @@ abstract class DataBase : RoomDatabase() {
     abstract fun tecDao(): TecDao
     abstract fun mainDao(): MainDao
 
-    companion object {
-        private var INSTANCE: DataBase? = null
-        fun getInstance(context: Context): DataBase {
-            if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(
-                    context.applicationContext,
-                    DataBase::class.java,
-                    "db"
-                )
-                    .fallbackToDestructiveMigration()
-                    .build()
-            }
-            return INSTANCE!!
-        }
-    }
+
 }

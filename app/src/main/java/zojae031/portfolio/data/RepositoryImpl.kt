@@ -7,7 +7,7 @@ import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 import zojae031.portfolio.util.NetworkUtil
 
-class RepositoryImpl private constructor(
+class RepositoryImpl(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource,
     private val network: NetworkUtil
@@ -39,17 +39,4 @@ class RepositoryImpl private constructor(
         PROFILE, PROJECT, TEC, MAIN
     }
 
-    companion object {
-        private var INSTANCE: RepositoryImpl? = null
-        fun getInstance(
-            localDataSource: LocalDataSource,
-            remoteDataSource: RemoteDataSource,
-            network: NetworkUtil
-        ): RepositoryImpl {
-            if (INSTANCE == null) {
-                INSTANCE = RepositoryImpl(localDataSource, remoteDataSource, network)
-            }
-            return INSTANCE!!
-        }
-    }
 }

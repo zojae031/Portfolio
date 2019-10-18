@@ -9,12 +9,12 @@ import zojae031.portfolio.util.UrlUtil
 
 val utilModule = module {
     single {
-        UrlUtil.getInstance(
+        UrlUtil(
             androidContext().getSharedPreferences(
                 "pref",
                 Context.MODE_PRIVATE
             )
         )
     }
-    single { NetworkUtil.getInstance(androidContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager) }
+    single { NetworkUtil(androidContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager) }
 }

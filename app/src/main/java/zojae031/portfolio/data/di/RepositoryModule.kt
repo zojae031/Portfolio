@@ -5,5 +5,5 @@ import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
 
 val repositoryModule = module {
-    single<Repository> { RepositoryImpl.getInstance(get(), get(), get()) }
+    single<Repository> { RepositoryImpl(get(), get(), get()) }
 }

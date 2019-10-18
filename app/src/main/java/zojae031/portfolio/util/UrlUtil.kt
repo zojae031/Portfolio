@@ -2,10 +2,8 @@ package zojae031.portfolio.util
 
 import android.content.SharedPreferences
 import android.os.Build
-import androidx.annotation.RequiresApi
 
-@RequiresApi(Build.VERSION_CODES.N)
-class UrlUtil private constructor(pref: SharedPreferences) {
+class UrlUtil(pref: SharedPreferences) {
     private val front = "https://github.com/"
     private val end = "/Portfolio/blob/json/"
     private val session = listOf("BasicData", "ProjectData", "TecData", "MainData")
@@ -48,13 +46,6 @@ class UrlUtil private constructor(pref: SharedPreferences) {
     fun getUserListUrl() = BASIC_URL
 
     companion object {
-        private var INSTANCE: UrlUtil? = null
         private const val BASIC_URL = "https://github.com/zojae031/Portfolio/network/members"
-        fun getInstance(pref: SharedPreferences): UrlUtil {
-            if (INSTANCE == null) {
-                INSTANCE = UrlUtil(pref)
-            }
-            return INSTANCE!!
-        }
     }
 }

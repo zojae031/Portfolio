@@ -5,7 +5,7 @@ import android.net.Network
 import android.os.Build
 import android.util.Log
 
-class NetworkUtil private constructor(private val manager: ConnectivityManager) {
+class NetworkUtil(private val manager: ConnectivityManager) {
     @Volatile
     var isConnect = true
 
@@ -39,16 +39,6 @@ class NetworkUtil private constructor(private val manager: ConnectivityManager) 
                     super.onUnavailable()
                 }
             })
-        }
-    }
-
-    companion object {
-        private var INSTANCE: NetworkUtil? = null
-        fun getInstance(manager: ConnectivityManager): NetworkUtil {
-            if (INSTANCE == null) {
-                INSTANCE = NetworkUtil(manager)
-            }
-            return INSTANCE!!
         }
     }
 

@@ -1,5 +1,6 @@
 package zojae031.portfolio.data.datasource.di
 
+import androidx.room.Room
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import zojae031.portfolio.data.datasource.DataBase
@@ -9,7 +10,15 @@ import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSourceImpl
 
 val dataSourceModule = module {
-    single<LocalDataSource> { LocalDataSourceImpl.getInstance(get()) }
-    single<DataBase> { DataBase.getInstance(androidContext()) }
-    single<RemoteDataSource> { RemoteDataSourceImpl.getInstance(get()) }
+    single<LocalDataSource> { LocalDataSourceImpl(get()) }
+    single<RemoteDataSource> { RemoteDataSourceImpl(get()) }
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            DataBase::class.java,
+            "db"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+    }
 }

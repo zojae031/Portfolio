@@ -1,7 +1,5 @@
 package zojae031.portfolio.data.datasource.remote
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.google.gson.JsonObject
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
@@ -15,7 +13,6 @@ import zojae031.portfolio.util.UrlUtil
 
 class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun getUserList(): Single<List<String>> = Single.create { emitter ->
         try {
             Jsoup.connect(urlUtil.getUserListUrl())
@@ -59,13 +56,4 @@ class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
         }, BackpressureStrategy.BUFFER)
             .subscribeOn(Schedulers.io())
 
-    companion object {
-        private var INSTANCE: RemoteDataSource? = null
-        fun getInstance(urlUtil: UrlUtil): RemoteDataSource {
-            if (INSTANCE == null) {
-                INSTANCE = RemoteDataSourceImpl(urlUtil)
-            }
-            return INSTANCE!!
-        }
-    }
 }
