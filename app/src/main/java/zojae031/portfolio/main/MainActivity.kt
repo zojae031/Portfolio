@@ -25,6 +25,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 })
             }.also { it.onCreate() }
 
+            activity = this@MainActivity
+
             pager.apply {
                 adapter = MainPagerAdapter(supportFragmentManager)
                 addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -67,12 +69,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         )
         adView.loadAd(AdRequest.Builder().build())
 
-        userBtn.setOnClickListener {
-            MainDialog().show(supportFragmentManager, "mainDialog")
-        }
-
     }
 
+    fun showDialog() {
+        MainDialog().show(supportFragmentManager, "mainDialog")
+    }
 
     override fun onResume() {
         super.onResume()

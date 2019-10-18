@@ -18,7 +18,6 @@ import zojae031.portfolio.databinding.UserListDialogBinding
 class MainDialog :
     BaseFragmentDialog<UserListDialogBinding>(R.layout.user_list_dialog) {
 
-
     private val mainViewModel by sharedViewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +52,7 @@ class MainDialog :
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             vm = mainViewModel
+
         }
 
         recyclerView.adapter =

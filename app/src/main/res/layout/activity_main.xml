@@ -223,6 +223,7 @@
                     android:background="@null"
                     android:foreground="@android:drawable/ic_menu_search"
                     android:foregroundGravity="center"
+                    android:onClick="@{() -> activity.showDialog()}"
                     ads:layout_constraintBottom_toBottomOf="parent"
                     ads:layout_constraintStart_toStartOf="parent"
                     ads:layout_constraintTop_toTopOf="parent" />
