@@ -69,9 +69,9 @@
 "source": [
 {
 "data1":"https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/base/BaseApplication.kt",
-"data2":"https://github.com/zojae031/Portfolio/blob/56f9bc8516b5cc13fd21d7902a5246ba61fb9a5f/app/src/main/java/zojae031/portfolio/main/MainActivity.kt#L21",
+"data2":"",
 "left":"startKoin",
-"right":"Injection"
+"right":""
 }
 ]
 }
