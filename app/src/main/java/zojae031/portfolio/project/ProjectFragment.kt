@@ -14,8 +14,10 @@ import zojae031.portfolio.databinding.FragmentProjectBinding
 import zojae031.portfolio.databinding.ProjectListBinding
 
 class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_project) {
+
     private val projectViewModel by sharedViewModel<ProjectViewModel>()
     private val dialog = ProjectDialog()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = projectViewModel
