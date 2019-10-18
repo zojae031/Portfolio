@@ -11,7 +11,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseActivity
 import zojae031.portfolio.databinding.ActivityMainBinding
-import zojae031.portfolio.main.dialog.MainDialog
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 

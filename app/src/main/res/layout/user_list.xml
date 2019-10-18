@@ -8,9 +8,6 @@
             name="userData"
             type="zojae031.portfolio.data.dao.main.MainUserEntity" />
 
-        <variable
-            name="vm"
-            type="zojae031.portfolio.main.dialog.MainDialogViewModel" />
     </data>
 
     <LinearLayout
