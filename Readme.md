@@ -4,7 +4,8 @@
    - AAC ViewModel
    - LiveData
    - Koin
-   - 현재 개발중
+   - dataBinding
+ 
    
    #### [MVP Branch](https://github.com/zojae031/Portfolio/tree/mvp)
    - MVP 패턴을 적용
