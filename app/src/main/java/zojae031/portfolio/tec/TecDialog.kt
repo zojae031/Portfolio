@@ -3,12 +3,9 @@ package zojae031.portfolio.tec
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import com.google.gson.JsonParser
-import kotlinx.android.synthetic.main.project_dialog.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragmentDialog
-import zojae031.portfolio.data.dao.tec.TecEntity
 import zojae031.portfolio.databinding.TecDialogBinding
 
 class TecDialog :
