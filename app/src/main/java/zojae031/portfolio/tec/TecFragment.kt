@@ -8,7 +8,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragment
 import zojae031.portfolio.base.BaseRecyclerViewAdapter
-import zojae031.portfolio.data.dao.tec.TecEntity
+import zojae031.portfolio.data.dao.tec.TecEntityOnListener
 import zojae031.portfolio.databinding.FragmentTecBinding
 import zojae031.portfolio.databinding.TecListBinding
 
@@ -19,7 +19,7 @@ class TecFragment : BaseFragment<FragmentTecBinding>(R.layout.fragment_tec) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = tecViewModel
-        recycler.adapter = object : BaseRecyclerViewAdapter<TecEntity, TecListBinding>(
+        recycler.adapter = object : BaseRecyclerViewAdapter<TecEntityOnListener, TecListBinding>(
             R.layout.tec_list,
             BR.tecEntity
         ) {

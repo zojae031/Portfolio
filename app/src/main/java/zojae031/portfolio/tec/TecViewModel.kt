@@ -8,7 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
-import zojae031.portfolio.data.dao.tec.TecEntity
+import zojae031.portfolio.data.dao.tec.TecEntityOnListener
 import zojae031.portfolio.util.DataConvertUtil
 
 class TecViewModel(private val repository: Repository) :
@@ -16,8 +16,8 @@ class TecViewModel(private val repository: Repository) :
 
     private val compositeDisposable = CompositeDisposable()
 
-    private val _tecList = MutableLiveData<List<TecEntity>>()
-    val tecList: LiveData<List<TecEntity>>
+    private val _tecList = MutableLiveData<List<TecEntityOnListener>>()
+    val tecList: LiveData<List<TecEntityOnListener>>
         get() = _tecList
 
     private val _loadingState = MutableLiveData<Boolean>()
@@ -28,10 +28,19 @@ class TecViewModel(private val repository: Repository) :
     val error: LiveData<String>
         get() = _error
 
+    private val _listData = MutableLiveData<TecEntityOnListener>()
+    val listData: LiveData<TecEntityOnListener>
+        get() = _listData
+
     fun onResume() {
         repository.getData(RepositoryImpl.ParseData.TEC)
             .map { data ->
-                DataConvertUtil.stringToTecList(data)
+                DataConvertUtil.stringToTecOnListenerList(data)
+                    .also {
+                        it.map { entity ->
+                            entity.listener = ::onClick
+                        }
+                    }
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnComplete { _loadingState.value = false }
@@ -47,6 +56,10 @@ class TecViewModel(private val repository: Repository) :
 
     fun onPause() {
         compositeDisposable.clear()
+    }
+
+    private fun onClick(data: TecEntityOnListener) {
+        _listData.value = data
     }
 
 }

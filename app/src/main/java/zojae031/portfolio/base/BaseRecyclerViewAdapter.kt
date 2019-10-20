@@ -31,9 +31,4 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
         notifyDataSetChanged()
     }
 
-        fun updateArrays(list: Array<ITEM>) {
-        items.clear()
-        items.addAll(list)
-        notifyDataSetChanged()
-    }
 }

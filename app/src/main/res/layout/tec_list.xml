@@ -6,12 +6,13 @@
 
         <variable
             name="tecEntity"
-            type="zojae031.portfolio.data.dao.tec.TecEntity" />
+            type="zojae031.portfolio.data.dao.tec.TecEntityOnListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{()->tecEntity.listener.invoke(tecEntity)}"
         android:orientation="horizontal">
 
         <ImageView

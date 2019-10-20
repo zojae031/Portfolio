@@ -7,10 +7,10 @@ import android.view.View
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragmentDialog
-import zojae031.portfolio.databinding.DialogBinding
+import zojae031.portfolio.databinding.ProjectDialogBinding
 
 class ProjectDialog :
-    BaseFragmentDialog<DialogBinding>(R.layout.dialog) {
+    BaseFragmentDialog<ProjectDialogBinding>(R.layout.project_dialog) {
     private val projectViewModel by sharedViewModel<ProjectViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

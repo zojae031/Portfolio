@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.JsonArray
 
 @Entity
 //@TypeConverters(JsonArrayConverter::class)
@@ -31,3 +32,10 @@ data class TecEntity(@PrimaryKey val name: String, val image: String, val source
         }
     }
 }
+
+data class TecEntityOnListener(
+    val name: String,
+    val image: String,
+    val source: JsonArray,
+    var listener: (TecEntityOnListener) -> Unit
+)
