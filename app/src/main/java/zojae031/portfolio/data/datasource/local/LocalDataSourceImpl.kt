@@ -63,7 +63,7 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
                 }
             }
             RepositoryImpl.ParseData.TEC -> {
-                DataConvertUtil.stringToTecArray(data).also {
+                DataConvertUtil.stringToTecList(data).also {
                     for (list in it) {
                         tecDao.insert(list)
                     }
@@ -88,7 +88,7 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
                 }
             }
             RepositoryImpl.ParseData.TEC -> {
-                DataConvertUtil.stringToTecArray(data).also {
+                DataConvertUtil.stringToTecList(data).also {
                     for (list in it) {
                         tecDao.delete(list)
                     }

@@ -35,7 +35,7 @@ object DataConvertUtil {
     }
 
 
-    fun stringToTecArray(data: String): Array<TecEntity> {
+    fun stringToTecList(data: String): List<TecEntity> {
         return JsonParser().parse(data).asJsonArray.run {
             this.map { element ->
                 return@map element.asJsonObject.run {
@@ -45,7 +45,7 @@ object DataConvertUtil {
                         get("source").toString()
                     )
                 }
-            }.toTypedArray()
+            }.toList()
         }
     }
 

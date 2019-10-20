@@ -16,8 +16,8 @@ class TecViewModel(private val repository: Repository) :
 
     private val compositeDisposable = CompositeDisposable()
 
-    private val _tecList = MutableLiveData<Array<TecEntity>>()
-    val tecList: LiveData<Array<TecEntity>>
+    private val _tecList = MutableLiveData<List<TecEntity>>()
+    val tecList: LiveData<List<TecEntity>>
         get() = _tecList
 
     private val _loadingState = MutableLiveData<Boolean>()
@@ -31,7 +31,7 @@ class TecViewModel(private val repository: Repository) :
     fun onResume() {
         repository.getData(RepositoryImpl.ParseData.TEC)
             .map { data ->
-                DataConvertUtil.stringToTecArray(data)
+                DataConvertUtil.stringToTecList(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnComplete { _loadingState.value = false }
