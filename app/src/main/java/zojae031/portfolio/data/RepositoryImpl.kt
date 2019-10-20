@@ -18,11 +18,10 @@ class RepositoryImpl(
         return if (network.isConnect) {
             remoteDataSource.getUserList()
                 .subscribeOn(Schedulers.io())
-
         } else {
             remoteDataSource.getErrorList()
+                .subscribeOn(Schedulers.io())
         }
-
     }
 
 
@@ -30,12 +29,10 @@ class RepositoryImpl(
         Log.e("connect", network.isConnect.toString())
         return if (network.isConnect) {//기본 네트워크 살아있니?
             Flowable.concat(
-                localDataSource.getData(type).toFlowable().doOnNext {
-                    localDataSource.deleteData(type, it)
-                },
-                remoteDataSource.getData(type).doOnNext {
-                    localDataSource.insertData(type, it)
-                }
+                localDataSource.getData(type).toFlowable()
+                    .doOnNext { localDataSource.deleteData(type, it) },
+                remoteDataSource.getData(type)
+                    .doOnNext { localDataSource.insertData(type, it) }
             )
         } else {
             localDataSource.getData(type).toFlowable()
