@@ -21,7 +21,3 @@ class BaseApplication : Application() {
         }
     }
 }
-
-//TODO
-// 1. Repository 패턴 문제 해결
-// 2. Tec 리팩토링
