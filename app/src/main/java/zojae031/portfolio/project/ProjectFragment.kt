@@ -2,6 +2,7 @@ package zojae031.portfolio.project
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_project.*
@@ -29,6 +30,10 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_p
 
         projectViewModel.listData.observe(this, Observer {
             dialog.show(fragmentManager!!, "")
+        })
+
+        projectViewModel.error.observe(this, Observer {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
     }
 

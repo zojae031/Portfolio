@@ -2,6 +2,7 @@ package zojae031.portfolio.tec
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_tec.*
@@ -28,6 +29,9 @@ class TecFragment : BaseFragment<FragmentTecBinding>(R.layout.fragment_tec) {
         }
         tecViewModel.listData.observe(this, Observer {
             TecDialog().show(fragmentManager!!, "tecDialog")
+        })
+        tecViewModel.error.observe(this, Observer {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
     }
 
