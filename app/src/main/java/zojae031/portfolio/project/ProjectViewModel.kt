@@ -45,6 +45,7 @@ class ProjectViewModel(private val repository: Repository) :
                     }
             }
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnComplete { _loadingState.value = false }
             .doAfterNext { _loadingState.value = false }
             .doOnSubscribe { _loadingState.value = true }
             .subscribe({ entity ->

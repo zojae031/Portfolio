@@ -2,6 +2,7 @@ package zojae031.portfolio.data
 
 import android.util.Log
 import io.reactivex.Flowable
+import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
@@ -13,9 +14,16 @@ class RepositoryImpl(
     private val network: NetworkUtil
 ) : Repository {
 
-    override fun getUserList() =
-        remoteDataSource.getUserList()
-            .subscribeOn(Schedulers.io())
+    override fun getUserList(): Single<List<String>> {
+        return if (network.isConnect) {
+            remoteDataSource.getUserList()
+                .subscribeOn(Schedulers.io())
+
+        } else {
+            remoteDataSource.getErrorList()
+        }
+
+    }
 
 
     override fun getData(type: ParseData): Flowable<String> {

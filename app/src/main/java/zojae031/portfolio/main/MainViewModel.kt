@@ -14,6 +14,7 @@ import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.util.DataConvertUtil
 import zojae031.portfolio.util.SingleLiveEvent
 import zojae031.portfolio.util.UrlUtil
+import java.util.concurrent.TimeUnit
 
 class MainViewModel(private val repository: Repository, private val urlUtil: UrlUtil) :
     ViewModel() {
@@ -41,7 +42,7 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
     val userName: LiveData<String>
         get() = _userName
 
-    fun onCreate() {
+    fun onResume() {
         repository.getUserList()
             .map { data ->
                 data.map {
@@ -57,15 +58,14 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
             .subscribe { data ->
                 _userList.value = data
             }.also { compositeDisposable.add(it) }
-    }
 
-    fun onResume() {
         repository
             .getData(RepositoryImpl.ParseData.MAIN)
             .map { data ->
                 DataConvertUtil.stringToMain(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
+            .doAfterNext { _loadingState.value = false }
             .doOnComplete { _loadingState.value = false }
             .doOnSubscribe { _loadingState.value = true }
             .subscribe({ entity ->
@@ -74,6 +74,7 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
                 _error.value = t.message
                 Log.e("MainViewModel", t.message)
             }).also { compositeDisposable.add(it) }
+
     }
 
     fun onPause() {

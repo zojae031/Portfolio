@@ -1,6 +1,7 @@
 package zojae031.portfolio.main
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
@@ -23,7 +24,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 error.observe(this@MainActivity, Observer {
                     Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
                 })
-            }.also { it.onCreate() }
+            }
 
             activity = this@MainActivity
 
@@ -67,7 +68,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             R.drawable.indicator_on,
             0
         )
-        adView.loadAd(AdRequest.Builder().build())
+        try {
+            adView.loadAd(AdRequest.Builder().build())
+        } catch (e: Exception) {
+            Log.e("AdError", e.message)
+        }
 
     }
 

@@ -29,6 +29,7 @@ class TecPresenter(private val view: TecContract.View, private val repository: R
                 DataConvertUtil.stringToTecArray(data)
             }
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnComplete { view.hideProgress() }
             .doAfterNext { view.hideProgress() }
             .doOnSubscribe { view.showProgress() }
             .subscribe({ data ->

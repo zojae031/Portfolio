@@ -30,14 +30,27 @@ class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
                         }.also { list ->
                             emitter.onSuccess(list)
                         }
-
                     }
                 }
-        } catch (e: java.lang.Exception) {
+        } catch (e: Exception) {
             emitter.tryOnError(e)
         }
     }
 
+    override fun getErrorList(): Single<List<String>> {
+        return Single.create {
+            it.onSuccess(
+                listOf(
+                    JsonObject().apply {
+                        addProperty(
+                            "name",
+                            "인터넷 연결이 원활하지 않습니다."
+                        )
+                    }.toString()
+                )
+            )
+        }
+    }
 
     override fun getData(type: RepositoryImpl.ParseData): Flowable<String> =
         Flowable.create(FlowableOnSubscribe<String> { emitter ->
