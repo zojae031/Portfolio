@@ -82,8 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{}"
-                android:text="시연 영상"
-                 />
+                app:leftButtonSet="@{vm.listData.source.toString()}" />
 
             <Button
                 android:id="@+id/right"
@@ -91,8 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="@{}"
-                android:text="깃허브"
-                 />
+                app:rightButtonSet="@{vm.listData.source.toString()}" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
