@@ -27,7 +27,7 @@ fun ImageView.showImage(url: String?) {
             .with(this)
             .load(url)
             .error(R.drawable.ic_launcher_foreground)
-            .override(150, 150)
+            .override(300, 300)
             .into(this)
     }
 }
