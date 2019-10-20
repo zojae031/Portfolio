@@ -4,7 +4,8 @@
    - AAC ViewModel
    - LiveData
    - Koin
-   - 현재 개발중
+   - dataBinding
+ 
    
    #### [MVP Branch](https://github.com/zojae031/Portfolio/tree/mvp)
    - MVP 패턴을 적용
@@ -12,7 +13,7 @@
    
    # MVVM 구성도
 
-   ![Architecture](https://user-images.githubusercontent.com/31091115/66820540-d67c5880-ef7b-11e9-9895-e7ea8c92cc6b.png)
+   ![Architecture](https://user-images.githubusercontent.com/31091115/67158166-ac59da80-f36f-11e9-94c5-5e892f4b44ca.png)
 
    <hr>  
 
