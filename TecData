@@ -18,7 +18,7 @@
 "source": [
 {
 "data1":"https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/data/datasource/remote/RemoteDataSourceImpl.kt",
-"data2":"https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/project/ProjectViewModel.kt",
+"data2":"https://github.com/zojae031/Portfolio/blob/3c0cc1474b20d1fa52283b6470a46e4b22de6c5e/app/src/main/java/zojae031/portfolio/project/ProjectViewModel.kt#L37",
 "left":"emitter",
 "right":"Subscriber"
 }
