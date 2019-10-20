@@ -16,7 +16,7 @@ class TecFragment : Fragment(), TecContract.View {
     private val repository: Repository by inject()
     private val adapter = TecAdapter()
     private val presenter by lazy {
-        TecPresenter(
+        TecViewModel(
             this,
             repository
         ).also { it.setAdapter(adapter, adapter) }
