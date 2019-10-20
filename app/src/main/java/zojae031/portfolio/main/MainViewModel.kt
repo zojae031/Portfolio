@@ -42,7 +42,7 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
     val userName: LiveData<String>
         get() = _userName
 
-    fun onResume() {
+    fun getUserList(){
         repository.getUserList()
             .map { data ->
                 data.map {
@@ -58,7 +58,9 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
             .subscribe { data ->
                 _userList.value = data
             }.also { compositeDisposable.add(it) }
+    }
 
+    fun getDataList() {
         repository
             .getData(RepositoryImpl.ParseData.MAIN)
             .map { data ->

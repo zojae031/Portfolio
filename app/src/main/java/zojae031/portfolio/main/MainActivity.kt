@@ -1,7 +1,6 @@
 package zojae031.portfolio.main
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
@@ -68,11 +67,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             R.drawable.indicator_on,
             0
         )
-        try {
-            adView.loadAd(AdRequest.Builder().build())
-        } catch (e: Exception) {
-            Log.e("AdError", e.message)
-        }
+
+        adView.loadAd(AdRequest.Builder().build())
 
     }
 
@@ -82,7 +78,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onResume() {
         super.onResume()
-        mainViewModel.onResume()
+        mainViewModel.getUserList()
+        mainViewModel.getDataList()
         adView.resume()
     }
 
