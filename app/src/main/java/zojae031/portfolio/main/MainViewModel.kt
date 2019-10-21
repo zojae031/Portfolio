@@ -3,7 +3,6 @@ package zojae031.portfolio.main
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,7 +14,6 @@ import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.util.DataConvertUtil
 import zojae031.portfolio.util.SingleLiveEvent
 import zojae031.portfolio.util.UrlUtil
-import java.util.concurrent.TimeUnit
 
 class MainViewModel(private val repository: Repository, private val urlUtil: UrlUtil) :
     BaseViewModel() {
@@ -35,7 +33,7 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
     val userName: LiveData<String>
         get() = _userName
 
-    fun getUserList(){
+    fun getUserList() {
         repository.getUserList()
             .map { data ->
                 data.map {

@@ -17,5 +17,10 @@ val utilModule = module {
             )
         )
     }
-    single { NetworkUtil(androidContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager,androidApplication().applicationContext) }
+    single {
+        NetworkUtil(
+            androidContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager,
+            androidApplication().applicationContext
+        )
+    }
 }
