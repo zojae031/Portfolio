@@ -36,7 +36,7 @@ class TecFragment : BaseFragment<FragmentTecBinding>(R.layout.fragment_tec) {
     }
 
     override fun onPause() {
-        tecViewModel.onPause()
+        tecViewModel.clearDisposable()
         super.onPause()
     }
 

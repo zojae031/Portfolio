@@ -3,9 +3,9 @@ package zojae031.portfolio.project
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.project.ProjectEntityOnListener
@@ -13,21 +13,13 @@ import zojae031.portfolio.util.DataConvertUtil
 
 
 class ProjectViewModel(private val repository: Repository) :
-    ViewModel() {
+    BaseViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
     private val _projectEntity = MutableLiveData<List<ProjectEntityOnListener>>()
     val projectEntity: LiveData<List<ProjectEntityOnListener>>
         get() = _projectEntity
-
-    private val _loadingState = MutableLiveData<Boolean>()
-    val loadingState: LiveData<Boolean>
-        get() = _loadingState
-
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String>
-        get() = _error
 
     private val _listData = MutableLiveData<ProjectEntityOnListener>()
     val listData: LiveData<ProjectEntityOnListener>
@@ -56,7 +48,7 @@ class ProjectViewModel(private val repository: Repository) :
             }).also { compositeDisposable.add(it) }
     }
 
-    fun onPause() {
+    override fun clearDisposable() {
         compositeDisposable.clear()
     }
 

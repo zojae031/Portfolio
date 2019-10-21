@@ -6,27 +6,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.tec.TecEntityOnListener
 import zojae031.portfolio.util.DataConvertUtil
 
 class TecViewModel(private val repository: Repository) :
-    ViewModel() {
+    BaseViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
 
     private val _tecList = MutableLiveData<List<TecEntityOnListener>>()
     val tecList: LiveData<List<TecEntityOnListener>>
         get() = _tecList
-
-    private val _loadingState = MutableLiveData<Boolean>()
-    val loadingState: LiveData<Boolean>
-        get() = _loadingState
-
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String>
-        get() = _error
 
     private val _listData = MutableLiveData<TecEntityOnListener>()
     val listData: LiveData<TecEntityOnListener>
@@ -54,7 +47,7 @@ class TecViewModel(private val repository: Repository) :
             }).also { compositeDisposable.add(it) }
     }
 
-    fun onPause() {
+    override fun clearDisposable() {
         compositeDisposable.clear()
     }
 

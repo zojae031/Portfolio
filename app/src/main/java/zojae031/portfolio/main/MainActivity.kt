@@ -84,7 +84,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun onPause() {
-        mainViewModel.onPause()
+        mainViewModel.clearDisposable()
         adView.pause()
         super.onPause()
     }

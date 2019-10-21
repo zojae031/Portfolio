@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.main.MainEntity
@@ -17,22 +18,14 @@ import zojae031.portfolio.util.UrlUtil
 import java.util.concurrent.TimeUnit
 
 class MainViewModel(private val repository: Repository, private val urlUtil: UrlUtil) :
-    ViewModel() {
+    BaseViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
     val pageLimit = 2
 
-    private val _loadingState = MutableLiveData<Boolean>()
-    val loadingState: LiveData<Boolean>
-        get() = _loadingState
-
     private val _mainEntity = MutableLiveData<MainEntity>()
     val mainEntity: LiveData<MainEntity>
         get() = _mainEntity
-
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String>
-        get() = _error
 
     private val _userList = MutableLiveData<List<MainUserEntity>>()
     val userList: LiveData<List<MainUserEntity>>
@@ -79,7 +72,7 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
 
     }
 
-    fun onPause() {
+    override fun clearDisposable() {
         compositeDisposable.clear()
     }
 
