@@ -31,14 +31,14 @@
 
    #### [Repository](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/data)
 
-   - Local 에서 데이터를 가져온다.
-   - 인터넷에 연결되어 있을 시 Remote에서 가져와 Local에 저장
- 
+   - Network 상태를 확인 후 Remote / Local 선택
+   - Flowable.concat을 이용하여 Local데이터를 보여준 이후 Remote데이터를 보여줌
    
 
 ### 1. [Main](https://github.com/zojae031/Portfolio/tree/master/app/src/main/java/zojae031/portfolio/main)
 
-1. 기본적인 데이터를 가져옴
+ - 기본적인 데이터를 가져옴
+ 
    1. 사용자 이미지 : userImage
    2. Drawable에 띄울 Notice정보 : notice
 
