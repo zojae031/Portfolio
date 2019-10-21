@@ -1,8 +1,10 @@
 # Protfolio(MVP Branch)
 
    #### [Master Branch](https://github.com/zojae031/Portfolio/tree/master)
-   - MVVM 패턴을 적용
-   - 현재 개발중
+ - AAC ViewModel
+ - LiveData
+ - Koin
+ - dataBinding
    
    #### [MVP Branch](https://github.com/zojae031/Portfolio/tree/mvp)
    - MVP 패턴을 적용
