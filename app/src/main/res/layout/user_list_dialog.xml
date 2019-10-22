@@ -38,7 +38,7 @@
             android:background="@android:color/white"
             android:foregroundGravity="center"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:ReplaceAll="@{vm.userList}">
+            app:replaceAll="@{vm.userList}">
 
         </androidx.recyclerview.widget.RecyclerView>
 

@@ -7,17 +7,23 @@ import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseActivity
 import zojae031.portfolio.databinding.ActivityMainBinding
+import zojae031.portfolio.util.NetworkUtil
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val mainViewModel by viewModel<MainViewModel>()
+    private val networkUtil by inject<NetworkUtil>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        networkUtil.checkNetworkInfo()
+
         with(binding) {
             viewModel = mainViewModel.apply {
                 error.observe(this@MainActivity, Observer {
@@ -91,6 +97,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onDestroy() {
         adView.destroy()
+        networkUtil.destroyNetwork()
         super.onDestroy()
     }
 
