@@ -1,7 +1,6 @@
 package zojae031.portfolio.util
 
 import android.content.SharedPreferences
-import android.os.Build
 
 class UrlUtil(pref: SharedPreferences) {
     private val front = "https://github.com/"
@@ -24,16 +23,9 @@ class UrlUtil(pref: SharedPreferences) {
 
     fun setUrl(name: String) {
         var index = 0
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            for (i in 0 until urlList.size) {
-                urlList.removeAt(0)
-                urlList.add(front + name + end + session[index++])
-            }
-        } else {
-            urlList.replaceAll {
-                front + name + end + session[index++]
-            }
 
+        urlList.replaceAll {
+            front + name + end + session[index++]
         }
 
         with(editor) {
