@@ -22,8 +22,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        networkUtil.checkNetworkInfo()
-
         with(binding) {
             viewModel = mainViewModel.apply {
                 error.observe(this@MainActivity, Observer {
@@ -78,6 +76,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        networkUtil.checkNetworkInfo()
+    }
+
     fun showDialog() {
         MainDialog().show(supportFragmentManager, "mainDialog")
     }
@@ -95,9 +98,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onPause()
     }
 
+    override fun onStop() {
+        networkUtil.destroyNetwork()
+        super.onStop()
+    }
+
     override fun onDestroy() {
         adView.destroy()
-        networkUtil.destroyNetwork()
         super.onDestroy()
     }
 
