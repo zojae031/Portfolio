@@ -3,9 +3,7 @@ package zojae031.portfolio.util
 import android.content.SharedPreferences
 
 class UrlUtil(pref: SharedPreferences) {
-    private val front = "https://github.com/"
-    private val end = "/Portfolio/blob/json/"
-    private val session = listOf("BasicData", "ProjectData", "TecData", "MainData")
+
     private val editor = pref.edit()
     val urlList = mutableListOf(
         "https://github.com/zojae031/Portfolio/blob/json/BasicData",
@@ -39,5 +37,8 @@ class UrlUtil(pref: SharedPreferences) {
 
     companion object {
         private const val BASIC_URL = "https://github.com/zojae031/Portfolio/network/members"
+        private const val front = "https://github.com/"
+        private const val end = "/Portfolio/blob/json/"
+        private val session = listOf("BasicData", "ProjectData", "TecData", "MainData")
     }
 }
