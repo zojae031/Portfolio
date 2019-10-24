@@ -15,8 +15,6 @@ import zojae031.portfolio.util.DataConvertUtil
 class ProjectViewModel(private val repository: Repository) :
     BaseViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
-
     private val _projectEntity = MutableLiveData<List<ProjectEntityOnListener>>()
     val projectEntity: LiveData<List<ProjectEntityOnListener>>
         get() = _projectEntity

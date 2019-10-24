@@ -14,8 +14,6 @@ import zojae031.portfolio.util.DataConvertUtil
 class ProfileViewModel(private val repository: Repository) :
     BaseViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
-
     private val _profileEntity = MutableLiveData<ProfileEntity>()
     val profileEntity: LiveData<ProfileEntity>
         get() = _profileEntity

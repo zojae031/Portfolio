@@ -18,7 +18,6 @@ import zojae031.portfolio.util.UrlUtil
 class MainViewModel(private val repository: Repository, private val urlUtil: UrlUtil) :
     BaseViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
     val pageLimit = 2
 
     private val _mainEntity = MutableLiveData<MainEntity>()

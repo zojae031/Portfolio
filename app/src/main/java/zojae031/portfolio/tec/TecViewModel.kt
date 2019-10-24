@@ -14,8 +14,6 @@ import zojae031.portfolio.util.DataConvertUtil
 class TecViewModel(private val repository: Repository) :
     BaseViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
-
     private val _tecList = MutableLiveData<List<TecEntityOnListener>>()
     val tecList: LiveData<List<TecEntityOnListener>>
         get() = _tecList
