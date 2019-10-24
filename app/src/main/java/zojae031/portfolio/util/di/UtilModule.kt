@@ -9,7 +9,6 @@ import zojae031.portfolio.util.NetworkUtil
 import zojae031.portfolio.util.UrlUtil
 
 val utilModule = module {
-
     single {
         UrlUtil(
             androidContext().getSharedPreferences(
@@ -18,12 +17,10 @@ val utilModule = module {
             )
         )
     }
-
     single {
         NetworkUtil(
             androidContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager,
             androidApplication().applicationContext
         )
     }
-
 }

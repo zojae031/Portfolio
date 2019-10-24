@@ -65,4 +65,9 @@ class MainDialog :
     }
 
 
+    override fun onPause() {
+        mainViewModel.clearDisposable()
+        super.onPause()
+    }
+
 }

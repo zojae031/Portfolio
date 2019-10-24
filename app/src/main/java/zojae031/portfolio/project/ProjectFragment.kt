@@ -37,6 +37,11 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_p
         })
     }
 
+    override fun onPause() {
+        projectViewModel.clearDisposable()
+        super.onPause()
+    }
+
     override fun onResume() {
         super.onResume()
         projectViewModel.onResume()

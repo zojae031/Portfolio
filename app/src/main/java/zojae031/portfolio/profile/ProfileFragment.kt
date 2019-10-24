@@ -30,4 +30,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
         profileViewModel.onResume()
     }
 
+    override fun onPause() {
+        profileViewModel.clearDisposable()
+        super.onPause()
+    }
+
 }
