@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
@@ -18,7 +17,6 @@ import zojae031.portfolio.util.UrlUtil
 class MainViewModel(private val repository: Repository, private val urlUtil: UrlUtil) :
     BaseViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
     val pageLimit = 2
 
     private val _mainEntity = MutableLiveData<MainEntity>()
@@ -68,10 +66,6 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
                 Log.e("MainViewModel", t.message)
             }).also { compositeDisposable.add(it) }
 
-    }
-
-    override fun clearDisposable() {
-        compositeDisposable.clear()
     }
 
     private fun onClick(name: String) {
