@@ -1,6 +1,5 @@
 package zojae031.portfolio.data
 
-import android.util.Log
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +25,6 @@ class RepositoryImpl(
 
 
     override fun getData(type: ParseData): Flowable<String> {
-        Log.e("connect", network.isConnect.toString())
         return if (network.isConnect) {//기본 네트워크 살아있니?
             Flowable.concat(
                 localDataSource.getData(type).toFlowable()
