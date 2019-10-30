@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
