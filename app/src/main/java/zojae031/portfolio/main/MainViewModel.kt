@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import io.reactivex.BackpressureStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.subjects.BehaviorSubject
 import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
@@ -30,6 +32,28 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
     private val _userName = SingleLiveEvent<String>()
     val userName: LiveData<String>
         get() = _userName
+
+
+    private val _finishState = MutableLiveData<Boolean>()
+    val finishState: LiveData<Boolean>
+        get() = _finishState
+
+    private val backPressSubject =
+        BehaviorSubject.createDefault(0L)
+
+    private val backPressDisposable = backPressSubject
+        .toFlowable(BackpressureStrategy.BUFFER)
+        .observeOn(AndroidSchedulers.mainThread())
+        .buffer(2, 1)
+        .map { it[0] to it[1] }
+        .subscribe(
+            {
+                _finishState.value = it.second - it.first < TOAST_DURATION
+            },
+            {
+                _error.value = it.message
+            }
+        )
 
     fun getUserList() {
         repository.getUserList()
@@ -68,6 +92,10 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
 
     }
 
+    fun onBackPressed() {
+        backPressSubject.onNext(System.currentTimeMillis())
+    }
+
     override fun clearDisposable() {
         compositeDisposable.clear()
     }
@@ -77,4 +105,11 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
         _userName.value = name
     }
 
+    fun clearBackPressDisposable() {
+        backPressDisposable.dispose()
+    }
+
+    companion object {
+        const val TOAST_DURATION = 1000L
+    }
 }

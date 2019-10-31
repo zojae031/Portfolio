@@ -27,6 +27,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 error.observe(this@MainActivity, Observer {
                     Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
                 })
+                finishState.observe(this@MainActivity, Observer {
+                    if (it) {
+                        finish()
+                    } else {
+                        Toast.makeText(this@MainActivity, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                })
             }
 
             activity = this@MainActivity
@@ -104,6 +112,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun onDestroy() {
+        mainViewModel.clearBackPressDisposable()
         adView.destroy()
         super.onDestroy()
     }
@@ -111,7 +120,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onBackPressed() {
         if (drawer.isDrawerOpen(second)) {
             drawer.closeDrawers()
-        } else super.onBackPressed()
+        } else {
+            mainViewModel.onBackPressed()
+        }
     }
 
 }
