@@ -2,6 +2,7 @@
 
    #### [Master Branch](https://github.com/zojae031/Portfolio/tree/master)
    - AAC ViewModel
+   - MVVM
    - LiveData
    - Koin
    - dataBinding
