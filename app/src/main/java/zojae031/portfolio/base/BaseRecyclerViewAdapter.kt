@@ -2,6 +2,7 @@ package zojae031.portfolio.base
 
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.annotation.MainThread
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
@@ -25,6 +26,7 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
         holder.bind(items[position])
     }
 
+    @MainThread
     fun updateLists(list: List<ITEM>) {
         items.run {
             clear()
