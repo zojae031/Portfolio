@@ -11,8 +11,11 @@ import zojae031.portfolio.base.BaseFragment
 import zojae031.portfolio.databinding.FragmentProfileBinding
 
 
-class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
+class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private val profileViewModel by viewModel<ProfileViewModel>()
+
+    override val layoutId: Int
+        get() = R.layout.fragment_profile
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

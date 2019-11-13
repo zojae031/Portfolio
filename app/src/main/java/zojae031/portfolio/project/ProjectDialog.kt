@@ -10,8 +10,11 @@ import zojae031.portfolio.base.BaseFragmentDialog
 import zojae031.portfolio.databinding.ProjectDialogBinding
 
 class ProjectDialog :
-    BaseFragmentDialog<ProjectDialogBinding>(R.layout.project_dialog) {
+    BaseFragmentDialog<ProjectDialogBinding>() {
     private val projectViewModel by sharedViewModel<ProjectViewModel>()
+
+    override val layoutId: Int
+        get() = R.layout.project_dialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -8,10 +8,11 @@ import zojae031.portfolio.base.BaseFragmentDialog
 import zojae031.portfolio.databinding.TecDialogBinding
 
 class TecDialog :
-    BaseFragmentDialog<TecDialogBinding>(R.layout.tec_dialog) {
-
+    BaseFragmentDialog<TecDialogBinding>() {
     private val tecViewModel by sharedViewModel<TecViewModel>()
 
+    override val layoutId: Int
+        get() = R.layout.tec_dialog
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = tecViewModel

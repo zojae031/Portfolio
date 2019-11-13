@@ -16,9 +16,12 @@ import zojae031.portfolio.databinding.UserListBinding
 import zojae031.portfolio.databinding.UserListDialogBinding
 
 class MainDialog :
-    BaseFragmentDialog<UserListDialogBinding>(R.layout.user_list_dialog) {
+    BaseFragmentDialog<UserListDialogBinding>() {
 
     private val mainViewModel by sharedViewModel<MainViewModel>()
+
+    override val layoutId: Int
+        get() = R.layout.user_list_dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

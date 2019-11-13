@@ -14,10 +14,13 @@ import zojae031.portfolio.data.dao.project.ProjectEntityOnListener
 import zojae031.portfolio.databinding.FragmentProjectBinding
 import zojae031.portfolio.databinding.ProjectListBinding
 
-class ProjectFragment : BaseFragment<FragmentProjectBinding>(R.layout.fragment_project) {
+class ProjectFragment : BaseFragment<FragmentProjectBinding>() {
 
     private val projectViewModel by sharedViewModel<ProjectViewModel>()
     private val dialog = ProjectDialog()
+
+    override val layoutId: Int
+        get() = R.layout.fragment_project
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
