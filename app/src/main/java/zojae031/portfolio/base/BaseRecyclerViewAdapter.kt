@@ -26,8 +26,10 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
     }
 
     fun updateLists(list: List<ITEM>) {
-        items.clear()
-        items.addAll(list)
+        items.run {
+            clear()
+            addAll(list)
+        }
         notifyDataSetChanged()
     }
 
