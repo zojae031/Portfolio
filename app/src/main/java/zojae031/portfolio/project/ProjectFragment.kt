@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.fragment_project.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragment
-import zojae031.portfolio.base.BaseRecyclerViewAdapter
+import zojae031.portfolio.base.SimpleRecyclerViewAdapter
 import zojae031.portfolio.data.dao.project.ProjectEntityOnListener
 import zojae031.portfolio.databinding.FragmentProjectBinding
 import zojae031.portfolio.databinding.ProjectListBinding
@@ -26,7 +26,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = projectViewModel
         recycler.adapter =
-            object : BaseRecyclerViewAdapter<ProjectEntityOnListener, ProjectListBinding>(
+            object : SimpleRecyclerViewAdapter<ProjectEntityOnListener, ProjectListBinding>(
                 R.layout.project_list,
                 BR.projectEntity
             ) {}

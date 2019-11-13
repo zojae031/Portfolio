@@ -10,7 +10,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import zojae031.portfolio.BR
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragmentDialog
-import zojae031.portfolio.base.BaseRecyclerViewAdapter
+import zojae031.portfolio.base.SimpleRecyclerViewAdapter
 import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.databinding.UserListBinding
 import zojae031.portfolio.databinding.UserListDialogBinding
@@ -59,7 +59,7 @@ class MainDialog :
         }
 
         recyclerView.adapter =
-            object : BaseRecyclerViewAdapter<MainUserEntity, UserListBinding>(
+            object : SimpleRecyclerViewAdapter<MainUserEntity, UserListBinding>(
                 R.layout.user_list,
                 BR.userData
             ) {

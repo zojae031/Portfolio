@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.JsonParser
 import zojae031.portfolio.R
-import zojae031.portfolio.base.BaseRecyclerViewAdapter
+import zojae031.portfolio.base.SimpleRecyclerViewAdapter
 import zojae031.portfolio.tec.TecActivity
 
 @BindingAdapter(value = ["loadUrlCircle"])
@@ -39,7 +39,7 @@ fun ImageView.showImage(url: String?) {
 @BindingAdapter(value = ["replaceAll"])
 fun RecyclerView.replaceAll(list: List<Any>?) {
     if (list != null) {
-        (this.adapter as? BaseRecyclerViewAdapter<Any, *>)?.updateLists(list)
+        (this.adapter as? SimpleRecyclerViewAdapter<Any, *>)?.updateLists(list)
     }
 }
 
