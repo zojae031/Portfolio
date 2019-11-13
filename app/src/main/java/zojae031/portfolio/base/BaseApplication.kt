@@ -11,10 +11,13 @@ import zojae031.portfolio.util.di.utilModule
 class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        initKoin()
+    }
+
+    private fun initKoin() {
         startKoin {
             androidContext(this@BaseApplication)
             modules(listOf(repositoryModule, dataSourceModule, utilModule, viewModelModule))
         }
     }
-
 }
