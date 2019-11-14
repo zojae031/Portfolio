@@ -26,9 +26,6 @@ class MainDialog :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel.apply {
-            error.observe(this@MainDialog, Observer {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-            })
 
             userName.observe(this@MainDialog, Observer {
                 //다시 셋 되면서 동작이됨

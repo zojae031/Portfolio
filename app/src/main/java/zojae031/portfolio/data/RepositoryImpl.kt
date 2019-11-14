@@ -13,14 +13,8 @@ class RepositoryImpl(
     private val network: NetworkUtil
 ) : Repository {
 
-    override fun getUserList(): Single<List<String>> {
-        return if (network.isConnect) {
-            remoteDataSource.getUserList()
-        } else {
-            remoteDataSource.getErrorList()
-        }.subscribeOn(Schedulers.io())
-    }
-
+    override fun getUserList(): Single<List<String>> =
+        remoteDataSource.getUserList().subscribeOn(Schedulers.io())
 
     override fun getData(type: ParseData): Flowable<String> {
         return if (network.isConnect) {//기본 네트워크 살아있니?

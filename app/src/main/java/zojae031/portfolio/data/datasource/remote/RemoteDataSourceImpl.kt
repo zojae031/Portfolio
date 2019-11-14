@@ -28,21 +28,8 @@ class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
                 }
         } catch (e: Exception) {
             emitter.tryOnError(e)
-        }
-    }
-
-    override fun getErrorList(): Single<List<String>> {
-        return Single.create {
-            it.onSuccess(
-                listOf(
-                    JsonObject().apply {
-                        addProperty(
-                            "name",
-                            "인터넷 연결이 원활하지 않습니다."
-                        )
-                    }.toString()
-                )
-            )
+        } catch (t: Throwable) {
+            emitter.tryOnError(t)
         }
     }
 

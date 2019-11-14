@@ -15,6 +15,7 @@ import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.util.DataConvertUtil
 import zojae031.portfolio.util.SingleLiveEvent
 import zojae031.portfolio.util.UrlUtil
+import java.net.UnknownHostException
 
 class MainViewModel(private val repository: Repository, private val urlUtil: UrlUtil) :
     BaseViewModel() {
@@ -68,9 +69,18 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
                 _error.value = it.message
                 Log.e("MainDialogViewModel", it.message)
             }
-            .subscribe { data ->
-                _userList.value = data
-            }.also { compositeDisposable.add(it) }
+            .subscribe(
+                { data ->
+                    _userList.value = data
+                },
+                { error ->
+                    if (error is UnknownHostException) {
+                        _error.value = "인터넷 연결이 원활하지 않습니다."
+                        _userList.value = listOf(MainUserEntity(null,_error.value.toString()))
+                    } else _error.value = error.message
+                }
+            ).also { compositeDisposable.add(it) }
+
     }
 
     fun getDataList() {
