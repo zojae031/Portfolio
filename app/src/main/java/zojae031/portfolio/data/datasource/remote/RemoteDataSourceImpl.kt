@@ -2,8 +2,6 @@ package zojae031.portfolio.data.datasource.remote
 
 import com.google.gson.JsonObject
 import io.reactivex.Single
-import io.reactivex.SingleOnSubscribe
-import io.reactivex.schedulers.Schedulers
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import zojae031.portfolio.data.RepositoryImpl
@@ -19,11 +17,9 @@ class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
                 .apply {
                     this.parse().select(".network").select(".repo").select(".gravatar").also {
                         it.map { element ->
-                            val src = element.attr("src")
-                            val alt = element.attr("alt")
                             JsonObject().apply {
-                                addProperty("images", src)
-                                addProperty("name", alt)
+                                addProperty("images", element.attr("src"))
+                                addProperty("name", element.attr("alt"))
                             }.toString()
                         }.also { list ->
                             emitter.onSuccess(list)
