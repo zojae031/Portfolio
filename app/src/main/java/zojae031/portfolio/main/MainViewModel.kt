@@ -20,8 +20,6 @@ import java.net.UnknownHostException
 class MainViewModel(private val repository: Repository, private val urlUtil: UrlUtil) :
     BaseViewModel() {
 
-    val pageLimit = 2
-
     private val _mainEntity = MutableLiveData<MainEntity>()
     val mainEntity: LiveData<MainEntity>
         get() = _mainEntity
@@ -75,7 +73,7 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
                 },
                 { error ->
                     if (error is UnknownHostException) {
-                        _error.value = "인터넷 연결이 원활하지 않습니다."
+                        _error.value = ERROR_MESSAGE
                         _userList.value = listOf(MainUserEntity(null, _error.value.toString()))
                     } else _error.value = error.message
                 }
@@ -119,7 +117,11 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
         backPressDisposable.dispose()
     }
 
+
     companion object {
+        const val ERROR_MESSAGE = "인터넷 연결이 원활하지 않습니다."
         const val TOAST_DURATION = 1000L
+        @JvmStatic
+        val PAGE_LIMIT = 2
     }
 }

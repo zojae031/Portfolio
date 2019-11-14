@@ -27,6 +27,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         with(binding) {
             viewModel = mainViewModel.apply {
+
                 error.observe(this@MainActivity, Observer {
                     Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
                 })
