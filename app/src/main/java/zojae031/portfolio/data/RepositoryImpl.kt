@@ -16,11 +16,9 @@ class RepositoryImpl(
     override fun getUserList(): Single<List<String>> {
         return if (network.isConnect) {
             remoteDataSource.getUserList()
-                .subscribeOn(Schedulers.io())
         } else {
             remoteDataSource.getErrorList()
-                .subscribeOn(Schedulers.io())
-        }
+        }.subscribeOn(Schedulers.io())
     }
 
 
@@ -29,12 +27,12 @@ class RepositoryImpl(
             Flowable.concat(
                 localDataSource.getData(type).toFlowable()
                     .doOnNext { localDataSource.deleteData(type, it) },
-                remoteDataSource.getData(type)
+                remoteDataSource.getData(type).toFlowable()
                     .doOnNext { localDataSource.insertData(type, it) }
             )
         } else {
             localDataSource.getData(type).toFlowable()
-        }
+        }.subscribeOn(Schedulers.io())
 
     }
 
