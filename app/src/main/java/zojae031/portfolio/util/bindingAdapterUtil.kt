@@ -14,26 +14,24 @@ import zojae031.portfolio.tec.TecActivity
 
 @BindingAdapter(value = ["loadUrlCircle"])
 fun ImageView.showImageCircle(url: String?) {
-    url?.let {
-        Glide.with(this)
-            .load(url)
-            .error(R.drawable.picture)
-            .centerCrop()
-            .apply(RequestOptions.circleCropTransform())
-            .into(this)
-    }
+    Glide.with(this)
+        .load(url)
+        .error(R.drawable.ic_launcher_foreground)
+        .centerCrop()
+        .apply(RequestOptions.circleCropTransform())
+        .into(this)
+
 }
 
 @BindingAdapter(value = ["loadUrl"])
 fun ImageView.showImage(url: String?) {
-    url?.let {
-        Glide
-            .with(this)
-            .load(url)
-            .error(R.drawable.ic_launcher_foreground)
-            .override(300, 300)
-            .into(this)
-    }
+    Glide
+        .with(this)
+        .load(url)
+        .error(R.drawable.ic_launcher_foreground)
+        .override(300, 300)
+        .into(this)
+
 }
 
 @BindingAdapter(value = ["replaceAll"])
