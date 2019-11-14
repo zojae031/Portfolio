@@ -50,10 +50,8 @@ class MainDialog :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding) {
-            vm = mainViewModel
 
-        }
+        binding.vm = mainViewModel
 
         recyclerView.adapter =
             object : SimpleRecyclerViewAdapter<MainUserEntity, UserListBinding>(
