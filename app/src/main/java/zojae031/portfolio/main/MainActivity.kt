@@ -1,11 +1,13 @@
 package zojae031.portfolio.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.google.android.gms.ads.AdRequest
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,6 +20,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val mainViewModel by viewModel<MainViewModel>()
     private val networkUtil by inject<NetworkUtil>()
+    private lateinit var disposable: Disposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +89,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onStart() {
         super.onStart()
-        networkUtil.checkNetworkInfo()
+        networkUtil.checkNetworkInfo()?.subscribe {
+            applicationContext.startActivity(
+                Intent(
+                    applicationContext,
+                    MainActivity::class.java
+                ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
+        }.also { disposable = it!! }
     }
 
     fun showDialog() {
@@ -108,6 +118,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onStop() {
         networkUtil.destroyNetwork()
+        disposable.dispose()
         super.onStop()
     }
 

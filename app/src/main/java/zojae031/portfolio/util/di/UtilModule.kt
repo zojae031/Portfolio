@@ -2,7 +2,6 @@ package zojae031.portfolio.util.di
 
 import android.content.Context
 import android.net.ConnectivityManager
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import zojae031.portfolio.util.NetworkUtil
@@ -19,8 +18,7 @@ val utilModule = module {
     }
     single {
         NetworkUtil(
-            androidContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager,
-            androidApplication().applicationContext
+            androidContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         )
     }
 }
