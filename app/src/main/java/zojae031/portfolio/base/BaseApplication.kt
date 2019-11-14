@@ -6,6 +6,7 @@ import io.reactivex.exceptions.UndeliverableException
 import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import timber.log.Timber
 import zojae031.portfolio.data.datasource.di.dataSourceModule
 import zojae031.portfolio.data.di.repositoryModule
 import zojae031.portfolio.di.viewModelModule
@@ -19,6 +20,7 @@ class BaseApplication : Application() {
         super.onCreate()
         initKoin()
         settingRxPlugIn()
+        initTimber()
     }
 
     private fun initKoin() {
@@ -50,11 +52,11 @@ class BaseApplication : Application() {
                     .uncaughtExceptionHandler.uncaughtException(Thread.currentThread(), error)
                 return@setErrorHandler
             }
-            Log.d(
-                "RxJavaPluginError",
-                "Undeliverable Exception received, not sure what to do",
-                error
-            )
+            Timber.tag("RxJavaPluginError").d("Undeliverable Exception received, not sure what to do")
         }
+    }
+
+    fun initTimber() {
+        Timber.plant(Timber.DebugTree())
     }
 }

@@ -1,12 +1,12 @@
 package zojae031.portfolio.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import io.reactivex.BackpressureStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subjects.BehaviorSubject
+import timber.log.Timber
 import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
@@ -67,7 +67,7 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
             .observeOn(AndroidSchedulers.mainThread())
             .doOnError {
                 _error.value = it.message
-                Log.e("MainDialogViewModel", it.message)
+                Timber.tag("MainDialogViewModel").e(it)
             }
             .subscribe(
                 { data ->
@@ -76,7 +76,7 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
                 { error ->
                     if (error is UnknownHostException) {
                         _error.value = "인터넷 연결이 원활하지 않습니다."
-                        _userList.value = listOf(MainUserEntity(null,_error.value.toString()))
+                        _userList.value = listOf(MainUserEntity(null, _error.value.toString()))
                     } else _error.value = error.message
                 }
             ).also { compositeDisposable.add(it) }
@@ -97,7 +97,7 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
                 _mainEntity.value = entity
             }, { t ->
                 _error.value = t.message
-                Log.e("MainViewModel", t.message)
+                Timber.tag("MainViewModel").e(t)
             }).also { compositeDisposable.add(it) }
 
     }

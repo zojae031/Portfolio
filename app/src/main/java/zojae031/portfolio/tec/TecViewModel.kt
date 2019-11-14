@@ -1,10 +1,9 @@
 package zojae031.portfolio.tec
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
+import timber.log.Timber
 import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
@@ -40,7 +39,7 @@ class TecViewModel(private val repository: Repository) :
                 _tecList.value = data
             }, { t ->
                 _error.value = t.message
-                Log.e("TecViewModel", t.message)
+                Timber.tag("TecViewModel").e(t)
             }).also { compositeDisposable.add(it) }
     }
 

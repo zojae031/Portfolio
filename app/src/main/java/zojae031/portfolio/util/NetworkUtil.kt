@@ -6,6 +6,7 @@ import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import timber.log.Timber
 
 class NetworkUtil(
     private val manager: ConnectivityManager
@@ -31,25 +32,25 @@ class NetworkUtil(
 
         override fun onAvailable(network: Network) {
             connectSubject.onNext(true)
-            Log.e("onAvailable", connectSubject.toString())
+            Timber.d("onAvailable $connectSubject")
             super.onAvailable(network)
         }
 
         override fun onLosing(network: Network, maxMsToLive: Int) {
             connectSubject.onNext(false)
-            Log.e("onLosing", connectSubject.toString())
+            Timber.d("onLosing $connectSubject")
             super.onLosing(network, maxMsToLive)
         }
 
         override fun onLost(network: Network) {
             connectSubject.onNext(false)
-            Log.e("onLost", connectSubject.toString())
+            Timber.d("onLost $connectSubject")
             super.onLost(network)
         }
 
         override fun onUnavailable() {
             connectSubject.onNext(false)
-            Log.e("onUnavailable", connectSubject.toString())
+            Timber.d("onUnavailable $connectSubject")
             super.onUnavailable()
         }
     }

@@ -1,10 +1,9 @@
 package zojae031.portfolio.project
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
+import timber.log.Timber
 import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
@@ -42,7 +41,7 @@ class ProjectViewModel(private val repository: Repository) :
                 _projectEntity.value = entity
             }, { t ->
                 _error.value = t.message
-                Log.e("ProjectViewModel", t.localizedMessage)
+                Timber.tag("ProjectViewModel").e(t.localizedMessage)
             }).also { compositeDisposable.add(it) }
     }
 
