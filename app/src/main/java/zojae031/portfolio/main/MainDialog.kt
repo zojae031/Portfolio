@@ -37,7 +37,7 @@ class MainDialog :
 
                 startActivity(
                     Intent(
-                        context?.applicationContext,
+                        requireContext().applicationContext,
                         MainActivity::class.java
                     ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 )
