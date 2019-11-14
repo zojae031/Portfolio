@@ -39,7 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
             activity = this@MainActivity
 
-            pager.apply {
+            pager.run {
                 adapter = MainPagerAdapter(supportFragmentManager)
                 addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                     override fun onPageScrollStateChanged(state: Int) {
@@ -67,7 +67,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             drawer.openDrawer(GravityCompat.START)
         }
 
-        supportActionBar?.apply {
+        supportActionBar?.run {
             setHomeAsUpIndicator(R.drawable.menu)
             setDisplayShowTitleEnabled(false)
             setDisplayHomeAsUpEnabled(true)
