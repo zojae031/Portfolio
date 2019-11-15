@@ -9,10 +9,6 @@
         <variable
             name="vm"
             type="zojae031.portfolio.tec.TecViewModel" />
-
-        <variable
-            name="dialog"
-            type="zojae031.portfolio.tec.TecDialog" />
     </data>
 
 
@@ -78,19 +74,18 @@
             app:layout_constraintTop_toBottomOf="@+id/outer">
 
             <Button
-                android:id="@+id/left"
+                android:id="@+id/tec_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{}"
-                app:leftButtonSet="@{vm.listData.source.toString()}" />
+                android:layout_weight="1" />
+
 
             <Button
-                android:id="@+id/right"
+                android:id="@+id/tec_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="@{}"
-                app:rightButtonSet="@{vm.listData.source.toString()}" />
+                android:layout_weight="1" />
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
