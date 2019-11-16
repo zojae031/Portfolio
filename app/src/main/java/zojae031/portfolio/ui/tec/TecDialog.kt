@@ -1,4 +1,4 @@
-package zojae031.portfolio.tec
+package zojae031.portfolio.ui.tec
 
 import android.os.Bundle
 import android.view.View
@@ -9,6 +9,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragmentDialog
 import zojae031.portfolio.databinding.TecDialogBinding
+import zojae031.portfolio.viewmodel.TecViewModel
 
 class TecDialog :
     BaseFragmentDialog<TecDialogBinding>() {
@@ -42,7 +43,10 @@ class TecDialog :
                     } else {
                         buttonName.setOnClickListener {
                             requireContext().startActivity(
-                                TecActivity.getIntent(requireContext(), get(state.second).asString)
+                                TecActivity.getIntent(
+                                    requireContext(),
+                                    get(state.second).asString
+                                )
                             )
                         }
                     }

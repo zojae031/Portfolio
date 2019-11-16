@@ -20,7 +20,7 @@
             android:value="ca-app-pub-5960006677580872~3633344286" />
 
         <activity
-            android:name=".main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".tec.TecActivity"
+            android:name=".ui.tec.TecActivity"
             android:launchMode="singleTop" />
 
     </application>

@@ -1,4 +1,4 @@
-package zojae031.portfolio.main
+package zojae031.portfolio.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -73,7 +73,8 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
                 },
                 { error ->
                     if (error is UnknownHostException) {
-                        _error.value = ERROR_MESSAGE
+                        _error.value =
+                            ERROR_MESSAGE
                         _userList.value = listOf(MainUserEntity(null, _error.value.toString()))
                     } else _error.value = error.message
                 }

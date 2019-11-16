@@ -10,7 +10,7 @@
 
         <variable
             name="viewModelStatic"
-            type="zojae031.portfolio.main.MainViewModel.Companion" />
+            type="zojae031.portfolio.viewmodel.MainViewModel" />
 
     </data>
 

@@ -1,4 +1,4 @@
-package zojae031.portfolio.project
+package zojae031.portfolio.ui.project
 
 import android.content.Intent
 import android.net.Uri
@@ -8,6 +8,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragmentDialog
 import zojae031.portfolio.databinding.ProjectDialogBinding
+import zojae031.portfolio.viewmodel.ProjectViewModel
 
 class ProjectDialog :
     BaseFragmentDialog<ProjectDialogBinding>() {

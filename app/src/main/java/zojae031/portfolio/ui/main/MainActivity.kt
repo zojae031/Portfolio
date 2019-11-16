@@ -1,10 +1,8 @@
-package zojae031.portfolio.main
+package zojae031.portfolio.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.core.view.GravityCompat
-import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.google.android.gms.ads.AdRequest
 import io.reactivex.disposables.Disposable
@@ -15,6 +13,7 @@ import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseActivity
 import zojae031.portfolio.databinding.ActivityMainBinding
 import zojae031.portfolio.util.NetworkUtil
+import zojae031.portfolio.viewmodel.MainViewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 

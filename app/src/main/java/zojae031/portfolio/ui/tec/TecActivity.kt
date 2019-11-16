@@ -1,4 +1,4 @@
-package zojae031.portfolio.tec
+package zojae031.portfolio.ui.tec
 
 import android.app.Activity
 import android.content.Context
@@ -39,6 +39,10 @@ class TecActivity : Activity() {
     companion object {
         private const val EXTRA_DATA = "EXTRA_DATA"
         fun getIntent(context: Context, data: String): Intent =
-            Intent(context, TecActivity::class.java).apply { putExtra(EXTRA_DATA, data) }
+            Intent(context, TecActivity::class.java).apply {
+                putExtra(
+                    EXTRA_DATA, data
+                )
+            }
     }
 }

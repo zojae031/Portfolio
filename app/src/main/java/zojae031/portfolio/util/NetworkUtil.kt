@@ -2,7 +2,6 @@ package zojae031.portfolio.util
 
 import android.net.ConnectivityManager
 import android.net.Network
-import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject

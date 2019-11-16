@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="zojae031.portfolio.tec.TecViewModel" />
+            type="zojae031.portfolio.viewmodel.TecViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,12 +24,12 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            app:replaceAll="@{vm.tecList}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:replaceAll="@{vm.tecList}"
             app:spanCount="3" />
 
         <ProgressBar

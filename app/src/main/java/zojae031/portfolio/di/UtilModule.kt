@@ -1,4 +1,4 @@
-package zojae031.portfolio.util.di
+package zojae031.portfolio.di
 
 import android.content.Context
 import android.net.ConnectivityManager

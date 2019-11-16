@@ -8,11 +8,11 @@
 
         <variable
             name="vm"
-            type="zojae031.portfolio.tec.TecViewModel" />
+            type="zojae031.portfolio.viewmodel.TecViewModel" />
 
         <variable
             name="vmStatic"
-            type="zojae031.portfolio.tec.TecViewModel.Companion" />
+            type="zojae031.portfolio.viewmodel.TecViewModel" />
     </data>
 
 

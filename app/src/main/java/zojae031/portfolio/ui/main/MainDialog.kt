@@ -1,4 +1,4 @@
-package zojae031.portfolio.main
+package zojae031.portfolio.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +14,7 @@ import zojae031.portfolio.base.SimpleRecyclerViewAdapter
 import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.databinding.UserListBinding
 import zojae031.portfolio.databinding.UserListDialogBinding
+import zojae031.portfolio.viewmodel.MainViewModel
 
 class MainDialog :
     BaseFragmentDialog<UserListDialogBinding>() {

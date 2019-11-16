@@ -1,4 +1,4 @@
-package zojae031.portfolio.tec
+package zojae031.portfolio.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

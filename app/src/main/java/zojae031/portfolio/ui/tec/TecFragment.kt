@@ -1,4 +1,4 @@
-package zojae031.portfolio.tec
+package zojae031.portfolio.ui.tec
 
 import android.os.Bundle
 import android.view.View
@@ -13,6 +13,7 @@ import zojae031.portfolio.base.SimpleRecyclerViewAdapter
 import zojae031.portfolio.data.dao.tec.TecEntityOnListener
 import zojae031.portfolio.databinding.FragmentTecBinding
 import zojae031.portfolio.databinding.TecListBinding
+import zojae031.portfolio.viewmodel.TecViewModel
 
 class TecFragment : BaseFragment<FragmentTecBinding>() {
     override val layoutId: Int

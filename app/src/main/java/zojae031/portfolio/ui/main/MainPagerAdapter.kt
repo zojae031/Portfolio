@@ -1,11 +1,11 @@
-package zojae031.portfolio.main
+package zojae031.portfolio.ui.main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import zojae031.portfolio.profile.ProfileFragment
-import zojae031.portfolio.project.ProjectFragment
-import zojae031.portfolio.tec.TecFragment
+import zojae031.portfolio.ui.profile.ProfileFragment
+import zojae031.portfolio.ui.project.ProjectFragment
+import zojae031.portfolio.ui.tec.TecFragment
 
 class MainPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
