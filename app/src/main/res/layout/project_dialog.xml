@@ -11,6 +11,10 @@
             type="zojae031.portfolio.project.ProjectViewModel" />
 
         <variable
+            name="vmStatic"
+            type="zojae031.portfolio.project.ProjectViewModel.Companion" />
+
+        <variable
             name="dialog"
             type="zojae031.portfolio.project.ProjectDialog" />
     </data>
@@ -43,6 +47,7 @@
                 android:adjustViewBounds="true"
                 android:padding="4dp"
                 app:loadUrl="@{vm.listData.image}"
+                app:size="@{vmStatic.IMAGE_SIZE}"
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <TextView

@@ -123,5 +123,7 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
         const val TOAST_DURATION = 1000L
         @JvmStatic
         val PAGE_LIMIT = 2
+        @JvmStatic
+        val IMAGE_SIZE = 300
     }
 }

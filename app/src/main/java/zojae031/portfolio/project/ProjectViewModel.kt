@@ -53,4 +53,8 @@ class ProjectViewModel(private val repository: Repository) :
         _listData.value = data
     }
 
+    companion object {
+        @JvmStatic
+        val IMAGE_SIZE = 300
+    }
 }

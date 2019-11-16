@@ -11,7 +11,7 @@ import zojae031.portfolio.base.SimpleRecyclerViewAdapter
 
 @BindingAdapter(value = ["loadUrlCircle"])
 @MainThread
-fun ImageView.showImageCircle(url: String?) {
+fun ImageView.loadUrlCircle(url: String?) {
     Glide.with(this)
         .load(url)
         .error(R.drawable.ic_launcher_foreground)
@@ -21,16 +21,15 @@ fun ImageView.showImageCircle(url: String?) {
 
 }
 
-@BindingAdapter(value = ["loadUrl"])
+@BindingAdapter(value = ["loadUrl", "size"])
 @MainThread
-fun ImageView.showImage(url: String?) {
+fun ImageView.loadUrl(url: String?, size: Int = 300) {
     Glide
         .with(this)
         .load(url)
         .error(R.drawable.ic_launcher_foreground)
-        .override(300, 300)
+        .override(size, size)
         .into(this)
-
 }
 
 @BindingAdapter(value = ["replaceAll"])
