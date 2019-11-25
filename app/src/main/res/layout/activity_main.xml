@@ -13,8 +13,8 @@
             type="zojae031.portfolio.viewmodel.MainViewModel" />
 
         <variable
-            name="activity"
-            type="zojae031.portfolio.ui.main.MainActivity" />
+            name="viewHandler"
+            type="zojae031.portfolio.ui.main.ViewHandler" />
 
     </data>
 
@@ -223,7 +223,7 @@
                     android:background="@null"
                     android:foreground="@android:drawable/ic_menu_search"
                     android:foregroundGravity="center"
-                    android:onClick="@{() -> activity.showDialog()}"
+                    android:onClick="@{() -> viewHandler.showDialog()}"
                     ads:layout_constraintBottom_toBottomOf="parent"
                     ads:layout_constraintStart_toStartOf="parent"
                     ads:layout_constraintTop_toTopOf="parent" />

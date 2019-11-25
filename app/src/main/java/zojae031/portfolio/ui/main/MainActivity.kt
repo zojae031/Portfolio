@@ -17,7 +17,8 @@ import zojae031.portfolio.databinding.ActivityMainBinding
 import zojae031.portfolio.util.NetworkUtil
 import zojae031.portfolio.viewmodel.MainViewModel
 
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main),
+    ViewHandler {
 
     private val mainViewModel by viewModel<MainViewModel>()
     private val networkUtil by inject<NetworkUtil>()
@@ -42,7 +43,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 })
             }
 
-            activity = this@MainActivity
+            viewHandler = this@MainActivity
 
             pager.run {
                 adapter = MainPagerAdapter(supportFragmentManager)
@@ -101,9 +102,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }.also { disposable = it!! }
     }
 
-    fun showDialog() {
-        MainDialog().show(supportFragmentManager, "mainDialog")
-    }
 
     override fun onResume() {
         super.onResume()
@@ -138,5 +136,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
     }
 
+    override fun showDialog() {
+        MainDialog().show(supportFragmentManager, "mainDialog")
+    }
+
+
 }
 
+interface ViewHandler {
+    fun showDialog()
+}
