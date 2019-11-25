@@ -2,7 +2,9 @@ package zojae031.portfolio.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.google.android.gms.ads.AdRequest
 import io.reactivex.disposables.Disposable

@@ -17,5 +17,4 @@ abstract class BaseViewModel : ViewModel() {
     val error: LiveData<String>
         get() = _error
 
-    abstract fun clearDisposable()
 }

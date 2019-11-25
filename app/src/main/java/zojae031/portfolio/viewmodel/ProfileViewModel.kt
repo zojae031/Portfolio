@@ -40,7 +40,7 @@ class ProfileViewModel(private val repository: Repository) :
             ).also { compositeDisposable.add(it) }
     }
 
-    override fun clearDisposable() {
+    fun clearDisposable() {
         compositeDisposable.clear()
     }
 

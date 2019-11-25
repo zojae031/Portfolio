@@ -105,7 +105,7 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
         backPressSubject.onNext(System.currentTimeMillis())
     }
 
-    override fun clearDisposable() {
+    fun clearDisposable() {
         compositeDisposable.clear()
     }
 
