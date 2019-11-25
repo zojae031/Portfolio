@@ -8,11 +8,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.view.setPadding
 
-class Indicator(
+class Indicator @JvmOverloads constructor(
     context: Context,
-    private val attributeSet: AttributeSet
-) :
-    LinearLayout(context, attributeSet) {
+    private val attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
 
     private var defaultCircle: Int = 0
     private var selectedCircle: Int = 0
@@ -27,7 +27,7 @@ class Indicator(
         this.selectedCircle = selectCircle
 
         for (i in 0 until count) {
-            imageDot.add(ImageView(context, attributeSet).apply {
+            imageDot.add(ImageView(context, attrs).apply {
                 setPadding(padding.toInt())
             })
             this.addView(imageDot[i])
