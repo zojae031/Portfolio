@@ -17,8 +17,10 @@ import zojae031.portfolio.databinding.ActivityMainBinding
 import zojae031.portfolio.util.NetworkUtil
 import zojae031.portfolio.viewmodel.MainViewModel
 
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main),
+class MainActivity : BaseActivity<ActivityMainBinding>(),
     ViewHandler {
+    override val layoutId: Int
+        get() = R.layout.activity_main
 
     private val mainViewModel by viewModel<MainViewModel>()
     private val networkUtil by inject<NetworkUtil>()
