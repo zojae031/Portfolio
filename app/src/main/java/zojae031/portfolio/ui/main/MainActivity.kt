@@ -26,6 +26,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
     private val networkUtil by inject<NetworkUtil>()
     private lateinit var disposable: Disposable
 
+    private val dialog = MainDialog()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -139,7 +141,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     override fun showDialog() {
-        MainDialog().show(supportFragmentManager, "mainDialog")
+        dialog.show(supportFragmentManager, "mainDialog")
     }
 
 

@@ -23,6 +23,13 @@ class MainDialog :
 
     override val layoutId: Int
         get() = R.layout.user_list_dialog
+    private val adapter =
+        object : SimpleRecyclerViewAdapter<MainUserEntity, UserListBinding>(
+            R.layout.user_list,
+            BR.userData
+        ) {
+
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,16 +58,8 @@ class MainDialog :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.vm = mainViewModel
-
-        recyclerView.adapter =
-            object : SimpleRecyclerViewAdapter<MainUserEntity, UserListBinding>(
-                R.layout.user_list,
-                BR.userData
-            ) {
-
-            }
+        recyclerView.adapter = adapter
     }
 
 
