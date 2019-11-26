@@ -7,9 +7,9 @@ import org.jsoup.Jsoup
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.util.DataConvertUtil
-import zojae031.portfolio.util.UrlUtil
+import zojae031.portfolio.util.UrlHelper
 
-class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
+class RemoteDataSourceImpl(private val urlHelper: UrlHelper) : RemoteDataSource {
 
     override fun getProfile(): Single<ProfileEntity> =
         parsing(RepositoryImpl.ParseData.PROFILE).map { data ->
@@ -19,7 +19,7 @@ class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
 
     override fun getUserList(): Single<List<String>> = Single.create { emitter ->
         try {
-            Jsoup.connect(urlUtil.getUserListUrl())
+            Jsoup.connect(urlHelper.getUserListUrl())
                 .method(Connection.Method.GET)
                 .execute()
                 .apply {
@@ -44,7 +44,7 @@ class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
     override fun getData(type: RepositoryImpl.ParseData): Single<String> =
         Single.create { emitter ->
             try {
-                Jsoup.connect(urlUtil.urlList[type.ordinal])
+                Jsoup.connect(urlHelper.urlList[type.ordinal])
                     .method(Connection.Method.GET)
                     .execute()
                     .apply {
@@ -60,7 +60,7 @@ class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
     private fun parsing(type: RepositoryImpl.ParseData) =
         Single.create<String> { emitter ->
             try {
-                Jsoup.connect(urlUtil.urlList[type.ordinal])
+                Jsoup.connect(urlHelper.urlList[type.ordinal])
                     .method(Connection.Method.GET)
                     .execute()
                     .apply {

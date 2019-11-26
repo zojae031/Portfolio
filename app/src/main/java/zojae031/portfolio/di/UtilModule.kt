@@ -5,11 +5,11 @@ import android.net.ConnectivityManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import zojae031.portfolio.util.NetworkUtil
-import zojae031.portfolio.util.UrlUtil
+import zojae031.portfolio.util.UrlHelper
 
 val utilModule = module {
     single {
-        UrlUtil(
+        UrlHelper(
             androidContext().getSharedPreferences(
                 "pref",
                 Context.MODE_PRIVATE

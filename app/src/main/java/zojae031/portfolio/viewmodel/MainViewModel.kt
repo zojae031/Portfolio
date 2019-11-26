@@ -14,10 +14,10 @@ import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.util.DataConvertUtil
 import zojae031.portfolio.util.SingleLiveEvent
-import zojae031.portfolio.util.UrlUtil
+import zojae031.portfolio.util.UrlHelper
 import java.net.UnknownHostException
 
-class MainViewModel(private val repository: Repository, private val urlUtil: UrlUtil) :
+class MainViewModel(private val repository: Repository, private val urlHelper: UrlHelper) :
     BaseViewModel() {
 
     private val _mainEntity = MutableLiveData<MainEntity>()
@@ -110,7 +110,7 @@ class MainViewModel(private val repository: Repository, private val urlUtil: Url
     }
 
     private fun onClick(name: String) {
-        urlUtil.setUrl(name.replace("@", ""))
+        urlHelper.setUrl(name.replace("@", ""))
         _userName.value = name
     }
 

@@ -31,25 +31,25 @@ class NetworkUtil(
 
         override fun onAvailable(network: Network) {
             connectSubject.onNext(true)
-            Timber.d("onAvailable $connectSubject")
+            Timber.d("onAvailable")
             super.onAvailable(network)
         }
 
         override fun onLosing(network: Network, maxMsToLive: Int) {
             connectSubject.onNext(false)
-            Timber.d("onLosing $connectSubject")
+            Timber.d("onLosing")
             super.onLosing(network, maxMsToLive)
         }
 
         override fun onLost(network: Network) {
             connectSubject.onNext(false)
-            Timber.d("onLost $connectSubject")
+            Timber.d("onLost")
             super.onLost(network)
         }
 
         override fun onUnavailable() {
             connectSubject.onNext(false)
-            Timber.d("onUnavailable $connectSubject")
+            Timber.d("onUnavailable")
             super.onUnavailable()
         }
     }
