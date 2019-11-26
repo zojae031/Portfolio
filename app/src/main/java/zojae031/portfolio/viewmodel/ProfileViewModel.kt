@@ -6,9 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
-import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.profile.ProfileEntity
-import zojae031.portfolio.util.DataConvertUtil
 
 class ProfileViewModel(private val repository: Repository) :
     BaseViewModel() {
@@ -23,10 +21,7 @@ class ProfileViewModel(private val repository: Repository) :
 
     fun onResume() {
         repository
-            .getData(RepositoryImpl.ParseData.PROFILE)
-            .map { data ->
-                DataConvertUtil.stringToProfile(data)
-            }
+            .parseProfile()
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterNext { _loadingState.value = false }
             .doOnComplete { _loadingState.value = false }

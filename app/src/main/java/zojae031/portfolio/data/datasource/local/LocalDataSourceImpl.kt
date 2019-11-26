@@ -4,6 +4,7 @@ import com.google.gson.JsonArray
 import io.reactivex.Maybe
 import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.RepositoryImpl
+import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.data.datasource.DataBase
 import zojae031.portfolio.util.DataConvertUtil
 
@@ -13,19 +14,16 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
     private val tecDao = db.tecDao()
     private val mainDao = db.mainDao()
 
+    override fun getProfile(): Maybe<ProfileEntity> {
+        return basicDao.select()
+    }
+
     override fun getData(type: RepositoryImpl.ParseData): Maybe<String> =
         when (type) {
             RepositoryImpl.ParseData.MAIN -> {
                 mainDao.select().map { entity ->
                     DataConvertUtil.mainToJson(entity)
                 }
-            }
-            RepositoryImpl.ParseData.PROFILE -> {
-                basicDao
-                    .select()
-                    .map { entity ->
-                        DataConvertUtil.profileToJson(entity)
-                    }
             }
             RepositoryImpl.ParseData.PROJECT -> {
                 val array = JsonArray()
@@ -47,14 +45,15 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
                     array.toString()
                 }
             }
+            else -> throw Exception("앙 기모쮜")
         }.subscribeOn(Schedulers.io())
 
+    override fun insertProfile(data: ProfileEntity) {
+        basicDao.insert(data)
+    }
 
     override fun insertData(type: RepositoryImpl.ParseData, data: String) {
         when (type) {
-            RepositoryImpl.ParseData.PROFILE -> {
-                DataConvertUtil.stringToProfile(data).also { basicDao.insert(it) }
-            }
             RepositoryImpl.ParseData.PROJECT -> {
                 DataConvertUtil.stringToProjectList(data).also {
                     for (list in it) {
@@ -72,14 +71,16 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
             RepositoryImpl.ParseData.MAIN -> {
                 DataConvertUtil.stringToMain(data).also { mainDao.insert(it) }
             }
+            else -> throw Exception("앙 기모쮜")
         }
+    }
+
+    override fun deleteProfile(data: ProfileEntity) {
+        basicDao.delete(data)
     }
 
     override fun deleteData(type: RepositoryImpl.ParseData, data: String) {
         when (type) {
-            RepositoryImpl.ParseData.PROFILE -> {
-                DataConvertUtil.stringToProfile(data).also { basicDao.delete(it) }
-            }
             RepositoryImpl.ParseData.PROJECT -> {
                 DataConvertUtil.stringToProjectList(data).also {
                     for (list in it) {
@@ -97,6 +98,7 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
             RepositoryImpl.ParseData.MAIN -> {
                 DataConvertUtil.stringToMain(data).also { mainDao.delete(it) }
             }
+            else -> throw Exception("앙 기모취")
         }
     }
 

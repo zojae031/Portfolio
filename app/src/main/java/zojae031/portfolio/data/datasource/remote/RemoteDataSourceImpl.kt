@@ -5,9 +5,17 @@ import io.reactivex.Single
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import zojae031.portfolio.data.RepositoryImpl
+import zojae031.portfolio.data.dao.profile.ProfileEntity
+import zojae031.portfolio.util.DataConvertUtil
 import zojae031.portfolio.util.UrlUtil
 
 class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
+
+    override fun getProfile(): Single<ProfileEntity> =
+        parsing(RepositoryImpl.ParseData.PROFILE).map { data ->
+            DataConvertUtil.stringToProfile(data)
+        }
+
 
     override fun getUserList(): Single<List<String>> = Single.create { emitter ->
         try {
@@ -35,6 +43,22 @@ class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
 
     override fun getData(type: RepositoryImpl.ParseData): Single<String> =
         Single.create { emitter ->
+            try {
+                Jsoup.connect(urlUtil.urlList[type.ordinal])
+                    .method(Connection.Method.GET)
+                    .execute()
+                    .apply {
+                        this.parse().select(".Box-body").select("tbody").text().also {
+                            emitter.onSuccess(it)
+                        }
+                    }
+            } catch (e: Exception) {
+                emitter.tryOnError(e)
+            }
+        }
+
+    private fun parsing(type: RepositoryImpl.ParseData) =
+        Single.create<String> { emitter ->
             try {
                 Jsoup.connect(urlUtil.urlList[type.ordinal])
                     .method(Connection.Method.GET)
