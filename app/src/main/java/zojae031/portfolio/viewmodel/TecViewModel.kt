@@ -24,12 +24,11 @@ class TecViewModel(private val repository: Repository) :
     fun onResume() {
         repository.getData(RepositoryImpl.ParseData.TEC)
             .map { data ->
-                DataConvertUtil.stringToTecOnListenerList(data)
-                    .also {
-                        it.map { entity ->
-                            entity.listener = ::onClick
-                        }
+                DataConvertUtil.stringToTecOnListenerList(data).also {
+                    it.map { entity ->
+                        entity.listener = ::onClick
                     }
+                }
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnComplete { _loadingState.value = false }

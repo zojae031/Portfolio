@@ -22,19 +22,20 @@ class TecFragment : BaseFragment<FragmentTecBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = tecViewModel
+        binding.vm = tecViewModel.apply {
+            listData.observe(this@TecFragment, Observer {
+                TecDialog().show(fragmentManager!!, "tecDialog")
+            })
+            error.observe(this@TecFragment, Observer {
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            })
+        }
         recycler.adapter = object : SimpleRecyclerViewAdapter<TecEntityOnListener, TecListBinding>(
             R.layout.tec_list,
             BR.tecEntity
         ) {
 
         }
-        tecViewModel.listData.observe(this, Observer {
-            TecDialog().show(fragmentManager!!, "tecDialog")
-        })
-        tecViewModel.error.observe(this, Observer {
-            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-        })
     }
 
     override fun onPause() {
