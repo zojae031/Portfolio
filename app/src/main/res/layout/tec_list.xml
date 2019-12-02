@@ -7,6 +7,10 @@
         <variable
             name="tecEntity"
             type="zojae031.portfolio.data.dao.tec.TecEntityOnListener" />
+
+        <variable
+            name="vmStatic"
+            type="zojae031.portfolio.ui.viewmodel.TecViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,6 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:loadUrl="@{tecEntity.image}"
+            app:size="@{vmStatic.IMAGE_SIZE}"
             app:srcCompat="@mipmap/ic_launcher" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

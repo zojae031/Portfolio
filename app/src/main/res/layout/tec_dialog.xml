@@ -8,11 +8,11 @@
 
         <variable
             name="vm"
-            type="zojae031.portfolio.tec.TecViewModel" />
+            type="zojae031.portfolio.ui.viewmodel.TecViewModel" />
 
         <variable
-            name="dialog"
-            type="zojae031.portfolio.tec.TecDialog" />
+            name="vmStatic"
+            type="zojae031.portfolio.ui.viewmodel.TecViewModel" />
     </data>
 
 
@@ -44,6 +44,7 @@
                 android:adjustViewBounds="true"
                 android:padding="4dp"
                 app:loadUrl="@{vm.listData.image}"
+                app:size="@{vmStatic.IMAGE_SIZE}"
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <TextView
@@ -78,19 +79,18 @@
             app:layout_constraintTop_toBottomOf="@+id/outer">
 
             <Button
-                android:id="@+id/left"
+                android:id="@+id/tec_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{}"
-                app:leftButtonSet="@{vm.listData.source.toString()}" />
+                android:layout_weight="1" />
+
 
             <Button
-                android:id="@+id/right"
+                android:id="@+id/tec_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="@{}"
-                app:rightButtonSet="@{vm.listData.source.toString()}" />
+                android:layout_weight="1" />
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

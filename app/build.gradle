@@ -25,6 +25,8 @@ android {
     dataBinding {
         enabled = true
     }
+    androidExtensions { experimental = true }
+
 }
 
 dependencies {
@@ -58,4 +60,6 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     // Koin AndroidX Experimental features
     implementation "org.koin:koin-androidx-ext:$koin_version"
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
