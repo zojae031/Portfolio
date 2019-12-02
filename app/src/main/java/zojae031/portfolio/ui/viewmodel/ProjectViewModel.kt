@@ -1,4 +1,4 @@
-package zojae031.portfolio.viewmodel
+package zojae031.portfolio.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,38 +7,41 @@ import timber.log.Timber
 import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
-import zojae031.portfolio.data.dao.tec.TecEntityOnListener
+import zojae031.portfolio.data.dao.project.ProjectEntityOnListener
 import zojae031.portfolio.util.DataConvertUtil
 
-class TecViewModel(private val repository: Repository) :
+
+class ProjectViewModel(private val repository: Repository) :
     BaseViewModel() {
 
-    private val _tecList = MutableLiveData<List<TecEntityOnListener>>()
-    val tecList: LiveData<List<TecEntityOnListener>>
-        get() = _tecList
+    private val _projectEntity = MutableLiveData<List<ProjectEntityOnListener>>()
+    val projectEntity: LiveData<List<ProjectEntityOnListener>>
+        get() = _projectEntity
 
-    private val _listData = MutableLiveData<TecEntityOnListener>()
-    val listData: LiveData<TecEntityOnListener>
+    private val _listData = MutableLiveData<ProjectEntityOnListener>()
+    val listData: LiveData<ProjectEntityOnListener>
         get() = _listData
 
     fun onResume() {
-        repository.getData(RepositoryImpl.ParseData.TEC)
+        repository
+            .getData(RepositoryImpl.ParseData.PROJECT)
             .map { data ->
-                DataConvertUtil.stringToTecOnListenerList(data).also {
-                    it.map { entity ->
-                        entity.listener = ::onClick
+                DataConvertUtil.stringToProjectOnListenerList(data)
+                    .also {
+                        it.map { entity ->
+                            entity.listener = ::onClick
+                        }
                     }
-                }
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnComplete { _loadingState.value = false }
             .doAfterNext { _loadingState.value = false }
             .doOnSubscribe { _loadingState.value = true }
-            .subscribe({ data ->
-                _tecList.value = data
+            .subscribe({ entity ->
+                _projectEntity.value = entity
             }, { t ->
                 _error.value = t.message
-                Timber.tag("TecViewModel").e(t)
+                Timber.tag("ProjectViewModel").e(t.localizedMessage)
             }).also { compositeDisposable.add(it) }
     }
 
@@ -46,7 +49,7 @@ class TecViewModel(private val repository: Repository) :
         compositeDisposable.clear()
     }
 
-    private fun onClick(data: TecEntityOnListener) {
+    private fun onClick(data: ProjectEntityOnListener) {
         _listData.value = data
     }
 

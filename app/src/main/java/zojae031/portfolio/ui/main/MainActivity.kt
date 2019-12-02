@@ -15,7 +15,7 @@ import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseActivity
 import zojae031.portfolio.databinding.ActivityMainBinding
 import zojae031.portfolio.util.NetworkUtil
-import zojae031.portfolio.viewmodel.MainViewModel
+import zojae031.portfolio.ui.viewmodel.MainViewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>(),
     ViewHandler {

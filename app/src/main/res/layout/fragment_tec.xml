@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="zojae031.portfolio.viewmodel.TecViewModel" />
+            type="zojae031.portfolio.ui.viewmodel.TecViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

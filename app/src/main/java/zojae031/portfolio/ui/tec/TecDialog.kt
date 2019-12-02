@@ -9,7 +9,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragmentDialog
 import zojae031.portfolio.databinding.TecDialogBinding
-import zojae031.portfolio.viewmodel.TecViewModel
+import zojae031.portfolio.ui.viewmodel.TecViewModel
 
 class TecDialog :
     BaseFragmentDialog<TecDialogBinding>() {

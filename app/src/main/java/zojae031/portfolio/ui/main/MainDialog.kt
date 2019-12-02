@@ -14,7 +14,7 @@ import zojae031.portfolio.base.SimpleRecyclerViewAdapter
 import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.databinding.UserListBinding
 import zojae031.portfolio.databinding.UserListDialogBinding
-import zojae031.portfolio.viewmodel.MainViewModel
+import zojae031.portfolio.ui.viewmodel.MainViewModel
 
 class MainDialog :
     BaseFragmentDialog<UserListDialogBinding>() {
