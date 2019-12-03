@@ -28,6 +28,7 @@ fun ImageView.loadUrl(url: String?, size: Int = 300) {
         .with(this)
         .load(url)
         .error(R.drawable.ic_launcher_foreground)
+        .centerCrop()
         .override(size, size)
         .into(this)
 }

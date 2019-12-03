@@ -9,10 +9,6 @@
         <variable
             name="vm"
             type="zojae031.portfolio.ui.viewmodel.TecViewModel" />
-
-        <variable
-            name="vmStatic"
-            type="zojae031.portfolio.ui.viewmodel.TecViewModel" />
     </data>
 
 
@@ -44,7 +40,7 @@
                 android:adjustViewBounds="true"
                 android:padding="4dp"
                 app:loadUrl="@{vm.listData.image}"
-                app:size="@{vmStatic.IMAGE_SIZE}"
+                app:size="@{vm.IMAGE_SIZE}"
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <TextView
