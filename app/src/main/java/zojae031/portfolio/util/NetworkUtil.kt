@@ -4,7 +4,7 @@ import android.net.ConnectivityManager
 import android.net.Network
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
 
 class NetworkUtil(
@@ -26,7 +26,7 @@ class NetworkUtil(
     private class NetworkCallback :
         ConnectivityManager.NetworkCallback() {
         val connectSubject =
-            PublishSubject.create<Boolean>()
+            BehaviorSubject.create<Boolean>()
 
 
         override fun onAvailable(network: Network) {

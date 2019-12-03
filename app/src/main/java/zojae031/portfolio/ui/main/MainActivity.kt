@@ -14,8 +14,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseActivity
 import zojae031.portfolio.databinding.ActivityMainBinding
-import zojae031.portfolio.util.NetworkUtil
 import zojae031.portfolio.ui.viewmodel.MainViewModel
+import zojae031.portfolio.util.NetworkUtil
 
 class MainActivity : BaseActivity<ActivityMainBinding>(),
     ViewHandler {
