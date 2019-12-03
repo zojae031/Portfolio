@@ -1,4 +1,4 @@
-package zojae031.portfolio.profile
+package zojae031.portfolio.ui.profile
 
 import android.content.Intent
 import android.net.Uri
@@ -9,10 +9,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragment
 import zojae031.portfolio.databinding.FragmentProfileBinding
+import zojae031.portfolio.ui.viewmodel.ProfileViewModel
 
 
-class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
+class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private val profileViewModel by viewModel<ProfileViewModel>()
+
+    override val layoutId: Int
+        get() = R.layout.fragment_profile
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

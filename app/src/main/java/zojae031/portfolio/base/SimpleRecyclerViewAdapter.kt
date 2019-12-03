@@ -2,10 +2,11 @@ package zojae031.portfolio.base
 
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.annotation.MainThread
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
+abstract class SimpleRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
     @LayoutRes private val layoutId: Int,
     private val bindingVariableId: Int? = null
 ) : RecyclerView.Adapter<BaseViewHolder<B>>() {
@@ -25,9 +26,12 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
         holder.bind(items[position])
     }
 
+    @MainThread
     fun updateLists(list: List<ITEM>) {
-        items.clear()
-        items.addAll(list)
+        items.run {
+            clear()
+            addAll(list)
+        }
         notifyDataSetChanged()
     }
 

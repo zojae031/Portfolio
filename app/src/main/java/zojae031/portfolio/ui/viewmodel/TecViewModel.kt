@@ -1,10 +1,9 @@
-package zojae031.portfolio.tec
+package zojae031.portfolio.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
+import timber.log.Timber
 import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
 import zojae031.portfolio.data.RepositoryImpl
@@ -25,12 +24,11 @@ class TecViewModel(private val repository: Repository) :
     fun onResume() {
         repository.getData(RepositoryImpl.ParseData.TEC)
             .map { data ->
-                DataConvertUtil.stringToTecOnListenerList(data)
-                    .also {
-                        it.map { entity ->
-                            entity.listener = ::onClick
-                        }
+                DataConvertUtil.stringToTecOnListenerList(data).also {
+                    it.map { entity ->
+                        entity.listener = ::onClick
                     }
+                }
             }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnComplete { _loadingState.value = false }
@@ -40,11 +38,11 @@ class TecViewModel(private val repository: Repository) :
                 _tecList.value = data
             }, { t ->
                 _error.value = t.message
-                Log.e("TecViewModel", t.message)
+                Timber.tag("TecViewModel").e(t)
             }).also { compositeDisposable.add(it) }
     }
 
-    override fun clearDisposable() {
+    fun clearDisposable() {
         compositeDisposable.clear()
     }
 
@@ -52,4 +50,8 @@ class TecViewModel(private val repository: Repository) :
         _listData.value = data
     }
 
+    companion object {
+        @JvmStatic
+        val IMAGE_SIZE = 300
+    }
 }

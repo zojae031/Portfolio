@@ -2,7 +2,7 @@ package zojae031.portfolio.util
 
 import android.content.SharedPreferences
 
-class UrlUtil(pref: SharedPreferences) {
+class UrlHelper(pref: SharedPreferences) {
 
     private val editor = pref.edit()
     val urlList = mutableListOf(

@@ -1,4 +1,4 @@
-package zojae031.portfolio.data.datasource.di
+package zojae031.portfolio.di
 
 import androidx.room.Room
 import org.koin.android.ext.koin.androidContext

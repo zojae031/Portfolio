@@ -1,15 +1,12 @@
-package zojae031.portfolio.profile
+package zojae031.portfolio.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
+import timber.log.Timber
 import zojae031.portfolio.base.BaseViewModel
 import zojae031.portfolio.data.Repository
-import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.profile.ProfileEntity
-import zojae031.portfolio.util.DataConvertUtil
 
 class ProfileViewModel(private val repository: Repository) :
     BaseViewModel() {
@@ -24,10 +21,7 @@ class ProfileViewModel(private val repository: Repository) :
 
     fun onResume() {
         repository
-            .getData(RepositoryImpl.ParseData.PROFILE)
-            .map { data ->
-                DataConvertUtil.stringToProfile(data)
-            }
+            .parseProfile()
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterNext { _loadingState.value = false }
             .doOnComplete { _loadingState.value = false }
@@ -36,12 +30,12 @@ class ProfileViewModel(private val repository: Repository) :
                 _profileEntity.value = entity
             }, { t ->
                 _error.value = t.message.toString()
-                Log.e("ProfileViewModel", t.message)
+                Timber.tag("ProfileViewModel").e(t)
             }
             ).also { compositeDisposable.add(it) }
     }
 
-    override fun clearDisposable() {
+    fun clearDisposable() {
         compositeDisposable.clear()
     }
 

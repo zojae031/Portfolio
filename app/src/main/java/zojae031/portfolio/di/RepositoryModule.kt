@@ -1,4 +1,4 @@
-package zojae031.portfolio.data.di
+package zojae031.portfolio.di
 
 import org.koin.dsl.module
 import zojae031.portfolio.data.Repository

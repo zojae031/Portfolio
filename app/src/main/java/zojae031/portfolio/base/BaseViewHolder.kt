@@ -17,10 +17,10 @@ abstract class BaseViewHolder<B : ViewDataBinding>(
             .inflate(layoutId, parents, false)
     ) {
 
-    private val binding: B? = DataBindingUtil.bind(itemView)
+    private val binding: B = DataBindingUtil.bind(itemView) ?: throw Exception("Binding is null")
 
     fun bind(item: Any?) {
-        binding?.apply {
+        binding.run {
             bindingVariableId?.let {
                 setVariable(it, item)
             }

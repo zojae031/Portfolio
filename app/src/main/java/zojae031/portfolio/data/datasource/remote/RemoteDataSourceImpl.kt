@@ -1,31 +1,33 @@
 package zojae031.portfolio.data.datasource.remote
 
 import com.google.gson.JsonObject
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
-import io.reactivex.FlowableOnSubscribe
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import zojae031.portfolio.data.RepositoryImpl
-import zojae031.portfolio.util.UrlUtil
+import zojae031.portfolio.data.dao.profile.ProfileEntity
+import zojae031.portfolio.util.DataConvertUtil
+import zojae031.portfolio.util.UrlHelper
 
-class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
+class RemoteDataSourceImpl(private val urlHelper: UrlHelper) : RemoteDataSource {
+
+    override fun getProfile(): Single<ProfileEntity> =
+        parsing(RepositoryImpl.ParseData.PROFILE).map { data ->
+            DataConvertUtil.stringToProfile(data)
+        }
+
 
     override fun getUserList(): Single<List<String>> = Single.create { emitter ->
         try {
-            Jsoup.connect(urlUtil.getUserListUrl())
+            Jsoup.connect(urlHelper.getUserListUrl())
                 .method(Connection.Method.GET)
                 .execute()
                 .apply {
                     this.parse().select(".network").select(".repo").select(".gravatar").also {
                         it.map { element ->
-                            val src = element.attr("src")
-                            val alt = element.attr("alt")
                             JsonObject().apply {
-                                addProperty("images", src)
-                                addProperty("name", alt)
+                                addProperty("images", element.attr("src"))
+                                addProperty("name", element.attr("alt"))
                             }.toString()
                         }.also { list ->
                             emitter.onSuccess(list)
@@ -34,39 +36,41 @@ class RemoteDataSourceImpl(private val urlUtil: UrlUtil) : RemoteDataSource {
                 }
         } catch (e: Exception) {
             emitter.tryOnError(e)
+        } catch (t: Throwable) {
+            emitter.tryOnError(t)
         }
     }
 
-    override fun getErrorList(): Single<List<String>> {
-        return Single.create {
-            it.onSuccess(
-                listOf(
-                    JsonObject().apply {
-                        addProperty(
-                            "name",
-                            "인터넷 연결이 원활하지 않습니다."
-                        )
-                    }.toString()
-                )
-            )
-        }
-    }
-
-    override fun getData(type: RepositoryImpl.ParseData): Flowable<String> =
-        Flowable.create(FlowableOnSubscribe<String> { emitter ->
+    override fun getData(type: RepositoryImpl.ParseData): Single<String> =
+        Single.create { emitter ->
             try {
-                Jsoup.connect(urlUtil.urlList[type.ordinal])
+                Jsoup.connect(urlHelper.urlList[type.ordinal])
                     .method(Connection.Method.GET)
                     .execute()
                     .apply {
                         this.parse().select(".Box-body").select("tbody").text().also {
-                            emitter.onNext(it)
+                            emitter.onSuccess(it)
                         }
                     }
             } catch (e: Exception) {
                 emitter.tryOnError(e)
             }
-        }, BackpressureStrategy.BUFFER)
-            .subscribeOn(Schedulers.io())
+        }
+
+    private fun parsing(type: RepositoryImpl.ParseData) =
+        Single.create<String> { emitter ->
+            try {
+                Jsoup.connect(urlHelper.urlList[type.ordinal])
+                    .method(Connection.Method.GET)
+                    .execute()
+                    .apply {
+                        this.parse().select(".Box-body").select("tbody").text().also {
+                            emitter.onSuccess(it)
+                        }
+                    }
+            } catch (e: Exception) {
+                emitter.tryOnError(e)
+            }
+        }
 
 }

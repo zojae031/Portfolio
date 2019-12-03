@@ -1,4 +1,4 @@
-package zojae031.portfolio.main
+package zojae031.portfolio.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,22 +10,30 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import zojae031.portfolio.BR
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragmentDialog
-import zojae031.portfolio.base.BaseRecyclerViewAdapter
+import zojae031.portfolio.base.SimpleRecyclerViewAdapter
 import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.databinding.UserListBinding
 import zojae031.portfolio.databinding.UserListDialogBinding
+import zojae031.portfolio.ui.viewmodel.MainViewModel
 
 class MainDialog :
-    BaseFragmentDialog<UserListDialogBinding>(R.layout.user_list_dialog) {
+    BaseFragmentDialog<UserListDialogBinding>() {
 
     private val mainViewModel by sharedViewModel<MainViewModel>()
+
+    override val layoutId: Int
+        get() = R.layout.user_list_dialog
+    private val adapter =
+        object : SimpleRecyclerViewAdapter<MainUserEntity, UserListBinding>(
+            R.layout.user_list,
+            BR.userData
+        ) {
+
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel.apply {
-            error.observe(this@MainDialog, Observer {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-            })
 
             userName.observe(this@MainDialog, Observer {
                 //다시 셋 되면서 동작이됨
@@ -37,7 +45,7 @@ class MainDialog :
 
                 startActivity(
                     Intent(
-                        context?.applicationContext,
+                        requireContext().applicationContext,
                         MainActivity::class.java
                     ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 )
@@ -50,18 +58,8 @@ class MainDialog :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(binding) {
-            vm = mainViewModel
-
-        }
-
-        recyclerView.adapter =
-            object : BaseRecyclerViewAdapter<MainUserEntity, UserListBinding>(
-                R.layout.user_list,
-                BR.userData
-            ) {
-
-            }
+        binding.vm = mainViewModel
+        recyclerView.adapter = adapter
     }
 
 
