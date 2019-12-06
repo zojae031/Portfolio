@@ -56,7 +56,7 @@
 "image":"https://user-images.githubusercontent.com/31091115/65407343-31a7a900-de1d-11e9-8366-88b8a689c1ac.png",
 "source": [
 {
-"data1":"https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/main/MainViewModel.kt",
+"data1":"https://github.com/zojae031/Portfolio/blob/master/app/src/main/java/zojae031/portfolio/ui/viewmodel/MainViewModel.kt",
 "data2":"https://github.com/zojae031/Portfolio/blob/master/app/src/main/res/layout/activity_main.xml",
 "left":"ViewModel",
 "right":"View"
