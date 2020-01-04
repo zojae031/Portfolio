@@ -14,7 +14,7 @@
 "image":"https://github.com/zojae031/CapstoneDesign_Global_Lounge_Door_System/raw/master/img/logo.png",
 "name":"글로벌 라운지 출입문 시스템",
 "prize":"(우수상)",
-"text":"무분별한 외부인 출입을 제한하고 자동화 시스템으로 바꿈으로써 사용자의 정보수집 및 데이터 활용 가능 프로젝트",
+"text":"외부인 출입을 제한하고 사용자 기록 자동화 시스템으로 사용자의 정보수집 및 데이터 활용 가능",
 "competition":"창의설계 경진대회",
 "video":"https://youtu.be/JlXVhnjMgEU",
 "skills":"Rxjava, MVP, databinding, Retrofit2, RSA, Zxing, Altbeacon",
