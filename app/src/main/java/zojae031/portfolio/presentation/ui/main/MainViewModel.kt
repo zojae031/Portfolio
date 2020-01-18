@@ -2,17 +2,14 @@ package zojae031.portfolio.presentation.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
 import io.reactivex.BackpressureStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
-import zojae031.portfolio.presentation.base.BaseViewModel
-import zojae031.portfolio.domain.repositories.Repository
 import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.main.MainUserEntity
-import zojae031.portfolio.util.DataConvertUtil
-import zojae031.portfolio.util.SingleLiveEvent
+import zojae031.portfolio.domain.repositories.Repository
+import zojae031.portfolio.presentation.base.BaseViewModel
 import zojae031.portfolio.util.UrlHelper
 import java.net.UnknownHostException
 
@@ -26,11 +23,6 @@ class MainViewModel(private val repository: Repository, private val urlHelper: U
     private val _userList = MutableLiveData<List<MainUserEntity>>()
     val userList: LiveData<List<MainUserEntity>>
         get() = _userList
-
-    private val _userName = SingleLiveEvent<String>()
-    val userName: LiveData<String>
-        get() = _userName
-
 
     private val _finishState = MutableLiveData<Boolean>()
     val finishState: LiveData<Boolean>
@@ -55,12 +47,6 @@ class MainViewModel(private val repository: Repository, private val urlHelper: U
 
     fun getUserList() {
         repository.getUserList()
-            .map { data ->
-                data.map {
-                    Gson().fromJson(it, MainUserEntity::class.java)
-                        .also { entity -> entity.listener = ::onClick }
-                }
-            }
             .observeOn(AndroidSchedulers.mainThread())
             .doOnError {
                 _error.value = it.message
@@ -105,10 +91,11 @@ class MainViewModel(private val repository: Repository, private val urlHelper: U
         compositeDisposable.clear()
     }
 
-    private fun onClick(name: String) {
+
+    fun setUrl(name: String) {
         urlHelper.setUrl(name.replace("@", ""))
-        _userName.value = name
     }
+
 
     fun clearBackPressDisposable() {
         backPressDisposable.dispose()

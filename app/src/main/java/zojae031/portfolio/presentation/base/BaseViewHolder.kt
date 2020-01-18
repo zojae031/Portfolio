@@ -11,7 +11,7 @@ abstract class BaseViewHolder<B : ViewDataBinding>(
     @LayoutRes layoutId: Int,
     parents: ViewGroup,
     private val bindingVariableId: Int? = null,
-    listener: (Int) -> Unit
+    listener: ((Int) -> Unit)?
 ) :
     RecyclerView.ViewHolder(
         LayoutInflater.from(parents.context)
@@ -19,7 +19,7 @@ abstract class BaseViewHolder<B : ViewDataBinding>(
     ) {
     init {
         itemView.setOnClickListener {
-            listener(adapterPosition)
+            listener?.let { listener(adapterPosition) }
         }
     }
 

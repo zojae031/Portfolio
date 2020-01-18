@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class SimpleRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
     @LayoutRes private val layoutId: Int,
     private val bindingVariableId: Int? = null,
-    private val listener: (Int) -> Unit
+    private val listener: ((Int) -> Unit)? = null
 ) : RecyclerView.Adapter<BaseViewHolder<B>>() {
 
     protected val items = mutableListOf<ITEM>()

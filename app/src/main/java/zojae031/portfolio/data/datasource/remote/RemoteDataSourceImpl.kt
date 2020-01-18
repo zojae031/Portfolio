@@ -1,11 +1,13 @@
 package zojae031.portfolio.data.datasource.remote
 
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.main.MainEntity
+import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
@@ -14,13 +16,7 @@ import zojae031.portfolio.util.UrlHelper
 
 class RemoteDataSourceImpl(private val urlHelper: UrlHelper) : RemoteDataSource {
 
-    override fun getProfile(): Single<ProfileEntity> =
-        parsing(RepositoryImpl.ParseData.PROFILE).map { data ->
-            DataConvertUtil.stringToProfile(data)
-        }
-
-
-    override fun getUserList(): Single<List<String>> = Single.create { emitter ->
+    override fun getUserList(): Single<List<MainUserEntity>> = Single.create { emitter ->
         try {
             Jsoup.connect(urlHelper.getUserListUrl())
                 .method(Connection.Method.GET)
@@ -28,10 +24,11 @@ class RemoteDataSourceImpl(private val urlHelper: UrlHelper) : RemoteDataSource 
                 .apply {
                     this.parse().select(".network").select(".repo").select(".gravatar").also {
                         it.map { element ->
-                            JsonObject().apply {
+                            val json = JsonObject().apply {
                                 addProperty("images", element.attr("src"))
                                 addProperty("name", element.attr("alt"))
-                            }.toString()
+                            }
+                            Gson().fromJson(json, MainUserEntity::class.java)
                         }.also { list ->
                             emitter.onSuccess(list)
                         }
@@ -43,6 +40,13 @@ class RemoteDataSourceImpl(private val urlHelper: UrlHelper) : RemoteDataSource 
             emitter.tryOnError(t)
         }
     }
+
+
+    override fun getProfile(): Single<ProfileEntity> =
+        parsing(RepositoryImpl.ParseData.PROFILE).map { data ->
+            DataConvertUtil.stringToProfile(data)
+        }
+
 
     override fun getProject(): Single<List<ProjectEntity>> {
         return parsing(RepositoryImpl.ParseData.PROJECT).map { data ->
