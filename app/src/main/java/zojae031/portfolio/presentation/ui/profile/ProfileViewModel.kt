@@ -21,7 +21,7 @@ class ProfileViewModel(private val repository: Repository) :
 
     fun onResume() {
         repository
-            .parseProfile()
+            .getProfile()
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterNext { _loadingState.value = false }
             .doOnComplete { _loadingState.value = false }

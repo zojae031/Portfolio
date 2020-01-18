@@ -5,6 +5,7 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.data.dao.project.ProjectEntity
+import zojae031.portfolio.data.dao.tec.TecEntity
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 import zojae031.portfolio.domain.repositories.Repository
@@ -19,7 +20,7 @@ class RepositoryImpl(
     override fun getUserList(): Single<List<String>> =
         remoteDataSource.getUserList().subscribeOn(Schedulers.io())
 
-    override fun parseProfile(): Flowable<ProfileEntity> {
+    override fun getProfile(): Flowable<ProfileEntity> {
         return if (network.isConnect) {//기본 네트워크 살아있니?
             localDataSource.getProfile().toFlowable()
                 .doOnNext { localDataSource.deleteProfile(it) }
@@ -44,6 +45,20 @@ class RepositoryImpl(
                 )
         } else {
             localDataSource.getProject()
+        }.subscribeOn(Schedulers.io())
+    }
+
+    override fun getTecData(): Flowable<List<TecEntity>> {
+        return if (network.isConnect) {//기본 네트워크 살아있니?
+            localDataSource.getTec()
+                .doOnNext { entity ->
+                    entity.map { localDataSource.deleteTec(it) }
+                }
+                .mergeWith(remoteDataSource.getTec().toFlowable().doOnNext { entity ->
+                    entity.map { localDataSource.insertTec(it) }
+                })
+        } else {
+            localDataSource.getTec()
         }.subscribeOn(Schedulers.io())
     }
 

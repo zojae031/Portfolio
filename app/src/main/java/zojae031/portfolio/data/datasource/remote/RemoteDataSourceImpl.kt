@@ -7,6 +7,7 @@ import org.jsoup.Jsoup
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.data.dao.project.ProjectEntity
+import zojae031.portfolio.data.dao.tec.TecEntity
 import zojae031.portfolio.util.DataConvertUtil
 import zojae031.portfolio.util.UrlHelper
 
@@ -45,6 +46,12 @@ class RemoteDataSourceImpl(private val urlHelper: UrlHelper) : RemoteDataSource 
     override fun getProject(): Single<List<ProjectEntity>> {
         return parsing(RepositoryImpl.ParseData.PROJECT).map { data ->
             DataConvertUtil.stringToProjectList(data)
+        }
+    }
+
+    override fun getTec(): Single<List<TecEntity>> {
+        return parsing(RepositoryImpl.ParseData.TEC).map { data ->
+            DataConvertUtil.stringToTecList(data)
         }
     }
 

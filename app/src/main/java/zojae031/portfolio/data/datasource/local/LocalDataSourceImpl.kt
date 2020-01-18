@@ -7,6 +7,7 @@ import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.data.dao.project.ProjectEntity
+import zojae031.portfolio.data.dao.tec.TecEntity
 import zojae031.portfolio.data.datasource.DataBase
 import zojae031.portfolio.util.DataConvertUtil
 
@@ -22,6 +23,10 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
 
     override fun getProject(): Flowable<List<ProjectEntity>> {
         return projectDao.select().toFlowable()
+    }
+
+    override fun getTec(): Flowable<List<TecEntity>> {
+        return tecDao.select().toFlowable()
     }
 
     override fun getData(type: RepositoryImpl.ParseData): Maybe<String> =
@@ -50,6 +55,10 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
 
     override fun insertProject(data: ProjectEntity) {
         projectDao.insert(data)
+    }
+
+    override fun insertTec(data: TecEntity) {
+        tecDao.insert(data)
     }
 
     override fun insertData(type: RepositoryImpl.ParseData, data: String) {
@@ -81,6 +90,10 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
 
     override fun deleteProject(data: ProjectEntity) {
         projectDao.delete(data)
+    }
+
+    override fun deleteTec(data: TecEntity) {
+        tecDao.delete(data)
     }
 
     override fun deleteData(type: RepositoryImpl.ParseData, data: String) {

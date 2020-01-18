@@ -6,7 +6,7 @@
 
         <variable
             name="tecEntity"
-            type="zojae031.portfolio.data.dao.tec.TecEntityOnListener" />
+            type="zojae031.portfolio.data.dao.tec.TecEntity" />
 
         <variable
             name="vmStatic"
@@ -16,7 +16,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()->tecEntity.listener.invoke(tecEntity)}"
         android:orientation="horizontal">
 
         <ImageView
