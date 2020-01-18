@@ -14,18 +14,4 @@ data class ProjectEntity(
     val skills: String,
     val git: String,
     val date: String
-
-)
-
-data class ProjectEntityOnListener(
-    val image: String,
-    val name: String,
-    val prize: String,
-    val text: String,
-    val competition: String,
-    val video: String,
-    val skills: String,
-    val git: String,
-    val date: String,
-    var listener: (ProjectEntityOnListener) -> Unit
 )
