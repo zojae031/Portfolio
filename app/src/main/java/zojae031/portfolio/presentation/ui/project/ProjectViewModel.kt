@@ -4,35 +4,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
-import zojae031.portfolio.presentation.base.BaseViewModel
+import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.domain.repositories.Repository
-import zojae031.portfolio.data.RepositoryImpl
-import zojae031.portfolio.data.dao.project.ProjectEntityOnListener
-import zojae031.portfolio.util.DataConvertUtil
+import zojae031.portfolio.presentation.base.BaseViewModel
 
 
 class ProjectViewModel(private val repository: Repository) :
     BaseViewModel() {
 
-    private val _projectEntity = MutableLiveData<List<ProjectEntityOnListener>>()
-    val projectEntity: LiveData<List<ProjectEntityOnListener>>
+    private val _projectEntity = MutableLiveData<List<ProjectEntity>>()
+    val projectEntity: LiveData<List<ProjectEntity>>
         get() = _projectEntity
-
-    private val _listData = MutableLiveData<ProjectEntityOnListener>()
-    val listData: LiveData<ProjectEntityOnListener>
-        get() = _listData
 
     fun onResume() {
         repository
-            .getData(RepositoryImpl.ParseData.PROJECT)
-            .map { data ->
-                DataConvertUtil.stringToProjectOnListenerList(data)
-                    .also {
-                        it.map { entity ->
-                            entity.listener = ::onClick
-                        }
-                    }
-            }
+            .getProjectData()
             .observeOn(AndroidSchedulers.mainThread())
             .doOnComplete { _loadingState.value = false }
             .doAfterNext { _loadingState.value = false }
@@ -45,12 +31,9 @@ class ProjectViewModel(private val repository: Repository) :
             }).also { compositeDisposable.add(it) }
     }
 
+
     fun clearDisposable() {
         compositeDisposable.clear()
-    }
-
-    private fun onClick(data: ProjectEntityOnListener) {
-        _listData.value = data
     }
 
     companion object {

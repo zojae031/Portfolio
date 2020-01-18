@@ -6,6 +6,7 @@ import org.jsoup.Connection
 import org.jsoup.Jsoup
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.profile.ProfileEntity
+import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.util.DataConvertUtil
 import zojae031.portfolio.util.UrlHelper
 
@@ -38,6 +39,12 @@ class RemoteDataSourceImpl(private val urlHelper: UrlHelper) : RemoteDataSource 
             emitter.tryOnError(e)
         } catch (t: Throwable) {
             emitter.tryOnError(t)
+        }
+    }
+
+    override fun getProject(): Single<List<ProjectEntity>> {
+        return parsing(RepositoryImpl.ParseData.PROJECT).map { data ->
+            DataConvertUtil.stringToProjectList(data)
         }
     }
 

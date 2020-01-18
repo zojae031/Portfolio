@@ -4,6 +4,7 @@ import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.dao.profile.ProfileEntity
+import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 import zojae031.portfolio.domain.repositories.Repository
@@ -25,8 +26,24 @@ class RepositoryImpl(
                 .mergeWith(remoteDataSource.getProfile().toFlowable().doOnNext {
                     localDataSource.insertProfile(it)
                 })
-        } else { 
+        } else {
             localDataSource.getProfile().toFlowable()
+        }.subscribeOn(Schedulers.io())
+    }
+
+    override fun getProjectData(): Flowable<List<ProjectEntity>> {
+        return if (network.isConnect) {//기본 네트워크 살아있니?
+            localDataSource.getProject()
+                .doOnNext { entity ->
+                    entity.map { localDataSource.deleteProject(it) }
+                }
+                .mergeWith(
+                    remoteDataSource.getProject().toFlowable().doOnNext { entity ->
+                        entity.map { localDataSource.insertProject(it) }
+                    }
+                )
+        } else {
+            localDataSource.getProject()
         }.subscribeOn(Schedulers.io())
     }
 

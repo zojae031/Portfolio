@@ -8,11 +8,11 @@ import kotlinx.android.synthetic.main.fragment_tec.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import zojae031.portfolio.BR
 import zojae031.portfolio.R
-import zojae031.portfolio.presentation.base.BaseFragment
-import zojae031.portfolio.presentation.base.SimpleRecyclerViewAdapter
 import zojae031.portfolio.data.dao.tec.TecEntityOnListener
 import zojae031.portfolio.databinding.FragmentTecBinding
 import zojae031.portfolio.databinding.TecListBinding
+import zojae031.portfolio.presentation.base.BaseFragment
+import zojae031.portfolio.presentation.base.SimpleRecyclerViewAdapter
 
 class TecFragment : BaseFragment<FragmentTecBinding>() {
     override val layoutId: Int
@@ -32,10 +32,15 @@ class TecFragment : BaseFragment<FragmentTecBinding>() {
         }
         recycler.adapter = object : SimpleRecyclerViewAdapter<TecEntityOnListener, TecListBinding>(
             R.layout.tec_list,
-            BR.tecEntity
+            BR.tecEntity,
+            ::temp
         ) {
 
         }
+    }
+
+    fun temp(asd: Int) {
+
     }
 
     override fun onPause() {

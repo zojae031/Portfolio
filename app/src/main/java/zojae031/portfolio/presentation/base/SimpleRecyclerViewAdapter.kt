@@ -8,16 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class SimpleRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
     @LayoutRes private val layoutId: Int,
-    private val bindingVariableId: Int? = null
+    private val bindingVariableId: Int? = null,
+    private val listener: (Int) -> Unit
 ) : RecyclerView.Adapter<BaseViewHolder<B>>() {
 
-    private val items = mutableListOf<ITEM>()
+    protected val items = mutableListOf<ITEM>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<B> =
         object : BaseViewHolder<B>(
             layoutId,
             parent,
-            bindingVariableId
+            bindingVariableId,
+            listener
         ) {}
 
     override fun getItemCount(): Int = items.size

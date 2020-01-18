@@ -11,6 +11,10 @@
             type="zojae031.portfolio.presentation.ui.project.ProjectViewModel" />
 
         <variable
+            name="entity"
+            type="zojae031.portfolio.data.dao.project.ProjectEntity" />
+
+        <variable
             name="dialog"
             type="zojae031.portfolio.presentation.ui.project.ProjectDialog" />
     </data>
@@ -42,7 +46,7 @@
                 android:layout_marginTop="8dp"
                 android:adjustViewBounds="true"
                 android:padding="4dp"
-                app:loadUrl="@{vm.listData.image}"
+                app:loadUrl="@{entity.image}"
                 app:size="@{vm.IMAGE_SIZE}"
                 app:srcCompat="@mipmap/ic_launcher" />
 
@@ -55,7 +59,7 @@
                 android:fontFamily="@font/main_font"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@{vm.listData.name}"
+                android:text="@{entity.name}"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
 
@@ -68,7 +72,7 @@
                 android:fontFamily="@font/main_font"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="@{vm.listData.text}"
+                android:text="@{entity.text}"
                 android:textColor="@android:color/black" />
 
             <TextView
@@ -81,7 +85,7 @@
                 android:fontFamily="@font/main_font"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="@{vm.listData.skills}"
+                android:text="@{entity.skills}"
                 android:textColor="@android:color/black"
                 android:visibility="visible" />
         </LinearLayout>
@@ -106,18 +110,18 @@
                 android:id="@+id/left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> dialog.onClick(vm.listData.video)}"
+                android:onClick="@{() -> dialog.onClick(entity.video)}"
                 android:text="시연 영상"
-                android:visibility="@{vm.listData.git.equals(``) ? View.GONE : View.VISIBLE}" />
+                android:visibility="@{entity.git.equals(``) ? View.GONE : View.VISIBLE}" />
 
             <Button
                 android:id="@+id/right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:onClick="@{() -> dialog.onClick(vm.listData.git)}"
+                android:onClick="@{() -> dialog.onClick(entity.git)}"
                 android:text="깃허브"
-                android:visibility="@{vm.listData.video.equals(``) ? View.GONE: View.VISIBLE}" />
+                android:visibility="@{entity.video.equals(``) ? View.GONE: View.VISIBLE}" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

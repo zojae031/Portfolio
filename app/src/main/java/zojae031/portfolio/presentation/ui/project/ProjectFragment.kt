@@ -3,22 +3,22 @@ package zojae031.portfolio.presentation.ui.project
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_project.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import zojae031.portfolio.R
-import zojae031.portfolio.presentation.base.BaseFragment
-import zojae031.portfolio.presentation.base.SimpleRecyclerViewAdapter
-import zojae031.portfolio.data.dao.project.ProjectEntityOnListener
 import zojae031.portfolio.databinding.FragmentProjectBinding
-import zojae031.portfolio.databinding.ProjectListBinding
+import zojae031.portfolio.presentation.base.BaseFragment
 
 class ProjectFragment : BaseFragment<FragmentProjectBinding>() {
 
     private val projectViewModel by sharedViewModel<ProjectViewModel>()
-    private val dialog =
-        ProjectDialog()
+
+    private val onClickItem: (Int) -> Unit = { pos ->
+        ProjectDialog(adapter.getItem(pos)).show(fragmentManager!!, "")
+    }
+
+    private val adapter = ProjectRecyclerViewAdapter(onClickItem)
 
     override val layoutId: Int
         get() = R.layout.fragment_project
@@ -26,15 +26,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = projectViewModel
-        recycler.adapter =
-            object : SimpleRecyclerViewAdapter<ProjectEntityOnListener, ProjectListBinding>(
-                R.layout.project_list,
-                BR.projectEntity
-            ) {}
-
-        projectViewModel.listData.observe(this, Observer {
-            dialog.show(fragmentManager!!, "")
-        })
+        recycler.adapter = adapter
 
         projectViewModel.error.observe(this, Observer {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()

@@ -6,10 +6,11 @@ import android.os.Bundle
 import android.view.View
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import zojae031.portfolio.R
-import zojae031.portfolio.presentation.base.BaseFragmentDialog
+import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.databinding.ProjectDialogBinding
+import zojae031.portfolio.presentation.base.BaseFragmentDialog
 
-class ProjectDialog :
+class ProjectDialog(private val item: ProjectEntity) :
     BaseFragmentDialog<ProjectDialogBinding>() {
     private val projectViewModel by sharedViewModel<ProjectViewModel>()
 
@@ -18,8 +19,12 @@ class ProjectDialog :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.vm = projectViewModel
-        binding.dialog = this
+        binding.run {
+            vm = projectViewModel
+            entity = item
+            dialog = this@ProjectDialog
+        }
+
     }
 
     fun onClick(url: String) {

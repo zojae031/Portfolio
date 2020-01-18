@@ -1,10 +1,12 @@
 package zojae031.portfolio.data.datasource.local
 
 import com.google.gson.JsonArray
+import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.profile.ProfileEntity
+import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.datasource.DataBase
 import zojae031.portfolio.util.DataConvertUtil
 
@@ -18,21 +20,15 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
         return basicDao.select()
     }
 
+    override fun getProject(): Flowable<List<ProjectEntity>> {
+        return projectDao.select().toFlowable()
+    }
+
     override fun getData(type: RepositoryImpl.ParseData): Maybe<String> =
         when (type) {
             RepositoryImpl.ParseData.MAIN -> {
                 mainDao.select().map { entity ->
                     DataConvertUtil.mainToJson(entity)
-                }
-            }
-            RepositoryImpl.ParseData.PROJECT -> {
-                val array = JsonArray()
-                projectDao.select().map { lists ->
-                    lists.map { entity ->
-                        array.add(DataConvertUtil.projectToJson(entity))
-                    }
-                }.map {
-                    array.toString()
                 }
             }
             RepositoryImpl.ParseData.TEC -> {
@@ -50,6 +46,10 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
 
     override fun insertProfile(data: ProfileEntity) {
         basicDao.insert(data)
+    }
+
+    override fun insertProject(data: ProjectEntity) {
+        projectDao.insert(data)
     }
 
     override fun insertData(type: RepositoryImpl.ParseData, data: String) {
@@ -77,6 +77,10 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
 
     override fun deleteProfile(data: ProfileEntity) {
         basicDao.delete(data)
+    }
+
+    override fun deleteProject(data: ProjectEntity) {
+        projectDao.delete(data)
     }
 
     override fun deleteData(type: RepositoryImpl.ParseData, data: String) {

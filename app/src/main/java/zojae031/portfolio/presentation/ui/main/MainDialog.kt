@@ -25,11 +25,13 @@ class MainDialog :
     private val adapter =
         object : SimpleRecyclerViewAdapter<MainUserEntity, UserListBinding>(
             R.layout.user_list,
-            BR.userData
+            BR.userData,::temp
         ) {
 
         }
+    fun temp(asd:Int){
 
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainViewModel.apply {
