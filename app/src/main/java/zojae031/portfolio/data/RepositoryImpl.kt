@@ -3,6 +3,7 @@ package zojae031.portfolio.data
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
@@ -62,16 +63,15 @@ class RepositoryImpl(
         }.subscribeOn(Schedulers.io())
     }
 
-    override fun getData(type: ParseData): Flowable<String> {
+    override fun getMainData(): Flowable<MainEntity> {
         return if (network.isConnect) {//기본 네트워크 살아있니?
-            Flowable.concat(
-                localDataSource.getData(type).toFlowable()
-                    .doOnNext { localDataSource.deleteData(type, it) },
-                remoteDataSource.getData(type).toFlowable()
-                    .doOnNext { localDataSource.insertData(type, it) }
-            )
+            localDataSource.getMainData().toFlowable()
+                .doOnNext { localDataSource.deleteMain(it) }
+                .mergeWith(remoteDataSource.getMain().toFlowable().doOnNext {
+                    localDataSource.insertMain(it)
+                })
         } else {
-            localDataSource.getData(type).toFlowable()
+            localDataSource.getMainData().toFlowable()
         }.subscribeOn(Schedulers.io())
 
     }

@@ -2,14 +2,14 @@ package zojae031.portfolio.data.datasource.local
 
 import io.reactivex.Flowable
 import io.reactivex.Maybe
-import zojae031.portfolio.data.RepositoryImpl
+import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
 
 interface LocalDataSource {
     //get
-    fun getData(type: RepositoryImpl.ParseData): Maybe<String>
+    fun getMainData(): Maybe<MainEntity>
 
     fun getProfile(): Maybe<ProfileEntity>
 
@@ -18,7 +18,7 @@ interface LocalDataSource {
     fun getTec(): Flowable<List<TecEntity>>
 
     //insert
-    fun insertData(type: RepositoryImpl.ParseData, data: String)
+    fun insertMain(data: MainEntity)
 
     fun insertProfile(data: ProfileEntity)
 
@@ -27,7 +27,7 @@ interface LocalDataSource {
     fun insertTec(data: TecEntity)
 
     //delete
-    fun deleteData(type: RepositoryImpl.ParseData, data: String)
+    fun deleteMain(data: MainEntity)
 
     fun deleteProfile(data: ProfileEntity)
 

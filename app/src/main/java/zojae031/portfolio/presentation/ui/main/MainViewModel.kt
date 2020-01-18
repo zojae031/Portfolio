@@ -9,7 +9,6 @@ import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
 import zojae031.portfolio.presentation.base.BaseViewModel
 import zojae031.portfolio.domain.repositories.Repository
-import zojae031.portfolio.data.RepositoryImpl
 import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.util.DataConvertUtil
@@ -84,10 +83,7 @@ class MainViewModel(private val repository: Repository, private val urlHelper: U
 
     fun getDataList() {
         repository
-            .getData(RepositoryImpl.ParseData.MAIN)
-            .map { data ->
-                DataConvertUtil.stringToMain(data)
-            }
+            .getMainData()
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterNext { _loadingState.value = false }
             .doOnComplete { _loadingState.value = false }

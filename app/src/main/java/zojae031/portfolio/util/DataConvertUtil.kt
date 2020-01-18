@@ -7,7 +7,7 @@ import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
-import zojae031.portfolio.data.dao.tec.TecEntityOnListener
+
 
 object DataConvertUtil {
     fun stringToMain(data: String): MainEntity {
@@ -43,13 +43,7 @@ object DataConvertUtil {
         }
     }
 
-    fun stringToTecOnListenerList(data: String): List<TecEntityOnListener> {
-        return JsonParser().parse(data).asJsonArray.run {
-            this.map { element ->
-                Gson().fromJson(element, TecEntityOnListener::class.java)
-            }
-        }.toList()
-    }
+
 
     fun mainToJson(data: MainEntity) = JsonObject().apply {
         addProperty("userImage", data.userImage)

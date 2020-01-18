@@ -5,6 +5,7 @@ import io.reactivex.Single
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import zojae031.portfolio.data.RepositoryImpl
+import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
@@ -55,21 +56,12 @@ class RemoteDataSourceImpl(private val urlHelper: UrlHelper) : RemoteDataSource 
         }
     }
 
-    override fun getData(type: RepositoryImpl.ParseData): Single<String> =
-        Single.create { emitter ->
-            try {
-                Jsoup.connect(urlHelper.urlList[type.ordinal])
-                    .method(Connection.Method.GET)
-                    .execute()
-                    .apply {
-                        this.parse().select(".Box-body").select("tbody").text().also {
-                            emitter.onSuccess(it)
-                        }
-                    }
-            } catch (e: Exception) {
-                emitter.tryOnError(e)
-            }
+    override fun getMain(): Single<MainEntity> {
+        return parsing(RepositoryImpl.ParseData.MAIN).map { data ->
+            DataConvertUtil.stringToMain(data)
         }
+    }
+
 
     private fun parsing(type: RepositoryImpl.ParseData) =
         Single.create<String> { emitter ->
