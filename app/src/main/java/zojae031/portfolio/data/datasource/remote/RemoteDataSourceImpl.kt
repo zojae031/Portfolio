@@ -13,6 +13,7 @@ import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
 import zojae031.portfolio.data.util.DataConvertUtil
 import zojae031.portfolio.data.util.UrlHelper
+import java.net.UnknownHostException
 
 class RemoteDataSourceImpl(private val urlHelper: UrlHelper) : RemoteDataSource {
 
@@ -35,9 +36,10 @@ class RemoteDataSourceImpl(private val urlHelper: UrlHelper) : RemoteDataSource 
                     }
                 }
         } catch (e: Exception) {
-            emitter.tryOnError(e)
-        } catch (t: Throwable) {
-            emitter.tryOnError(t)
+            if (e is UnknownHostException) {
+                emitter.onSuccess(listOf(MainUserEntity(null, ERROR_MESSAGE)))
+                emitter.tryOnError(e)
+            } else emitter.tryOnError(e)
         }
     }
 
@@ -83,4 +85,7 @@ class RemoteDataSourceImpl(private val urlHelper: UrlHelper) : RemoteDataSource 
             }
         }
 
+    companion object {
+        const val ERROR_MESSAGE = "인터넷 연결이 원활하지 않습니다."
+    }
 }

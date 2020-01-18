@@ -1,6 +1,5 @@
 package zojae031.portfolio.data.datasource.local
 
-import io.reactivex.Flowable
 import io.reactivex.Maybe
 import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.profile.ProfileEntity
@@ -16,9 +15,9 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
 
     override fun getProfile(): Maybe<ProfileEntity> = basicDao.select()
 
-    override fun getProject(): Flowable<List<ProjectEntity>> = projectDao.select().toFlowable()
+    override fun getProject(): Maybe<List<ProjectEntity>> = projectDao.select()
 
-    override fun getTec(): Flowable<List<TecEntity>> = tecDao.select().toFlowable()
+    override fun getTec(): Maybe<List<TecEntity>> = tecDao.select()
 
     override fun getMainData(): Maybe<MainEntity> = mainDao.select()
 

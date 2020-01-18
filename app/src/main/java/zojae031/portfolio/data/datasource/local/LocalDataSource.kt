@@ -1,6 +1,5 @@
 package zojae031.portfolio.data.datasource.local
 
-import io.reactivex.Flowable
 import io.reactivex.Maybe
 import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.profile.ProfileEntity
@@ -13,9 +12,9 @@ interface LocalDataSource {
 
     fun getProfile(): Maybe<ProfileEntity>
 
-    fun getProject(): Flowable<List<ProjectEntity>>
+    fun getProject(): Maybe<List<ProjectEntity>>
 
-    fun getTec(): Flowable<List<TecEntity>>
+    fun getTec(): Maybe<List<TecEntity>>
 
     //insert
     fun insertMain(data: MainEntity)

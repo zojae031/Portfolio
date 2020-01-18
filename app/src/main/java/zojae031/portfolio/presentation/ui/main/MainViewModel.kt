@@ -8,10 +8,9 @@ import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
 import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.main.MainUserEntity
+import zojae031.portfolio.data.util.UrlHelper
 import zojae031.portfolio.domain.repositories.Repository
 import zojae031.portfolio.presentation.base.BaseViewModel
-import zojae031.portfolio.data.util.UrlHelper
-import java.net.UnknownHostException
 
 class MainViewModel(private val repository: Repository, private val urlHelper: UrlHelper) :
     BaseViewModel() {
@@ -57,11 +56,7 @@ class MainViewModel(private val repository: Repository, private val urlHelper: U
                     _userList.value = data
                 },
                 { error ->
-                    if (error is UnknownHostException) {
-                        _error.value =
-                            ERROR_MESSAGE
-                        _userList.value = listOf(MainUserEntity(null, _error.value.toString()))
-                    } else _error.value = error.message
+                    _error.value = error.message
                 }
             ).also { compositeDisposable.add(it) }
 
@@ -103,7 +98,6 @@ class MainViewModel(private val repository: Repository, private val urlHelper: U
 
 
     companion object {
-        const val ERROR_MESSAGE = "인터넷 연결이 원활하지 않습니다."
         const val TOAST_DURATION = 1000L
         @JvmStatic
         val PAGE_LIMIT = 2
