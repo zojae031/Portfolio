@@ -9,7 +9,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import zojae031.portfolio.R
 import zojae031.portfolio.base.BaseFragment
 import zojae031.portfolio.databinding.FragmentProfileBinding
-import zojae031.portfolio.ui.viewmodel.ProfileViewModel
 
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {

@@ -13,7 +13,6 @@ import zojae031.portfolio.base.SimpleRecyclerViewAdapter
 import zojae031.portfolio.data.dao.project.ProjectEntityOnListener
 import zojae031.portfolio.databinding.FragmentProjectBinding
 import zojae031.portfolio.databinding.ProjectListBinding
-import zojae031.portfolio.ui.viewmodel.ProjectViewModel
 
 class ProjectFragment : BaseFragment<FragmentProjectBinding>() {
 

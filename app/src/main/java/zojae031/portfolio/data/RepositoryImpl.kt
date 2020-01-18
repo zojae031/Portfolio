@@ -19,13 +19,12 @@ class RepositoryImpl(
 
     override fun parseProfile(): Flowable<ProfileEntity> {
         return if (network.isConnect) {//기본 네트워크 살아있니?
-            Flowable.concat(
-                localDataSource.getProfile().toFlowable()
-                    .doOnNext { localDataSource.deleteProfile(it) },
-                remoteDataSource.getProfile().toFlowable()
-                    .doOnNext { localDataSource.insertProfile(it) }
-            )
-        } else {
+            localDataSource.getProfile().toFlowable()
+                .doOnNext { localDataSource.deleteProfile(it) }
+                .mergeWith(remoteDataSource.getProfile().toFlowable().doOnNext {
+                    localDataSource.insertProfile(it)
+                })
+        } else { 
             localDataSource.getProfile().toFlowable()
         }.subscribeOn(Schedulers.io())
     }

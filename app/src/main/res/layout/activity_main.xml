@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="zojae031.portfolio.ui.viewmodel.MainViewModel" />
+            type="zojae031.portfolio.ui.main.MainViewModel" />
 
         <variable
             name="viewHandler"

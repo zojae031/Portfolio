@@ -6,7 +6,7 @@
 
         <variable
             name="vmStatic"
-            type="zojae031.portfolio.ui.viewmodel.ProjectViewModel" />
+            type="zojae031.portfolio.ui.project.ProjectViewModel" />
 
         <variable
             name="projectEntity"
