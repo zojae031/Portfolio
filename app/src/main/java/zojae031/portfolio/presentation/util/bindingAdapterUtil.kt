@@ -1,4 +1,4 @@
-package zojae031.portfolio.util
+package zojae031.portfolio.presentation.util
 
 import android.widget.ImageView
 import androidx.annotation.MainThread

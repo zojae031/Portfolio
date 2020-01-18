@@ -1,4 +1,4 @@
-package zojae031.portfolio.util
+package zojae031.portfolio.data.util
 
 import android.content.SharedPreferences
 
@@ -33,7 +33,8 @@ class UrlHelper(pref: SharedPreferences) {
 
     }
 
-    fun getUserListUrl() = BASIC_URL
+    fun getUserListUrl() =
+        BASIC_URL
 
     companion object {
         private const val BASIC_URL = "https://github.com/zojae031/Portfolio/network/members"

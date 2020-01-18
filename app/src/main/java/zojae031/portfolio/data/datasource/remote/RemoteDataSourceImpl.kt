@@ -11,8 +11,8 @@ import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.data.dao.project.ProjectEntity
 import zojae031.portfolio.data.dao.tec.TecEntity
-import zojae031.portfolio.util.DataConvertUtil
-import zojae031.portfolio.util.UrlHelper
+import zojae031.portfolio.data.util.DataConvertUtil
+import zojae031.portfolio.data.util.UrlHelper
 
 class RemoteDataSourceImpl(private val urlHelper: UrlHelper) : RemoteDataSource {
 

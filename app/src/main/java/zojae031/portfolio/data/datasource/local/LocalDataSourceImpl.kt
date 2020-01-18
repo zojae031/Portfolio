@@ -14,20 +14,13 @@ class LocalDataSourceImpl(db: DataBase) : LocalDataSource {
     private val tecDao = db.tecDao()
     private val mainDao = db.mainDao()
 
-    override fun getProfile(): Maybe<ProfileEntity> {
-        return basicDao.select()
-    }
+    override fun getProfile(): Maybe<ProfileEntity> = basicDao.select()
 
-    override fun getProject(): Flowable<List<ProjectEntity>> {
-        return projectDao.select().toFlowable()
-    }
+    override fun getProject(): Flowable<List<ProjectEntity>> = projectDao.select().toFlowable()
 
-    override fun getTec(): Flowable<List<TecEntity>> {
-        return tecDao.select().toFlowable()
-    }
+    override fun getTec(): Flowable<List<TecEntity>> = tecDao.select().toFlowable()
 
-    override fun getMainData(): Maybe<MainEntity> =
-        mainDao.select()
+    override fun getMainData(): Maybe<MainEntity> = mainDao.select()
 
     override fun insertProfile(data: ProfileEntity) {
         basicDao.insert(data)

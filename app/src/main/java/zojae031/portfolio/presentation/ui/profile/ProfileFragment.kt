@@ -7,8 +7,8 @@ import android.view.View
 import androidx.lifecycle.Observer
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import zojae031.portfolio.R
-import zojae031.portfolio.presentation.base.BaseFragment
 import zojae031.portfolio.databinding.FragmentProfileBinding
+import zojae031.portfolio.presentation.base.BaseFragment
 
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {

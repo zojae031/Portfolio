@@ -1,4 +1,4 @@
-package zojae031.portfolio.util
+package zojae031.portfolio.data.util
 
 import android.net.ConnectivityManager
 import android.net.Network
@@ -10,7 +10,8 @@ import timber.log.Timber
 class NetworkUtil(
     private val manager: ConnectivityManager
 ) {
-    private val callback = NetworkCallback()
+    private val callback =
+        NetworkCallback()
     var isConnect: Boolean = false
 
     fun checkNetworkInfo(): Observable<Boolean>? {

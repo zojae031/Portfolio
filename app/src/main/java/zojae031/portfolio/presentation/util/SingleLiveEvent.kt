@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package zojae031.portfolio.util
+package zojae031.portfolio.presentation.util
 
 import android.util.Log
 import androidx.annotation.MainThread

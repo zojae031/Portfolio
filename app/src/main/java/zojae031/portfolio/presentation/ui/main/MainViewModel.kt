@@ -10,7 +10,7 @@ import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.domain.repositories.Repository
 import zojae031.portfolio.presentation.base.BaseViewModel
-import zojae031.portfolio.util.UrlHelper
+import zojae031.portfolio.data.util.UrlHelper
 import java.net.UnknownHostException
 
 class MainViewModel(private val repository: Repository, private val urlHelper: UrlHelper) :

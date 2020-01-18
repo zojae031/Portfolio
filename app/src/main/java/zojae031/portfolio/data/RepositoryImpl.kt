@@ -11,7 +11,7 @@ import zojae031.portfolio.data.dao.tec.TecEntity
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
 import zojae031.portfolio.domain.repositories.Repository
-import zojae031.portfolio.util.NetworkUtil
+import zojae031.portfolio.data.util.NetworkUtil
 
 class RepositoryImpl(
     private val localDataSource: LocalDataSource,
