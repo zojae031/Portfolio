@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import zojae031.portfolio.R
-import zojae031.portfolio.base.SimpleRecyclerViewAdapter
+import zojae031.portfolio.presentation.base.SimpleRecyclerViewAdapter
 
 @BindingAdapter(value = ["loadUrlCircle"])
 @MainThread

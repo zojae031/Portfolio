@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="zojae031.portfolio.ui.profile.ProfileViewModel" />
+            type="zojae031.portfolio.presentation.ui.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

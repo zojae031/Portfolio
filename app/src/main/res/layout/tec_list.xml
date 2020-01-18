@@ -10,7 +10,7 @@
 
         <variable
             name="vmStatic"
-            type="zojae031.portfolio.ui.tec.TecViewModel" />
+            type="zojae031.portfolio.presentation.ui.tec.TecViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

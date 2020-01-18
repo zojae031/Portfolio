@@ -10,11 +10,11 @@
 
         <variable
             name="viewModel"
-            type="zojae031.portfolio.ui.main.MainViewModel" />
+            type="zojae031.portfolio.presentation.ui.main.MainViewModel" />
 
         <variable
             name="viewHandler"
-            type="zojae031.portfolio.ui.main.ViewHandler" />
+            type="zojae031.portfolio.presentation.ui.main.ViewHandler" />
 
     </data>
 
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000000"
-        tools:context=".ui.main.MainActivity">
+        tools:context=".presentation.ui.main.MainActivity">
         <!--MAIN Layout-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/parent"
@@ -118,7 +118,7 @@
                 ads:layout_constraintEnd_toEndOf="parent"
                 ads:layout_constraintStart_toStartOf="parent">
 
-                <zojae031.portfolio.ui.main.Indicator
+                <zojae031.portfolio.presentation.ui.main.Indicator
                     android:id="@+id/indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

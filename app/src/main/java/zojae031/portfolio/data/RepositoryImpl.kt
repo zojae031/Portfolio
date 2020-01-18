@@ -6,6 +6,7 @@ import io.reactivex.schedulers.Schedulers
 import zojae031.portfolio.data.dao.profile.ProfileEntity
 import zojae031.portfolio.data.datasource.local.LocalDataSource
 import zojae031.portfolio.data.datasource.remote.RemoteDataSource
+import zojae031.portfolio.domain.repositories.Repository
 import zojae031.portfolio.util.NetworkUtil
 
 class RepositoryImpl(

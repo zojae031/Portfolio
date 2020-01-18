@@ -8,11 +8,11 @@
 
         <variable
             name="vm"
-            type="zojae031.portfolio.ui.project.ProjectViewModel" />
+            type="zojae031.portfolio.presentation.ui.project.ProjectViewModel" />
 
         <variable
             name="dialog"
-            type="zojae031.portfolio.ui.project.ProjectDialog" />
+            type="zojae031.portfolio.presentation.ui.project.ProjectDialog" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <application
-        android:name=".base.BaseApplication"
+        android:name="zojae031.portfolio.presentation.base.BaseApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,7 +20,7 @@
             android:value="ca-app-pub-5960006677580872~3633344286" />
 
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".presentation.ui.main.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.tec.TecActivity"
+            android:name=".presentation.ui.tec.TecActivity"
             android:launchMode="singleTop" />
 
     </application>
