@@ -9,10 +9,10 @@ import timber.log.Timber
 import zojae031.portfolio.data.dao.main.MainEntity
 import zojae031.portfolio.data.dao.main.MainUserEntity
 import zojae031.portfolio.data.util.UrlHelper
-import zojae031.portfolio.domain.repositories.Repository
+import zojae031.portfolio.domain.usecase.MainUseCase
 import zojae031.portfolio.presentation.base.BaseViewModel
 
-class MainViewModel(private val repository: Repository, private val urlHelper: UrlHelper) :
+class MainViewModel(private val useCase: MainUseCase, private val urlHelper: UrlHelper) :
     BaseViewModel() {
 
     private val _mainEntity = MutableLiveData<MainEntity>()
@@ -45,7 +45,7 @@ class MainViewModel(private val repository: Repository, private val urlHelper: U
         )
 
     fun getUserList() {
-        repository.getUserList()
+        useCase.getUserList()
             .observeOn(AndroidSchedulers.mainThread())
             .doOnError {
                 _error.value = it.message
@@ -63,7 +63,7 @@ class MainViewModel(private val repository: Repository, private val urlHelper: U
     }
 
     fun getDataList() {
-        repository
+        useCase
             .getMainData()
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterNext { _loadingState.value = false }

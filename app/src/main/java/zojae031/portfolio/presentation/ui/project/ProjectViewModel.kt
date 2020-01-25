@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import zojae031.portfolio.data.dao.project.ProjectEntity
-import zojae031.portfolio.domain.repositories.Repository
+import zojae031.portfolio.domain.usecase.ProjectUseCase
 import zojae031.portfolio.presentation.base.BaseViewModel
 
 
-class ProjectViewModel(private val repository: Repository) :
+class ProjectViewModel(private val useCase: ProjectUseCase) :
     BaseViewModel() {
 
     private val _projectEntity = MutableLiveData<List<ProjectEntity>>()
@@ -17,7 +17,7 @@ class ProjectViewModel(private val repository: Repository) :
         get() = _projectEntity
 
     fun onResume() {
-        repository
+        useCase
             .getProjectData()
             .observeOn(AndroidSchedulers.mainThread())
             .doOnComplete { _loadingState.value = false }

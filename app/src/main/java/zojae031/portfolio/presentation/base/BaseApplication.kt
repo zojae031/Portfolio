@@ -6,10 +6,7 @@ import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
-import zojae031.portfolio.presentation.di.dataSourceModule
-import zojae031.portfolio.presentation.di.repositoryModule
-import zojae031.portfolio.presentation.di.utilModule
-import zojae031.portfolio.presentation.di.viewModelModule
+import zojae031.portfolio.presentation.di.*
 import java.io.IOException
 import java.net.SocketException
 
@@ -25,7 +22,15 @@ class BaseApplication : Application() {
     private fun initKoin() {
         startKoin {
             androidContext(this@BaseApplication)
-            modules(listOf(repositoryModule, dataSourceModule, utilModule, viewModelModule))
+            modules(
+                listOf(
+                    repositoryModule,
+                    dataSourceModule,
+                    utilModule,
+                    useCaseModule,
+                    viewModelModule
+                )
+            )
         }
     }
 

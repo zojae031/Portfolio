@@ -30,7 +30,7 @@ class MainDialog :
             Intent(
                 requireContext().applicationContext,
                 MainActivity::class.java
-            ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            )
         )
         dismiss()
     }

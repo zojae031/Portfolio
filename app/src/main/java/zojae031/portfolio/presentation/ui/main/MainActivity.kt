@@ -12,9 +12,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import zojae031.portfolio.R
+import zojae031.portfolio.data.util.NetworkUtil
 import zojae031.portfolio.databinding.ActivityMainBinding
 import zojae031.portfolio.presentation.base.BaseActivity
-import zojae031.portfolio.data.util.NetworkUtil
 
 class MainActivity : BaseActivity<ActivityMainBinding>(),
     ViewHandler {

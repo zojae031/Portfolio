@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import zojae031.portfolio.data.dao.profile.ProfileEntity
-import zojae031.portfolio.domain.repositories.Repository
+import zojae031.portfolio.domain.usecase.ProfileUssCase
 import zojae031.portfolio.presentation.base.BaseViewModel
 
-class ProfileViewModel(private val repository: Repository) :
+class ProfileViewModel(private val useCase: ProfileUssCase) :
     BaseViewModel() {
 
     private val _profileEntity = MutableLiveData<ProfileEntity>()
@@ -20,7 +20,7 @@ class ProfileViewModel(private val repository: Repository) :
         get() = _buttonEvent
 
     fun onResume() {
-        repository
+        useCase
             .getProfile()
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterNext { _loadingState.value = false }

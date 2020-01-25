@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import zojae031.portfolio.data.dao.tec.TecEntity
-import zojae031.portfolio.domain.repositories.Repository
+import zojae031.portfolio.domain.usecase.TecUseCase
 import zojae031.portfolio.presentation.base.BaseViewModel
 
-class TecViewModel(private val repository: Repository) :
+class TecViewModel(private val useCase: TecUseCase) :
     BaseViewModel() {
 
     private val _tecList = MutableLiveData<List<TecEntity>>()
@@ -17,7 +17,7 @@ class TecViewModel(private val repository: Repository) :
 
 
     fun onResume() {
-        repository.getTecData()
+        useCase.getTecData()
             .observeOn(AndroidSchedulers.mainThread())
             .doOnComplete { _loadingState.value = false }
             .doAfterNext { _loadingState.value = false }
