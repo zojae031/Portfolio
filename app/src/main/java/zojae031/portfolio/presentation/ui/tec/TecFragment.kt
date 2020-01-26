@@ -26,7 +26,7 @@ class TecFragment : BaseFragment<FragmentTecBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = tecViewModel.apply {
-            error.observe(this@TecFragment, Observer {
+            error.observe(viewLifecycleOwner, Observer {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             })
         }

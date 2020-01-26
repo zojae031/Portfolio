@@ -28,7 +28,7 @@ class ProjectFragment : BaseFragment<FragmentProjectBinding>() {
         binding.vm = projectViewModel
         recycler.adapter = adapter
 
-        projectViewModel.error.observe(this, Observer {
+        projectViewModel.error.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
     }

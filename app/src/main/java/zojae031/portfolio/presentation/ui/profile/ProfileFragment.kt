@@ -20,7 +20,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = profileViewModel.apply {
-            buttonEvent.observe(this@ProfileFragment, Observer {
+            buttonEvent.observe(viewLifecycleOwner, Observer {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
             })
         }
